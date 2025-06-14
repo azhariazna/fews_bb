@@ -1,4 +1,5 @@
-body, html {
+body,
+html {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -43,18 +44,28 @@ body, html {
     cursor: default;
 }
 
-#toggleSidebar {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 1002;
-    background: #007bff;
-    color: #fff;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 5px;
-    cursor: pointer;
+@media (max-width: 768px) {
+    #toggleSidebar {
+        top: 10px;
+        right: 10px;
+        position: fixed;
+        /* fix tombol agar tidak tertutup elemen lain */
+        z-index: 1002;
+        background: #007bff;
+        color: #fff;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .sidebar {
+        width: 85vw;
+        /* supaya sidebar tidak penuh 100% di HP */
+        max-width: 300px;
+    }
 }
+
 
 
 .locate-control {
@@ -64,7 +75,7 @@ body, html {
     background-color: white;
     border-radius: 50%;
     padding: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     cursor: pointer;
     z-index: 1002;
     display: flex;
@@ -88,4 +99,33 @@ body, html {
 
 .leaflet-popup-content button:hover {
     background: #0056b3;
+}
+
+.leaflet-routing-container .leaflet-routing-alt .leaflet-routing-alt-content {
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.leaflet-routing-container-hide>* {
+    animation: blink 1s infinite;
+}
+
+.leaflet-routing-container-hide .leaflet-routing-alt-line {
+    stroke: red;
+    stroke-width: 4;
+    stroke-dasharray: 8, 8;
+    animation: blink 1s infinite;
 }

@@ -34,6 +34,7 @@ class Filters extends BaseFilters
         'forcehttps'    => ForceHTTPS::class,
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
+        
     ];
 
     /**
@@ -61,6 +62,9 @@ class Filters extends BaseFilters
         ],
     ];
 
+
+
+
     /**
      * List of filter aliases that are always
      * applied before and after every request.
@@ -69,8 +73,9 @@ class Filters extends BaseFilters
      */
     public array $globals = [
         'before' => [
+            'cors',
             // 'honeypot',
-            // 'csrf',
+            'csrf' => ['except' => ['upload-api']],
             // 'invalidchars',
         ],
         'after' => [
@@ -104,4 +109,6 @@ class Filters extends BaseFilters
      * @var array<string, array<string, list<string>>>
      */
     public array $filters = [];
+
+    
 }

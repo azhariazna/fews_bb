@@ -1,28 +1,4 @@
-CRITICAL - 2025-06-12 01:42:09 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "coba.php"
-[Method: GET, Route: /]
-in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
- 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('coba.php')
- 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('coba', [], true)
- 3 APPPATH\Controllers\Home.php(9): view('coba')
- 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->index()
- 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
- 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
- 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
- 9 FCPATH\index.php(60): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
-CRITICAL - 2025-06-12 01:42:14 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "coba.php"
-[Method: GET, Route: /]
-in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
- 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('coba.php')
- 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('coba', [], true)
- 3 APPPATH\Controllers\Home.php(9): view('coba')
- 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->index()
- 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
- 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
- 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
- 9 FCPATH\index.php(60): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
-WARNING - 2025-06-12 16:43:19 --> [DEPRECATED] Passing lowercase HTTP method "get" is deprecated. Use uppercase HTTP method like "GET". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
+WARNING - 2025-06-14 17:58:16 --> [DEPRECATED] Passing lowercase HTTP method "get" is deprecated. Use uppercase HTTP method like "GET". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
  1 SYSTEMPATH\Router\RouteCollection.php(1026): trigger_error('Passing lowercase HTTP method "get" is deprecated. Use uppercase HTTP method like "GET".', 16384)
  2 APPPATH\Config\Routes.php(10): CodeIgniter\Router\RouteCollection->match([...], 'upload-api', 'UploadController::upload')
  3 SYSTEMPATH\Router\RouteCollection.php(339): require('D:\\xampp\\htdocs\\fews_bb\\app\\Config\\Routes.php')
@@ -32,7 +8,7 @@ WARNING - 2025-06-12 16:43:19 --> [DEPRECATED] Passing lowercase HTTP method "ge
  7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
  8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  9 FCPATH\index.php(60): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
-WARNING - 2025-06-12 16:43:19 --> [DEPRECATED] Passing lowercase HTTP method "post" is deprecated. Use uppercase HTTP method like "POST". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
+WARNING - 2025-06-14 17:58:16 --> [DEPRECATED] Passing lowercase HTTP method "post" is deprecated. Use uppercase HTTP method like "POST". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
  1 SYSTEMPATH\Router\RouteCollection.php(1026): trigger_error('Passing lowercase HTTP method "post" is deprecated. Use uppercase HTTP method like "POST".', 16384)
  2 APPPATH\Config\Routes.php(10): CodeIgniter\Router\RouteCollection->match([...], 'upload-api', 'UploadController::upload')
  3 SYSTEMPATH\Router\RouteCollection.php(339): require('D:\\xampp\\htdocs\\fews_bb\\app\\Config\\Routes.php')
@@ -42,7 +18,7 @@ WARNING - 2025-06-12 16:43:19 --> [DEPRECATED] Passing lowercase HTTP method "po
  7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
  8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  9 FCPATH\index.php(60): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
-WARNING - 2025-06-12 16:43:21 --> [DEPRECATED] Passing lowercase HTTP method "get" is deprecated. Use uppercase HTTP method like "GET". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
+WARNING - 2025-06-14 17:58:23 --> [DEPRECATED] Passing lowercase HTTP method "get" is deprecated. Use uppercase HTTP method like "GET". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
  1 SYSTEMPATH\Router\RouteCollection.php(1026): trigger_error('Passing lowercase HTTP method "get" is deprecated. Use uppercase HTTP method like "GET".', 16384)
  2 APPPATH\Config\Routes.php(10): CodeIgniter\Router\RouteCollection->match([...], 'upload-api', 'UploadController::upload')
  3 SYSTEMPATH\Router\RouteCollection.php(339): require('D:\\xampp\\htdocs\\fews_bb\\app\\Config\\Routes.php')
@@ -52,7 +28,7 @@ WARNING - 2025-06-12 16:43:21 --> [DEPRECATED] Passing lowercase HTTP method "ge
  7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
  8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  9 FCPATH\index.php(60): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
-WARNING - 2025-06-12 16:43:21 --> [DEPRECATED] Passing lowercase HTTP method "post" is deprecated. Use uppercase HTTP method like "POST". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
+WARNING - 2025-06-14 17:58:23 --> [DEPRECATED] Passing lowercase HTTP method "post" is deprecated. Use uppercase HTTP method like "POST". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
  1 SYSTEMPATH\Router\RouteCollection.php(1026): trigger_error('Passing lowercase HTTP method "post" is deprecated. Use uppercase HTTP method like "POST".', 16384)
  2 APPPATH\Config\Routes.php(10): CodeIgniter\Router\RouteCollection->match([...], 'upload-api', 'UploadController::upload')
  3 SYSTEMPATH\Router\RouteCollection.php(339): require('D:\\xampp\\htdocs\\fews_bb\\app\\Config\\Routes.php')
@@ -62,7 +38,7 @@ WARNING - 2025-06-12 16:43:21 --> [DEPRECATED] Passing lowercase HTTP method "po
  7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
  8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  9 FCPATH\index.php(60): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
-WARNING - 2025-06-12 16:44:20 --> [DEPRECATED] Passing lowercase HTTP method "get" is deprecated. Use uppercase HTTP method like "GET". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
+WARNING - 2025-06-14 17:58:53 --> [DEPRECATED] Passing lowercase HTTP method "get" is deprecated. Use uppercase HTTP method like "GET". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
  1 SYSTEMPATH\Router\RouteCollection.php(1026): trigger_error('Passing lowercase HTTP method "get" is deprecated. Use uppercase HTTP method like "GET".', 16384)
  2 APPPATH\Config\Routes.php(10): CodeIgniter\Router\RouteCollection->match([...], 'upload-api', 'UploadController::upload')
  3 SYSTEMPATH\Router\RouteCollection.php(339): require('D:\\xampp\\htdocs\\fews_bb\\app\\Config\\Routes.php')
@@ -72,7 +48,7 @@ WARNING - 2025-06-12 16:44:20 --> [DEPRECATED] Passing lowercase HTTP method "ge
  7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
  8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  9 FCPATH\index.php(60): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
-WARNING - 2025-06-12 16:44:20 --> [DEPRECATED] Passing lowercase HTTP method "post" is deprecated. Use uppercase HTTP method like "POST". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
+WARNING - 2025-06-14 17:58:53 --> [DEPRECATED] Passing lowercase HTTP method "post" is deprecated. Use uppercase HTTP method like "POST". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
  1 SYSTEMPATH\Router\RouteCollection.php(1026): trigger_error('Passing lowercase HTTP method "post" is deprecated. Use uppercase HTTP method like "POST".', 16384)
  2 APPPATH\Config\Routes.php(10): CodeIgniter\Router\RouteCollection->match([...], 'upload-api', 'UploadController::upload')
  3 SYSTEMPATH\Router\RouteCollection.php(339): require('D:\\xampp\\htdocs\\fews_bb\\app\\Config\\Routes.php')
@@ -82,7 +58,7 @@ WARNING - 2025-06-12 16:44:20 --> [DEPRECATED] Passing lowercase HTTP method "po
  7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
  8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  9 FCPATH\index.php(60): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
-WARNING - 2025-06-12 16:44:36 --> [DEPRECATED] Passing lowercase HTTP method "get" is deprecated. Use uppercase HTTP method like "GET". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
+WARNING - 2025-06-14 17:58:55 --> [DEPRECATED] Passing lowercase HTTP method "get" is deprecated. Use uppercase HTTP method like "GET". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
  1 SYSTEMPATH\Router\RouteCollection.php(1026): trigger_error('Passing lowercase HTTP method "get" is deprecated. Use uppercase HTTP method like "GET".', 16384)
  2 APPPATH\Config\Routes.php(10): CodeIgniter\Router\RouteCollection->match([...], 'upload-api', 'UploadController::upload')
  3 SYSTEMPATH\Router\RouteCollection.php(339): require('D:\\xampp\\htdocs\\fews_bb\\app\\Config\\Routes.php')
@@ -92,7 +68,7 @@ WARNING - 2025-06-12 16:44:36 --> [DEPRECATED] Passing lowercase HTTP method "ge
  7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
  8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  9 FCPATH\index.php(60): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
-WARNING - 2025-06-12 16:44:36 --> [DEPRECATED] Passing lowercase HTTP method "post" is deprecated. Use uppercase HTTP method like "POST". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
+WARNING - 2025-06-14 17:58:55 --> [DEPRECATED] Passing lowercase HTTP method "post" is deprecated. Use uppercase HTTP method like "POST". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
  1 SYSTEMPATH\Router\RouteCollection.php(1026): trigger_error('Passing lowercase HTTP method "post" is deprecated. Use uppercase HTTP method like "POST".', 16384)
  2 APPPATH\Config\Routes.php(10): CodeIgniter\Router\RouteCollection->match([...], 'upload-api', 'UploadController::upload')
  3 SYSTEMPATH\Router\RouteCollection.php(339): require('D:\\xampp\\htdocs\\fews_bb\\app\\Config\\Routes.php')
@@ -102,19 +78,7 @@ WARNING - 2025-06-12 16:44:36 --> [DEPRECATED] Passing lowercase HTTP method "po
  7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
  8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  9 FCPATH\index.php(60): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
-CRITICAL - 2025-06-12 16:44:36 --> CodeIgniter\Security\Exceptions\SecurityException: The action you requested is not allowed.
-[Method: POST, Route: upload-api]
-in SYSTEMPATH\Security\Security.php on line 262.
- 1 SYSTEMPATH\Security\Security.php(262): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
- 2 SYSTEMPATH\Filters\CSRF.php(52): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
- 3 SYSTEMPATH\Filters\Filters.php(241): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
- 4 SYSTEMPATH\Filters\Filters.php(221): CodeIgniter\Filters\Filters->runBefore([...])
- 5 SYSTEMPATH\CodeIgniter.php(479): CodeIgniter\Filters\Filters->run('upload-api', 'before')
- 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
- 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
- 9 FCPATH\index.php(60): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
-WARNING - 2025-06-12 16:45:15 --> [DEPRECATED] Passing lowercase HTTP method "get" is deprecated. Use uppercase HTTP method like "GET". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
+WARNING - 2025-06-14 17:59:01 --> [DEPRECATED] Passing lowercase HTTP method "get" is deprecated. Use uppercase HTTP method like "GET". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
  1 SYSTEMPATH\Router\RouteCollection.php(1026): trigger_error('Passing lowercase HTTP method "get" is deprecated. Use uppercase HTTP method like "GET".', 16384)
  2 APPPATH\Config\Routes.php(10): CodeIgniter\Router\RouteCollection->match([...], 'upload-api', 'UploadController::upload')
  3 SYSTEMPATH\Router\RouteCollection.php(339): require('D:\\xampp\\htdocs\\fews_bb\\app\\Config\\Routes.php')
@@ -124,7 +88,7 @@ WARNING - 2025-06-12 16:45:15 --> [DEPRECATED] Passing lowercase HTTP method "ge
  7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
  8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  9 FCPATH\index.php(60): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
-WARNING - 2025-06-12 16:45:15 --> [DEPRECATED] Passing lowercase HTTP method "post" is deprecated. Use uppercase HTTP method like "POST". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
+WARNING - 2025-06-14 17:59:01 --> [DEPRECATED] Passing lowercase HTTP method "post" is deprecated. Use uppercase HTTP method like "POST". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
  1 SYSTEMPATH\Router\RouteCollection.php(1026): trigger_error('Passing lowercase HTTP method "post" is deprecated. Use uppercase HTTP method like "POST".', 16384)
  2 APPPATH\Config\Routes.php(10): CodeIgniter\Router\RouteCollection->match([...], 'upload-api', 'UploadController::upload')
  3 SYSTEMPATH\Router\RouteCollection.php(339): require('D:\\xampp\\htdocs\\fews_bb\\app\\Config\\Routes.php')
@@ -134,19 +98,7 @@ WARNING - 2025-06-12 16:45:15 --> [DEPRECATED] Passing lowercase HTTP method "po
  7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
  8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  9 FCPATH\index.php(60): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
-CRITICAL - 2025-06-12 16:45:15 --> CodeIgniter\Security\Exceptions\SecurityException: The action you requested is not allowed.
-[Method: POST, Route: upload-api]
-in SYSTEMPATH\Security\Security.php on line 262.
- 1 SYSTEMPATH\Security\Security.php(262): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
- 2 SYSTEMPATH\Filters\CSRF.php(52): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
- 3 SYSTEMPATH\Filters\Filters.php(241): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
- 4 SYSTEMPATH\Filters\Filters.php(221): CodeIgniter\Filters\Filters->runBefore([...])
- 5 SYSTEMPATH\CodeIgniter.php(479): CodeIgniter\Filters\Filters->run('upload-api', 'before')
- 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
- 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
- 9 FCPATH\index.php(60): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
-WARNING - 2025-06-12 16:47:15 --> [DEPRECATED] Passing lowercase HTTP method "get" is deprecated. Use uppercase HTTP method like "GET". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
+WARNING - 2025-06-14 17:59:03 --> [DEPRECATED] Passing lowercase HTTP method "get" is deprecated. Use uppercase HTTP method like "GET". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
  1 SYSTEMPATH\Router\RouteCollection.php(1026): trigger_error('Passing lowercase HTTP method "get" is deprecated. Use uppercase HTTP method like "GET".', 16384)
  2 APPPATH\Config\Routes.php(10): CodeIgniter\Router\RouteCollection->match([...], 'upload-api', 'UploadController::upload')
  3 SYSTEMPATH\Router\RouteCollection.php(339): require('D:\\xampp\\htdocs\\fews_bb\\app\\Config\\Routes.php')
@@ -156,47 +108,7 @@ WARNING - 2025-06-12 16:47:15 --> [DEPRECATED] Passing lowercase HTTP method "ge
  7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
  8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  9 FCPATH\index.php(60): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
-WARNING - 2025-06-12 16:47:15 --> [DEPRECATED] Passing lowercase HTTP method "post" is deprecated. Use uppercase HTTP method like "POST". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
- 1 SYSTEMPATH\Router\RouteCollection.php(1026): trigger_error('Passing lowercase HTTP method "post" is deprecated. Use uppercase HTTP method like "POST".', 16384)
- 2 APPPATH\Config\Routes.php(10): CodeIgniter\Router\RouteCollection->match([...], 'upload-api', 'UploadController::upload')
- 3 SYSTEMPATH\Router\RouteCollection.php(339): require('D:\\xampp\\htdocs\\fews_bb\\app\\Config\\Routes.php')
- 4 SYSTEMPATH\CodeIgniter.php(821): CodeIgniter\Router\RouteCollection->loadRoutes()
- 5 SYSTEMPATH\CodeIgniter.php(455): CodeIgniter\CodeIgniter->tryToRouteIt(null)
- 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
- 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
- 9 FCPATH\index.php(60): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
-WARNING - 2025-06-12 16:47:59 --> [DEPRECATED] Passing lowercase HTTP method "get" is deprecated. Use uppercase HTTP method like "GET". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
- 1 SYSTEMPATH\Router\RouteCollection.php(1026): trigger_error('Passing lowercase HTTP method "get" is deprecated. Use uppercase HTTP method like "GET".', 16384)
- 2 APPPATH\Config\Routes.php(10): CodeIgniter\Router\RouteCollection->match([...], 'upload-api', 'UploadController::upload')
- 3 SYSTEMPATH\Router\RouteCollection.php(339): require('D:\\xampp\\htdocs\\fews_bb\\app\\Config\\Routes.php')
- 4 SYSTEMPATH\CodeIgniter.php(821): CodeIgniter\Router\RouteCollection->loadRoutes()
- 5 SYSTEMPATH\CodeIgniter.php(455): CodeIgniter\CodeIgniter->tryToRouteIt(null)
- 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
- 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
- 9 FCPATH\index.php(60): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
-WARNING - 2025-06-12 16:47:59 --> [DEPRECATED] Passing lowercase HTTP method "post" is deprecated. Use uppercase HTTP method like "POST". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
- 1 SYSTEMPATH\Router\RouteCollection.php(1026): trigger_error('Passing lowercase HTTP method "post" is deprecated. Use uppercase HTTP method like "POST".', 16384)
- 2 APPPATH\Config\Routes.php(10): CodeIgniter\Router\RouteCollection->match([...], 'upload-api', 'UploadController::upload')
- 3 SYSTEMPATH\Router\RouteCollection.php(339): require('D:\\xampp\\htdocs\\fews_bb\\app\\Config\\Routes.php')
- 4 SYSTEMPATH\CodeIgniter.php(821): CodeIgniter\Router\RouteCollection->loadRoutes()
- 5 SYSTEMPATH\CodeIgniter.php(455): CodeIgniter\CodeIgniter->tryToRouteIt(null)
- 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
- 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
- 9 FCPATH\index.php(60): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
-WARNING - 2025-06-12 16:48:41 --> [DEPRECATED] Passing lowercase HTTP method "get" is deprecated. Use uppercase HTTP method like "GET". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
- 1 SYSTEMPATH\Router\RouteCollection.php(1026): trigger_error('Passing lowercase HTTP method "get" is deprecated. Use uppercase HTTP method like "GET".', 16384)
- 2 APPPATH\Config\Routes.php(10): CodeIgniter\Router\RouteCollection->match([...], 'upload-api', 'UploadController::upload')
- 3 SYSTEMPATH\Router\RouteCollection.php(339): require('D:\\xampp\\htdocs\\fews_bb\\app\\Config\\Routes.php')
- 4 SYSTEMPATH\CodeIgniter.php(821): CodeIgniter\Router\RouteCollection->loadRoutes()
- 5 SYSTEMPATH\CodeIgniter.php(455): CodeIgniter\CodeIgniter->tryToRouteIt(null)
- 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
- 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
- 9 FCPATH\index.php(60): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
-WARNING - 2025-06-12 16:48:41 --> [DEPRECATED] Passing lowercase HTTP method "post" is deprecated. Use uppercase HTTP method like "POST". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
+WARNING - 2025-06-14 17:59:03 --> [DEPRECATED] Passing lowercase HTTP method "post" is deprecated. Use uppercase HTTP method like "POST". in SYSTEMPATH\Router\RouteCollection.php on line 1026.
  1 SYSTEMPATH\Router\RouteCollection.php(1026): trigger_error('Passing lowercase HTTP method "post" is deprecated. Use uppercase HTTP method like "POST".', 16384)
  2 APPPATH\Config\Routes.php(10): CodeIgniter\Router\RouteCollection->match([...], 'upload-api', 'UploadController::upload')
  3 SYSTEMPATH\Router\RouteCollection.php(339): require('D:\\xampp\\htdocs\\fews_bb\\app\\Config\\Routes.php')
