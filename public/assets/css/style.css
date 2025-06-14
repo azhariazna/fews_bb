@@ -44,27 +44,35 @@ html {
     cursor: default;
 }
 
+/* Tombol toggle muncul di semua resolusi */
+#toggleSidebar {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1002;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Penyesuaian khusus saat mobile */
 @media (max-width: 768px) {
     #toggleSidebar {
         top: 10px;
         right: 10px;
-        position: fixed;
-        /* fix tombol agar tidak tertutup elemen lain */
-        z-index: 1002;
-        background: #007bff;
-        color: #fff;
-        border: none;
-        padding: 6px 12px;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .sidebar {
-        width: 85vw;
-        /* supaya sidebar tidak penuh 100% di HP */
-        max-width: 300px;
     }
 }
+
+
+.sidebar {
+    width: 85vw;
+    /* supaya sidebar tidak penuh 100% di HP */
+    max-width: 300px;
+}
+
 
 
 
