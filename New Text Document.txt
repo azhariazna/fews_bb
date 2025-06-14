@@ -1,0 +1,3 @@
+docker exec -it fews_bb bash
+cd /var/www/html
+git pull origin main
