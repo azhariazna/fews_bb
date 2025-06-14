@@ -133,7 +133,7 @@
                 }
             });
 
-        fetch('<?= base_url("public/assets/geojson/jalur_evakuasi.json") ?>')
+        fetch('<?= base_url("public/assets/geojson/Jalur_Evakuasi.json") ?>')
             .then(res => res.json())
             .then(data => {
                 jalurEvakuasiLayer = L.geoJSON(data, {
@@ -150,7 +150,7 @@
 
 
 
-        fetch('<?= base_url("public/assets/geojson/titik_evakuasi.json") ?>')
+        fetch('<?= base_url("public/assets/geojson/Titik_Evakuasi.json") ?>')
             .then(res => res.json())
             .then(data => {
                 titikEvakuasiLayer = L.geoJSON(data, {
