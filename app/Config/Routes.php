@@ -8,6 +8,11 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 $routes->get('geojson/(:any)', 'Geojson::show/$1');
 $routes->match(['get', 'post'], 'upload-api', 'UploadController::upload');
+$routes->get('dbtest', 'DatabaseTest::index');
+
+$routes->get('api/telemetri', 'Home::getTelemetriGeoJSON');
+
+
 
 
 

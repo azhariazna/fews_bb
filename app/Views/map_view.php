@@ -2,8 +2,10 @@
 <html lang="id">
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
     <meta charset="utf-8" />
-    <title>Leaflet Map with OSRM Routing</title>
+    <title>FEWS Bintang Bano</title>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="<?= base_url('public/assets/css/style.css') ?>">
@@ -42,32 +44,173 @@
         .gradeGroup {
             margin-left: 20px;
         }
+
+        #topbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: #005a9e;
+            color: white;
+            z-index: 1001;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 0 20px;
+        }
+
+        .topbar-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .topbar-logo {
+            height: 42px;
+            width: auto;
+        }
+
+        .topbar-title {
+            font-size: 20px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        @media screen and (max-width: 480px) {
+            .topbar-title {
+                font-size: 14px;
+                white-space: normal;
+                max-width: 140px;
+            }
+        }
+
+
+
+        #topbar h2 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+
+        #map {
+            position: absolute;
+            top: 54px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .sidebar {
+            top: 54px !important;
+        }
+
+        .gradeGroup {
+            margin-left: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .gradeGroup.collapsed {
+            display: none;
+        }
     </style>
 </head>
 
 <body>
+    <div id="topbar">
+        <div class="topbar-content">
+            <img src="<?= base_url('public/assets/img/pu.png') ?>" alt="Logo" class="topbar-logo">
+            <span class="topbar-title">DASHBOARD MONITORING</span>
+        </div>
+    </div>
+
+
 
     <div class="locate-control" onclick="showMyLocation()" title="Lokasi Saya">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#333" viewBox="0 0 24 24">
             <path d="M12 10a2 2 0 102.001 2.001A2.002 2.002 0 0012 10zm10 1h-2.071a8.004 8.004 0 00-6.929-6.929V2a1 1 0 10-2 0v2.071A8.004 8.004 0 004.071 11H2a1 1 0 100 2h2.071a8.004 8.004 0 006.929 6.929V22a1 1 0 102 0v-2.071a8.004 8.004 0 006.929-6.929H22a1 1 0 100-2zM12 18a6 6 0 116-6 6.006 6.006 0 01-6 6z" />
         </svg>
     </div>
-
     <div class="sidebar" id="sidebar">
-        <h3>Menu Peta</h3>
+        <h3>Menu</h3>
         <ul>
             <li>
                 <label>
-                    <input type="checkbox" id="checkboxGenangan" checked />
-                    Layer Genangan
-                </label>
-                <ul class="gradeGroup">
-                    <li><label><input type="checkbox" class="gradeFilter" value="1" checked /> GradeCode 1</label></li>
-                    <li><label><input type="checkbox" class="gradeFilter" value="2" checked /> GradeCode 2</label></li>
-                    <li><label><input type="checkbox" class="gradeFilter" value="3" checked /> GradeCode 3</label></li>
-                    <li><label><input type="checkbox" class="gradeFilter" value="4" checked /> GradeCode 4</label></li>
-                    <li><label><input type="checkbox" class="gradeFilter" value="5" checked /> GradeCode 5</label></li>
-                </ul>
+                    <label style="cursor: pointer;" onclick="toggleGradeGroup()">
+                        <!-- <input type="checkbox" id="checkboxGenangan" checked /> -->
+                        <span id="arrowToggle" style="display: inline-block; width: 16px;">▼</span>
+                        Tinggi Genangan
+                    </label>
+                    <ul class="gradeGroup collapsed" id="gradeGroup">
+                        <li>
+                            <label>
+                                <input type="checkbox" class="gradeFilter" value="1" checked />
+                                <span style="
+        display:inline-block;
+        width:16px !important;
+        height:16px !important;
+        margin: 0 6px;
+        vertical-align: middle;
+        border: 2px solid #333;
+        border-radius: 4px;
+        background-color: #cce6ff;">
+                                </span>
+                                0–0.5 meter
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" class="gradeFilter" value="2" checked />
+                                <span style="
+        display:inline-block;
+        width:16px !important;
+        height:16px !important;
+        margin: 0 6px;
+        vertical-align: middle;
+        border: 2px solid #333;
+        border-radius: 4px;
+        background-color: #99ccff;">
+                                </span>
+                                0.5–1.5 meter
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" class="gradeFilter" value="3" checked />
+                                <span style="
+        display:inline-block;
+        width:16px !important;
+        height:16px !important;
+        margin: 0 6px;
+        vertical-align: middle;
+        border: 2px solid #333;
+        border-radius: 4px;
+        background-color: #336699;">
+                                </span>
+                                1.5–4 meter
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" class="gradeFilter" value="4" checked />
+                                <span style="
+        display:inline-block;
+        width:16px !important;
+        height:16px !important;
+        margin: 0 6px;
+        vertical-align: middle;
+        border: 2px solid #333;
+        border-radius: 4px;
+        background-color: #003366;">
+                                </span>
+                                > 4 meter
+                            </label>
+                        </li>
+                    </ul>
+
             </li>
             <li>
                 <label><input type="checkbox" id="checkboxDas" checked> Layer DAS</label>
@@ -75,9 +218,29 @@
             <li>
                 <label><input type="checkbox" id="checkboxSungai" checked> Layer Sungai</label>
             </li>
-            <li><label><input type="checkbox" id="checkboxJalurEvakuasi" checked> Jalur Evakuasi</label></li>
-            <li><label><input type="checkbox" id="checkboxTitikEvakuasi" checked> Titik Evakuasi</label></li>
+            <li>
+                <label>
+                    <input type="checkbox" id="checkboxJalurEvakuasi" checked>
+                    Jalur Evakuasi
+                </label>
+            </li>
+
+            <li>
+                <label>
+                    <input type="checkbox" id="checkboxTitikEvakuasi" checked>
+                    <img src="<?= base_url('public/assets/img/evakuasi.png') ?>" alt="Jalur Icon" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
+                    Titik Evakuasi
+                </label>
+            </li>
+
             <li><label><input type="checkbox" id="checkboxTitikTinjau" checked> Titik Tinjau</label></li>
+            <li>
+                <label>
+                    <input type="checkbox" id="checkboxAwlr" checked>
+                    <img src="<?= base_url('public/assets/img/tma.png') ?>" alt="TMA Icon" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
+                    AWLR
+                </label>
+            </li>
         </ul>
     </div>
 
@@ -89,6 +252,8 @@
     <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 
     <script>
+        const layerOn = true; // atau false jika default ingin disembunyikan
+
         const map = L.map('map').setView([-8.740373, 116.777827], 10);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -224,15 +389,7 @@
 
         gradeCheckboxes.forEach(cb => cb.addEventListener('change', updateFilteredLayer));
 
-        const mainGenanganCheckbox = document.getElementById('checkboxGenangan');
-        mainGenanganCheckbox.addEventListener('change', function() {
-            const isChecked = this.checked;
-            gradeCheckboxes.forEach(cb => {
-                cb.checked = isChecked;
-                cb.disabled = !isChecked;
-            });
-            updateFilteredLayer();
-        });
+
 
         function getFillColor(grade) {
             switch (parseInt(grade)) {
@@ -252,11 +409,10 @@
         }
 
         function updateFilteredLayer() {
-            const layerOn = mainGenanganCheckbox.checked;
             const selectedGrades = Array.from(gradeCheckboxes).filter(cb => cb.checked).map(cb => cb.value);
 
             if (genanganLayer) map.removeLayer(genanganLayer);
-            if (!layerOn) return;
+            if (selectedGrades.length === 0) return;
 
             genanganLayer = L.geoJSON(originalData, {
                 filter: feature => selectedGrades.includes(String(feature.properties.gridcode)),
@@ -388,6 +544,56 @@
                     routeWhileDragging: false
                 }).addTo(map);
             });
+        }
+        let telemetriLayer = null;
+
+        fetch('<?= base_url("api/telemetri") ?>')
+            .then(res => res.json())
+            .then(data => {
+                // Buat layer tapi belum langsung ditambahkan ke peta
+                telemetriLayer = L.geoJSON(data, {
+                    pointToLayer: (feature, latlng) => {
+                        return L.marker(latlng, {
+                            icon: L.icon({
+                                iconUrl: '<?= base_url("public/assets/img/tma.png") ?>',
+                                iconSize: [24, 24],
+                                iconAnchor: [12, 12],
+                                popupAnchor: [0, -12]
+                            })
+                        });
+                    },
+                    onEachFeature: (feature, layer) => {
+                        const props = feature.properties;
+                        layer.bindPopup(`
+                    <strong>${props.nama_lokasi}</strong><br>
+                    Waktu: ${props.waktu ?? '-'}<br>
+                    TMA: ${props.tma ?? '-'} meter
+                `);
+                    }
+                });
+
+                // Cek status awal checkbox
+                if (document.getElementById("checkboxAwlr")?.checked) {
+                    telemetriLayer.addTo(map);
+                }
+
+                // Tambahkan event untuk toggle layer
+                document.getElementById("checkboxAwlr")?.addEventListener("change", function() {
+                    if (this.checked) {
+                        map.addLayer(telemetriLayer);
+                    } else {
+                        map.removeLayer(telemetriLayer);
+                    }
+                });
+            });
+
+        function toggleGradeGroup() {
+            const group = document.getElementById("gradeGroup");
+            const arrow = document.getElementById("arrowToggle");
+            if (group && arrow) {
+                group.classList.toggle("collapsed");
+                arrow.textContent = group.classList.contains("collapsed") ? "▶" : "▼";
+            }
         }
     </script>
 </body>
