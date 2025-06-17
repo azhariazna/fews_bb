@@ -595,6 +595,46 @@
                 arrow.textContent = group.classList.contains("collapsed") ? "▶" : "▼";
             }
         }
+
+        // 1. Tambah ikon khusus
+        const iconTiuSuntuk = L.icon({
+            iconUrl: '<?= base_url("assets/img/bendungan.png") ?>',
+            iconSize: [32, 32],
+            iconAnchor: [16, 32],
+            popupAnchor: [0, -32]
+        });
+
+        const iconBintangBano = L.icon({
+            iconUrl: '<?= base_url("assets/img/bendungan.png") ?>',
+            iconSize: [32, 32],
+            iconAnchor: [16, 32],
+            popupAnchor: [0, -32]
+        });
+
+        // 2. Tambah marker
+        const tiuSuntukMarker = L.marker([-8.7934844, 116.9222879], {
+                icon: iconTiuSuntuk
+            })
+            .addTo(map)
+            .bindTooltip("<b>Bendungan Tiu Suntuk</b><br>-8.7934844, 116.9222879", {
+                permanent: false,
+                direction: "top"
+            })
+            .openTooltip();
+
+        const bintangBanoMarker = L.marker([-8.713588, 116.989053], {
+                icon: iconBintangBano
+            })
+            .addTo(map)
+            .bindTooltip("<b>Bendungan Bintang Bano</b><br>-8.713588, 116.989053", {
+                permanent: false,
+                direction: "top"
+            })
+            .openTooltip();
+
+        // 3. Zoom ke dua lokasi
+        const group = new L.featureGroup([tiuSuntukMarker, bintangBanoMarker]);
+        map.fitBounds(group.getBounds().pad(1));
     </script>
 </body>
 
