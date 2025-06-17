@@ -262,14 +262,14 @@
 
         let genanganLayer, originalData, dasLayer, sungaiLayer, jalurEvakuasiLayer, titikEvakuasiLayer, titikTinjauLayer;
 
-        fetch('<?= base_url("assets/geojson/Genangan.json") ?>')
+        fetch('assets/geojson/Genangan.json')
             .then(response => response.json())
             .then(data => {
                 originalData = data;
                 updateFilteredLayer();
             });
 
-        fetch('<?= base_url("assets/geojson/das.json") ?>')
+        fetch('assets/geojson/das.json')
             .then(res => res.json())
             .then(data => {
                 dasLayer = L.geoJSON(data, {
@@ -284,7 +284,7 @@
                 }
             });
 
-        fetch('<?= base_url("assets/geojson/sungai.json") ?>')
+        fetch('assets/geojson/sungai.json')
             .then(res => res.json())
             .then(data => {
                 sungaiLayer = L.geoJSON(data, {
@@ -298,7 +298,7 @@
                 }
             });
 
-        fetch('<?= base_url("assets/geojson/Jalur_Evakuasi.json") ?>')
+        fetch('assets/geojson/Jalur_Evakuasi.json')
             .then(res => res.json())
             .then(data => {
                 jalurEvakuasiLayer = L.geoJSON(data, {
@@ -315,14 +315,14 @@
 
 
 
-        fetch('<?= base_url("assets/geojson/titik_evakuasi.json") ?>')
+        fetch('assets/geojson/titik_evakuasi.json')
             .then(res => res.json())
             .then(data => {
                 titikEvakuasiLayer = L.geoJSON(data, {
                     pointToLayer: (feature, latlng) => {
                         return L.marker(latlng, {
                             icon: L.icon({
-                                iconUrl: '<?= base_url("assets/img/evakuasi.png") ?>',
+                                iconUrl: 'assets/img/evakuasi.png',
                                 iconSize: [24, 24]
                             })
                         }).bindPopup(`
@@ -337,7 +337,7 @@
             });
 
 
-        fetch('<?= base_url("assets/geojson/Titik_Tinjau.json") ?>')
+        fetch('assets/geojson/Titik_Tinjau.json')
             .then(res => res.json())
             .then(data => {
                 titikTinjauLayer = L.geoJSON(data, {
@@ -547,7 +547,7 @@
         }
         let telemetriLayer = null;
 
-        fetch('<?= base_url("api/telemetri") ?>')
+        fetch('api/telemetri')
             .then(res => res.json())
             .then(data => {
                 // Buat layer tapi belum langsung ditambahkan ke peta
@@ -555,7 +555,7 @@
                     pointToLayer: (feature, latlng) => {
                         return L.marker(latlng, {
                             icon: L.icon({
-                                iconUrl: '<?= base_url("assets/img/tma.png") ?>',
+                                iconUrl: 'assets/img/tma.png',
                                 iconSize: [24, 24],
                                 iconAnchor: [12, 12],
                                 popupAnchor: [0, -12]
