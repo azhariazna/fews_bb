@@ -8,7 +8,7 @@
     <title>FEWS Bintang Bano</title>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
+    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
 
     <style>
@@ -122,7 +122,7 @@
 <body>
     <div id="topbar">
         <div class="topbar-content">
-            <img src="<?= base_url('assets/img/pu.png') ?>" alt="Logo" class="topbar-logo">
+            <img src="assets/img/pu.png" alt="Logo" class="topbar-logo">
             <span class="topbar-title">DASHBOARD MONITORING</span>
         </div>
     </div>
@@ -228,7 +228,7 @@
             <li>
                 <label>
                     <input type="checkbox" id="checkboxTitikEvakuasi" checked>
-                    <img src="<?= base_url('assets/img/evakuasi.png') ?>" alt="Jalur Icon" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
+                    <img src="assets/img/evakuasi.png" alt="Jalur Icon" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
                     Titik Evakuasi
                 </label>
             </li>
@@ -237,7 +237,7 @@
             <li>
                 <label>
                     <input type="checkbox" id="checkboxAwlr" checked>
-                    <img src="<?= base_url('assets/img/tma.png') ?>" alt="TMA Icon" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
+                    <img src="assets/img/tma.png" alt="TMA Icon" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
                     AWLR
                 </label>
             </li>
@@ -598,14 +598,14 @@
 
         // 1. Tambah ikon khusus
         const iconTiuSuntuk = L.icon({
-            iconUrl: '<?= base_url("assets/img/bendungan.png") ?>',
+            iconUrl: 'assets/img/bendungan.png',
             iconSize: [32, 32],
             iconAnchor: [16, 32],
             popupAnchor: [0, -32]
         });
 
         const iconBintangBano = L.icon({
-            iconUrl: '<?= base_url("assets/img/bendungan.png") ?>',
+            iconUrl: 'assets/img/bendungan.png',
             iconSize: [32, 32],
             iconAnchor: [16, 32],
             popupAnchor: [0, -32]
