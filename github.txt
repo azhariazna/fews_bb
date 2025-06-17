@@ -1,0 +1,5 @@
+echo ".env" >> .gitignore
+git rm --cached .env
+git add .gitignore
+git commit -m "Ignore .env from future commits"
+git push origin main

@@ -8,7 +8,7 @@
     <title>FEWS Bintang Bano</title>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="<?= base_url('public/assets/css/style.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
 
     <style>
@@ -122,7 +122,7 @@
 <body>
     <div id="topbar">
         <div class="topbar-content">
-            <img src="<?= base_url('public/assets/img/pu.png') ?>" alt="Logo" class="topbar-logo">
+            <img src="<?= base_url('assets/img/pu.png') ?>" alt="Logo" class="topbar-logo">
             <span class="topbar-title">DASHBOARD MONITORING</span>
         </div>
     </div>
@@ -228,7 +228,7 @@
             <li>
                 <label>
                     <input type="checkbox" id="checkboxTitikEvakuasi" checked>
-                    <img src="<?= base_url('public/assets/img/evakuasi.png') ?>" alt="Jalur Icon" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
+                    <img src="<?= base_url('assets/img/evakuasi.png') ?>" alt="Jalur Icon" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
                     Titik Evakuasi
                 </label>
             </li>
@@ -237,7 +237,7 @@
             <li>
                 <label>
                     <input type="checkbox" id="checkboxAwlr" checked>
-                    <img src="<?= base_url('public/assets/img/tma.png') ?>" alt="TMA Icon" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
+                    <img src="<?= base_url('assets/img/tma.png') ?>" alt="TMA Icon" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
                     AWLR
                 </label>
             </li>
@@ -262,14 +262,14 @@
 
         let genanganLayer, originalData, dasLayer, sungaiLayer, jalurEvakuasiLayer, titikEvakuasiLayer, titikTinjauLayer;
 
-        fetch('<?= base_url("public/assets/geojson/Genangan.json") ?>')
+        fetch('<?= base_url("assets/geojson/Genangan.json") ?>')
             .then(response => response.json())
             .then(data => {
                 originalData = data;
                 updateFilteredLayer();
             });
 
-        fetch('<?= base_url("public/assets/geojson/das.json") ?>')
+        fetch('<?= base_url("assets/geojson/das.json") ?>')
             .then(res => res.json())
             .then(data => {
                 dasLayer = L.geoJSON(data, {
@@ -284,7 +284,7 @@
                 }
             });
 
-        fetch('<?= base_url("public/assets/geojson/sungai.json") ?>')
+        fetch('<?= base_url("assets/geojson/sungai.json") ?>')
             .then(res => res.json())
             .then(data => {
                 sungaiLayer = L.geoJSON(data, {
@@ -298,7 +298,7 @@
                 }
             });
 
-        fetch('<?= base_url("public/assets/geojson/Jalur_Evakuasi.json") ?>')
+        fetch('<?= base_url("assets/geojson/Jalur_Evakuasi.json") ?>')
             .then(res => res.json())
             .then(data => {
                 jalurEvakuasiLayer = L.geoJSON(data, {
@@ -315,14 +315,14 @@
 
 
 
-        fetch('<?= base_url("public/assets/geojson/titik_evakuasi.json") ?>')
+        fetch('<?= base_url("assets/geojson/titik_evakuasi.json") ?>')
             .then(res => res.json())
             .then(data => {
                 titikEvakuasiLayer = L.geoJSON(data, {
                     pointToLayer: (feature, latlng) => {
                         return L.marker(latlng, {
                             icon: L.icon({
-                                iconUrl: '<?= base_url("public/assets/img/evakuasi.png") ?>',
+                                iconUrl: '<?= base_url("assets/img/evakuasi.png") ?>',
                                 iconSize: [24, 24]
                             })
                         }).bindPopup(`
@@ -337,7 +337,7 @@
             });
 
 
-        fetch('<?= base_url("public/assets/geojson/Titik_Tinjau.json") ?>')
+        fetch('<?= base_url("assets/geojson/Titik_Tinjau.json") ?>')
             .then(res => res.json())
             .then(data => {
                 titikTinjauLayer = L.geoJSON(data, {
@@ -555,7 +555,7 @@
                     pointToLayer: (feature, latlng) => {
                         return L.marker(latlng, {
                             icon: L.icon({
-                                iconUrl: '<?= base_url("public/assets/img/tma.png") ?>',
+                                iconUrl: '<?= base_url("assets/img/tma.png") ?>',
                                 iconSize: [24, 24],
                                 iconAnchor: [12, 12],
                                 popupAnchor: [0, -12]
