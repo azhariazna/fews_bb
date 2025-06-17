@@ -19,14 +19,23 @@ class App extends BaseConfig
     /**public string $baseURL = 'http://localhost:8080/';**/
 	public string $baseURL = '';
 
-	public function __construct()
-	{
-		parent::__construct();
+	    public function __construct()
+    {
+        parent::__construct();
 
-		$this->baseURL = (isset($_SERVER['HTTPS']) ? "https://" : "http://")
-					   . $_SERVER['HTTP_HOST']
-					   . str_replace('/index.php', '', $_SERVER['SCRIPT_NAME']) . '/';
-	}
+        $https = false;
+
+        if (
+            (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') ||
+            (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] === 'on' || $_SERVER['HTTPS'] === 1)) ||
+            (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443)
+        ) {
+            $https = true;
+        }
+
+        $this->baseURL = ($https ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . '/fews_bb/public/';
+    }
+
 
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.

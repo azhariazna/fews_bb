@@ -394,13 +394,13 @@
         function getFillColor(grade) {
             switch (parseInt(grade)) {
                 case 1:
-                    return '#003366';
+                    return '#cce6ff';
                 case 2:
-                    return '#336699';
-                case 3:
-                    return '#6699cc';
-                case 4:
                     return '#99ccff';
+                case 3:
+                    return '#336699';
+                case 4:
+                    return '#003366';
                 case 5:
                     return '#cce6ff';
                 default:

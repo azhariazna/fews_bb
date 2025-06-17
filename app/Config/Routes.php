@@ -11,6 +11,15 @@ $routes->match(['get', 'post'], 'upload-api', 'UploadController::upload');
 $routes->get('dbtest', 'DatabaseTest::index');
 
 $routes->get('api/telemetri', 'Home::getTelemetriGeoJSON');
+$routes->get('laporanrtd', 'LaporanRTD::index');
+$routes->post('laporanrtd/submit', 'LaporanRTD::submit');
+$routes->get('laporanrtd/download', 'LaporanRTD::download');
+
+$routes->get('login', 'Login::index');
+$routes->post('login/auth', 'Login::auth');
+$routes->get('logout', 'Login::logout');
+
+$routes->get('dashboard', 'Dashboard::index');
 
 
 
