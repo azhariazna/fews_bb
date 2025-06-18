@@ -24,16 +24,16 @@ class Login extends BaseController
         if ($user) {
             session()->set('logged_in', true);
             session()->set('username', $user['username']);
-            return redirect()->to('dashboard');
+            return redirect()->to(base_url('dashboard'));
         } else {
             session()->setFlashdata('error', 'Login gagal. Username atau password salah.');
-            return redirect()->to('login');
+            return redirect()->to(base_url('login'));
         }
     }
 
     public function logout()
     {
         session()->destroy();
-        return redirect()->to('login');
+        return redirect()->to(base_url('login'));
     }
 }
