@@ -24,7 +24,7 @@ class Login extends BaseController
         if ($user) {
             session()->set('logged_in', true);
             session()->set('username', $user['username']);
-            return redirect()->to(base_url('dashboard'));
+            return redirect()->to(base_url('Dashboard'));
         } else {
             session()->setFlashdata('error', 'Login gagal. Username atau password salah.');
             return redirect()->to(base_url('login'));
