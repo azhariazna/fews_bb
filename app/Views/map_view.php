@@ -598,8 +598,20 @@
                                         options: {
                                             responsive: false,
                                             plugins: {
-                                                legend: { display: false }
+                                                legend: { display: false },
+                                                title: {
+                                                    display: true,
+                                                    text: 'Hidrograf Prediksi Banjir',
+                                                    font: {
+                                                        size: 14
+                                                    },
+                                                    padding: {
+                                                        top: 5,
+                                                        bottom: 10
+                                                    }
+                                                }
                                             },
+
                                             scales: {
                                                 y: { beginAtZero: true }
                                             }

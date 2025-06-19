@@ -5,3 +5,4 @@
 
 /vendor/
 writable/logs/
+.env
