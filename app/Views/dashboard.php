@@ -16,12 +16,12 @@
             <div class="position-sticky pt-3">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= base_url('laporanrtd') ?>" target="content-frame">
+                        <a class="nav-link" href="laporanrtd" target="content-frame">
                             📝 Isi RTD
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= base_url('laporanrtd/download') ?>" target="content-frame">
+                        <a class="nav-link" href="laporanrtd/download" target="content-frame">
                             📥 Download RTD
                         </a>
                     </li>
@@ -42,7 +42,7 @@
             </nav>
 
             <!-- Dynamic Content -->
-            <iframe name="content-frame" src="<?= base_url('laporanrtd') ?>" style="width:100%; height:75vh; border:none;"></iframe>
+            <iframe name="content-frame" src="laporanrtd" style="width:100%; height:75vh; border:none;"></iframe>
         </main>
 
     </div>
