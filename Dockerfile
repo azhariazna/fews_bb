@@ -1,41 +1,24 @@
-# Gunakan image dasar PHP dengan FPM
-FROM php:8.1-fpm
+FROM php:8.2-apache
 
-# Install ekstensi dan dependency yang dibutuhkan
+# Install ekstensi PHP yang dibutuhkan CI4
 RUN apt-get update && apt-get install -y \
-    libicu-dev \
-    zip unzip \
-    git \
-    libonig-dev \
-    libzip-dev \
-    curl \
-    libpng-dev \
-    libxml2-dev \
-    && docker-php-ext-install \
-    intl \
-    pdo \
-    pdo_mysql \
-    mbstring \
-    zip \
-    exif \
-    gd \
-    mysqli
+    libzip-dev unzip zip libpng-dev libonig-dev libxml2-dev \
+    libicu-dev g++ \
+    default-mysql-client \
+    && docker-php-ext-install intl mysqli pdo pdo_mysql zip intl
 
-# Install Composer
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+# Aktifkan mod_rewrite Apache
+RUN a2enmod rewrite
 
-# Set direktori kerja di dalam container
+# Salin semua isi folder project ke Apache
+COPY . /var/www/html
+
+# Set direktori kerja
 WORKDIR /var/www/html
 
-# Copy semua file dari project ke dalam container
-COPY . .
-
-# Atur permission file agar cocok untuk user web
+# Atur permission
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
 
-# Expose port untuk PHP-FPM
-EXPOSE 9000
-
-# Jalankan PHP-FPM
-CMD ["php-fpm"]
+# Konfigurasi Apache agar .htaccess aktif
+RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf

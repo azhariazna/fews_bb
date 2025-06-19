@@ -250,6 +250,8 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.min.js"></script>
     <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
     <script>
         const layerOn = true; // atau false jika default ingin disembunyikan
@@ -564,12 +566,50 @@
                     },
                     onEachFeature: (feature, layer) => {
                         const props = feature.properties;
-                        layer.bindPopup(`
-                    <strong>${props.nama_lokasi}</strong><br>
-                    Waktu: ${props.waktu ?? '-'}<br>
-                    TMA: ${props.tma ?? '-'} meter
-                `);
+                        const idTelemetri = props.id;
+
+                        const canvasId = `chart-${idTelemetri}`;
+                        const popupContent = `
+                            <strong>${props.nama_lokasi}</strong><br>
+                            Waktu: ${props.waktu}<br>
+                            TMA: ${props.tma} meter<br><br>
+                            <canvas id="${canvasId}" width="250" height="150"></canvas>
+                        `;
+
+                        layer.bindPopup(popupContent);
+
+                        layer.on('popupopen', () => {
+                            fetch(`api/grafik/${idTelemetri}`)
+                                .then(res => res.json())
+                                .then(grafik => {
+                                    const ctx = document.getElementById(canvasId).getContext('2d');
+                                    new Chart(ctx, {
+                                        type: 'line',
+                                        data: {
+                                            labels: grafik.map(g => `Jam ${g.jam}`),
+                                            datasets: [{
+                                                label: 'Debit (m³/dt)',
+                                                data: grafik.map(g => g.debit),
+                                                borderColor: 'blue',
+                                                fill: false,
+                                                tension: 0.4
+                                            }]
+                                        },
+                                        options: {
+                                            responsive: false,
+                                            plugins: {
+                                                legend: { display: false }
+                                            },
+                                            scales: {
+                                                y: { beginAtZero: true }
+                                            }
+                                        }
+                                    });
+                                });
+                        });
                     }
+
+
                 });
 
                 // Cek status awal checkbox

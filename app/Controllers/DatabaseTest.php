@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\TelemetriModel;
+use App\Models\GrafikModel;
 use CodeIgniter\Controller;
 
 class DatabaseTest extends Controller
@@ -42,5 +43,21 @@ class DatabaseTest extends Controller
             echo "<h2>Koneksi ke database GAGAL!</h2>";
             echo "<p>Error: " . $e->getMessage() . "</p>";
         }
+    }
+
+    // Tambahan: Endpoint untuk API grafik per id_telemetri
+    public function grafik($idTelemetri = null)
+    {
+        header('Content-Type: application/json');
+
+        if (!$idTelemetri) {
+            echo json_encode(['status' => 'error', 'message' => 'ID tidak diberikan']);
+            return;
+        }
+
+        $grafikModel = new GrafikModel();
+        $data = $grafikModel->getByTelemetriId($idTelemetri);
+
+        echo json_encode($data);
     }
 }

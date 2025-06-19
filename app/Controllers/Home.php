@@ -45,4 +45,23 @@ class Home extends BaseController
             'features' => $features
         ]);
     }
+
+    public function grafik($idTelemetri = null)
+        {
+            header('Access-Control-Allow-Origin: *');
+            header('Content-Type: application/json');
+
+            if (!$idTelemetri) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'ID Telemetri tidak diberikan.'
+                ]);
+            }
+
+            $grafikModel = new \App\Models\GrafikModel();
+            $data = $grafikModel->getByTelemetriId($idTelemetri);
+
+            return $this->response->setJSON($data);
+        }
+
 }

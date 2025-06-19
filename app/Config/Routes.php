@@ -11,6 +11,7 @@ $routes->match(['get', 'post'], 'upload-api', 'UploadController::upload');
 $routes->get('dbtest', 'DatabaseTest::index');
 
 $routes->get('api/telemetri', 'Home::getTelemetriGeoJSON');
+$routes->get('api/grafik/(:num)', 'Home::grafik/$1');
 $routes->get('laporanrtd', 'LaporanRTD::index');
 $routes->post('laporanrtd/submit', 'LaporanRTD::submit');
 $routes->get('laporanrtd/download', 'LaporanRTD::download');
