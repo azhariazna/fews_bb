@@ -33,7 +33,7 @@ class App extends BaseConfig
             $https = true;
         }
 
-        $this->baseURL = ($https ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . '/fews_bb/public/';
+        $this->baseURL = ($https ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . '';
     }
 
 
