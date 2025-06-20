@@ -674,15 +674,31 @@
             })
             .openTooltip();
 
-        const bintangBanoMarker = L.marker([-8.713588, 116.989053], {
+            let bintangBanoMarker;
+
+            fetch('/telemetri/latest')
+            .then(res => res.json())
+            .then(data => {
+                const content = `<b>Bendungan Bintang Bano</b><br>TMA: ${data.tma} m<br>Waktu: ${data.waktu}`;
+                
+                // Buat marker dan tampilkan tooltip
+                bintangBanoMarker = L.marker([-8.713588, 116.989053], {
                 icon: iconBintangBano
-            })
-            .addTo(map)
-            .bindTooltip("<b>Bendungan Bintang Bano</b><br>-8.713588, 116.989053", {
+                })
+                .addTo(map)
+                .bindTooltip(content, {
                 permanent: false,
                 direction: "top"
-            })
-            .openTooltip();
+                })
+                .openTooltip();
+
+                // Tambahkan layer hanya jika valid
+                if (telemetriLayer && typeof telemetriLayer.addTo === 'function') {
+                telemetriLayer.addTo(map);
+                }
+            });
+
+
 
         // 3. Zoom ke dua lokasi
         const group = new L.featureGroup([tiuSuntukMarker, bintangBanoMarker]);

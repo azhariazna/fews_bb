@@ -22,6 +22,10 @@ $routes->get('logout', 'Login::logout');
 
 $routes->get('dashboard', 'Dashboard::index');
 
+$routes->get('/telemetri/fetch', 'TelemetryController::fetchAndStore');
+$routes->get('/telemetri/latest', 'TelemetryController::getLatestTMA');
+
+
 
 
 
