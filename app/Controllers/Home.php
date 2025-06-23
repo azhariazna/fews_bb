@@ -63,58 +63,58 @@ class Home extends BaseController
 
             return $this->response->setJSON($data);
         }
-public function bulkUpdate()
-{
-    $request = service('request');
-    $model = new \App\Models\DataModel();
-    $dataList = $request->getJSON();
+    public function bulkUpdate()
+    {
+        $request = service('request');
+        $model = new \App\Models\DataModel();
+        $dataList = $request->getJSON();
 
-    $successCount = 0;
-    $failCount = 0;
-    $results = [];
+        $successCount = 0;
+        $failCount = 0;
+        $results = [];
 
-    foreach ($dataList as $dataInput) {
-        $id = isset($dataInput->id) ? (int)$dataInput->id : null;
-        $jam = isset($dataInput->jam) ? (int)$dataInput->jam : null;
-        $debit = isset($dataInput->debit) ? (int)$dataInput->debit : null;
-        $lastupdate = $dataInput->update_at ?? null;
-        $id_telemetri = isset($dataInput->id_telemetri)
-            ? $dataInput->id_telemetri
-            : ceil($id / 48);
+        foreach ($dataList as $dataInput) {
+            $id = isset($dataInput->id) ? (int)$dataInput->id : null;
+            $jam = isset($dataInput->jam) ? (int)$dataInput->jam : null;
+            $debit = isset($dataInput->debit) ? (int)$dataInput->debit : null;
+            $lastupdate = $dataInput->update_at ?? null;
+            $id_telemetri = isset($dataInput->id_telemetri)
+                ? $dataInput->id_telemetri
+                : ceil($id / 48);
 
-        if ($id === null || $jam === null || $debit === null || $lastupdate === null) {
-            $failCount++;
-            $results[] = ['id' => $id, 'status' => 'invalid'];
-            continue;
+            if ($id === null || $jam === null || $debit === null || $lastupdate === null) {
+                $failCount++;
+                $results[] = ['id' => $id, 'status' => 'invalid'];
+                continue;
+            }
+
+            $dataUpdate = [
+                'jam' => $jam,
+                'debit' => $debit,
+                'id_telemetri' => $id_telemetri,
+                'update_at' => $lastupdate
+            ];
+
+            if ($id === 1) {
+                log_message('debug', 'DEBUG ID 1: ' . json_encode($dataUpdate));
+            }
+
+            if ($model->update($id, $dataUpdate)) {
+                $successCount++;
+                $results[] = ['id' => $id, 'status' => 'updated'];
+            } else {
+                $failCount++;
+                $results[] = ['id' => $id, 'status' => 'failed'];
+            }
         }
 
-        $dataUpdate = [
-            'jam' => $jam,
-            'debit' => $debit,
-            'id_telemetri' => $id_telemetri,
-            'update_at' => $lastupdate
-        ];
-
-        if ($id === 1) {
-            log_message('debug', 'DEBUG ID 1: ' . json_encode($dataUpdate));
-        }
-
-        if ($model->update($id, $dataUpdate)) {
-            $successCount++;
-            $results[] = ['id' => $id, 'status' => 'updated'];
-        } else {
-            $failCount++;
-            $results[] = ['id' => $id, 'status' => 'failed'];
-        }
+        return $this->response->setJSON([
+            'status' => true,
+            'updated' => $successCount,
+            'failed' => $failCount,
+            'details' => $results
+        ]);
     }
-
-    return $this->response->setJSON([
-        'status' => true,
-        'updated' => $successCount,
-        'failed' => $failCount,
-        'details' => $results
-    ]);
-}
 
 
 

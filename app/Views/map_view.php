@@ -578,53 +578,53 @@
 
                         layer.bindPopup(popupContent);
 
-                        layer.on('popupopen', () => {
-                            fetch(`api/grafik/${idTelemetri}`)
-                                .then(res => res.json())
-                                .then(grafik => {
-                                    const ctx = document.getElementById(canvasId).getContext('2d');
+                    layer.on('popupopen', () => {
+                        fetch(`api/grafik/${idTelemetri}`)
+                            .then(res => res.json())
+                            .then(grafik => {
+                                const ctx = document.getElementById(canvasId).getContext('2d');
 
-                                    let waktuUpdate = 'Data tidak tersedia';
+                                let waktuUpdate = 'Data tidak tersedia';
 
-                                    if (grafik.length > 0 && grafik[0].update_at) {
-                                        waktuUpdate = grafik[0].update_at;  // Langsung tampilkan tanpa ubah apapun
-                                    }
+                                if (grafik.length > 0 && grafik[0].update_at) {
+                                    waktuUpdate = grafik[0].update_at;  // Langsung tampilkan tanpa ubah apapun
+                                }
 
-                                    new Chart(ctx, {
-                                        type: 'line',
-                                        data: {
-                                            labels: grafik.map(g => `Jam ${g.jam}`),
-                                            datasets: [{
-                                                label: 'Debit (m³/dt)',
-                                                data: grafik.map(g => g.debit),
-                                                borderColor: 'blue',
-                                                fill: false,
-                                                tension: 0.4
-                                            }]
-                                        },
-                                        options: {
-                                            responsive: false,
-                                            plugins: {
-                                                legend: { display: false },
-                                                title: {
-                                                    display: true,
-                                                    text: `Hidrograf Prediksi Banjir (Update: ${waktuUpdate})`,
-                                                    font: {
-                                                        size: 14
-                                                    },
-                                                    padding: {
-                                                        top: 5,
-                                                        bottom: 10
-                                                    }
+                                new Chart(ctx, {
+                                    type: 'line',
+                                    data: {
+                                        labels: grafik.map(g => `Jam ${g.jam}`),
+                                        datasets: [{
+                                            label: 'Debit (m³/dt)',
+                                            data: grafik.map(g => g.debit),
+                                            borderColor: 'blue',
+                                            fill: false,
+                                            tension: 0.4
+                                        }]
+                                    },
+                                    options: {
+                                        responsive: false,
+                                        plugins: {
+                                            legend: { display: false },
+                                            title: {
+                                                display: true,
+                                                text: `Hidrograf Prediksi Banjir (Update: ${waktuUpdate})`,
+                                                font: {
+                                                    size: 14
+                                                },
+                                                padding: {
+                                                    top: 5,
+                                                    bottom: 10
                                                 }
-                                            },
-                                            scales: {
-                                                y: { beginAtZero: true }
                                             }
+                                        },
+                                        scales: {
+                                            y: { beginAtZero: true }
                                         }
-                                    });
+                                    }
                                 });
-                        });
+                            });
+                    });
 
 
 
