@@ -40,7 +40,9 @@ class TelemetryApi extends BaseController
                     $tma = $json['data'][0]['data'][0]['value'];
 
                     // Ambil datetime langsung tanpa mengubah zona waktu
-                    $datetime = date('Y-m-d H:i:s', strtotime($createdAtRaw));
+                    $datetime = (new \DateTime($createdAtRaw, new \DateTimeZone('UTC')))
+                        ->format('Y-m-d H:i:s');
+
 
                     $model->where('nama_lokasi', $nama_lokasi)
                         ->set(['waktu' => $datetime, 'tma' => $tma])
