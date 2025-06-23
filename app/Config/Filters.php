@@ -79,7 +79,8 @@ class Filters extends BaseFilters
                 'except' => [
                     'upload-api',
                     'api/bulk-update-data',
-                    'api/update-data' // tambahkan lainnya kalau perlu
+                    'api/update-data',
+                    'api/last-awlr'
                 ]
             ],
             // 'invalidchars',

@@ -572,7 +572,7 @@
                         const popupContent = `
                             <strong>${props.nama_lokasi}</strong><br>
                             Waktu: ${props.waktu}<br>
-                            TMA: ${props.tma} meter<br><br>
+                            TMA: ${props.tma} cm<br><br>
                             <canvas id="${canvasId}" width="250" height="150"></canvas>
                         `;
 
