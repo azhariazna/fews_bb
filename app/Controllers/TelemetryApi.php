@@ -36,22 +36,33 @@ class TelemetryApi extends BaseController
             if ($response) {
                 $json = json_decode($response, true);
 
-                // Ambil waktu UTC tanpa menggeser ke zona waktu lokal
-                $createdAtUTC = $json['data'][0]['created_at'];
-                $tma = $json['data'][0]['data'][0]['value'];
+                if (isset($json['data'][0]['created_at']) && isset($json['data'][0]['data'][0]['value'])) {
+                    $createdAt = $json['data'][0]['created_at']; // UTC format
+                    $tma = $json['data'][0]['data'][0]['value'];
 
-                // Format waktu agar sesuai format MySQL (tanpa timezone)
-                $datetime = date('Y-m-d H:i:s', strtotime($createdAtUTC));
+                    // Hanya ubah ke format datetime standar tanpa mengubah timezone
+                    $datetime = date('Y-m-d H:i:s', strtotime($createdAt));
 
-                // Update ke database
-                $model->where('nama_lokasi', $nama_lokasi)
-                      ->set(['waktu' => $datetime, 'tma' => $tma])
-                      ->update();
+                    // Update database berdasarkan nama_lokasi
+                    $model->where('nama_lokasi', $nama_lokasi)
+                          ->set(['waktu' => $datetime, 'tma' => $tma])
+                          ->update();
 
+                    $results[] = [
+                        'nama_lokasi' => $nama_lokasi,
+                        'tma' => $tma,
+                        'waktu' => $datetime,
+                    ];
+                } else {
+                    $results[] = [
+                        'nama_lokasi' => $nama_lokasi,
+                        'error' => 'Data tidak lengkap dari API.'
+                    ];
+                }
+            } else {
                 $results[] = [
                     'nama_lokasi' => $nama_lokasi,
-                    'tma' => $tma,
-                    'waktu' => $datetime, // masih dalam UTC
+                    'error' => 'Gagal mengambil data dari API.'
                 ];
             }
         }
