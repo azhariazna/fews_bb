@@ -12,7 +12,7 @@ class GrafikModel extends Model
     public function getByTelemetriId($idTelemetri)
     {
         return $this->where('id_telemetri', $idTelemetri)
-                    ->orderBy('jam', 'ASC')
+                    ->orderBy('id', 'ASC')
                     ->findAll();
     }
 }

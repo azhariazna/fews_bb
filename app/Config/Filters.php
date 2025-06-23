@@ -75,14 +75,22 @@ class Filters extends BaseFilters
         'before' => [
             'cors',
             // 'honeypot',
-            'csrf' => ['except' => ['upload-api']],
+            'csrf' => [
+                'except' => [
+                    'upload-api',
+                    'api/bulk-update-data',
+                    'api/update-data' // tambahkan lainnya kalau perlu
+                ]
+            ],
             // 'invalidchars',
         ],
+
         'after' => [
             // 'honeypot',
             // 'secureheaders',
         ],
     ];
+
 
     /**
      * List of filter aliases that works on a

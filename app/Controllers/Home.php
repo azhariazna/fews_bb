@@ -63,5 +63,52 @@ class Home extends BaseController
 
             return $this->response->setJSON($data);
         }
+    public function bulkUpdate()
+        {
+            $request = service('request');
+            $model = new \App\Models\DataModel();
+            $dataList = $request->getJSON();
+
+            $successCount = 0;
+            $failCount = 0;
+            $results = [];
+
+            foreach ($dataList as $dataInput) {
+                $id = $dataInput->id ?? null;
+                $jam = $dataInput->jam ?? null;
+                $debit = $dataInput->debit ?? null;
+
+                if (!$id || !$jam || !is_numeric($debit)) {
+                    $failCount++;
+                    $results[] = ['id' => $id, 'status' => 'invalid'];
+                    continue;
+                }
+
+                $id_telemetri = ceil($id / 48);
+
+                $dataUpdate = [
+                    'jam' => $jam,
+                    'debit' => $debit,
+                    'id_telemetri' => $id_telemetri
+                ];
+
+                if ($model->update($id, $dataUpdate)) {
+                    $successCount++;
+                    $results[] = ['id' => $id, 'status' => 'updated'];
+                } else {
+                    $failCount++;
+                    $results[] = ['id' => $id, 'status' => 'failed'];
+                }
+            }
+
+            return $this->response->setJSON([
+                'status' => true,
+                'updated' => $successCount,
+                'failed' => $failCount,
+                'details' => $results
+            ]);
+        }
+
+
 
 }

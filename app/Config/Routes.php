@@ -10,6 +10,7 @@ $routes->get('geojson/(:any)', 'Geojson::show/$1');
 $routes->match(['get', 'post'], 'upload-api', 'UploadController::upload');
 $routes->get('dbtest', 'DatabaseTest::index');
 
+$routes->post('api/bulk-update-data', 'Home::bulkUpdate');
 $routes->get('api/telemetri', 'Home::getTelemetriGeoJSON');
 $routes->get('api/grafik/(:num)', 'Home::grafik/$1');
 $routes->get('laporanrtd', 'LaporanRTD::index');
