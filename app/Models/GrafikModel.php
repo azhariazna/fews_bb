@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 class GrafikModel extends Model
 {
     protected $table = 'grafik';
-    protected $allowedFields = ['id_telemetri', 'jam', 'debit'];
+    protected $allowedFields = ['id_telemetri', 'jam', 'debit','update_at'];
     protected $returnType = 'array';
 
     public function getByTelemetriId($idTelemetri)

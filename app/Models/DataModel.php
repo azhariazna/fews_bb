@@ -8,5 +8,5 @@ class DataModel extends Model
 {
     protected $table = 'grafik'; 
     protected $primaryKey = 'id';
-    protected $allowedFields = ['jam', 'debit', 'id_telemetri'];
+    protected $allowedFields = ['jam', 'debit', 'id_telemetri','update_at'];
 }
