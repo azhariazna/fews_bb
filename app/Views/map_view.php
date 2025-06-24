@@ -573,10 +573,18 @@
                             <strong>${props.nama_lokasi}</strong><br>
                             Waktu: ${props.waktu}<br>
                             TMA: ${props.tma} cm<br><br>
-                            <canvas id="${canvasId}" width="250" height="150"></canvas>
+                            <div style="width: 450px; height: 300px;">
+                                <canvas id="${canvasId}" width="420" height="250"></canvas>
+                            </div>
                         `;
 
-                        layer.bindPopup(popupContent);
+
+                        layer.bindPopup(popupContent, {
+                            maxWidth: 500,
+                            autoPan: true,
+                            autoPanPadding: [20, 20]
+                        });
+
 
                     layer.on('popupopen', () => {
                         fetch(`api/grafik/${idTelemetri}`)
