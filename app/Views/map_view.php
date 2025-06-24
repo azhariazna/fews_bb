@@ -280,7 +280,6 @@
        
     
 <body>
-  <div id="map"></div>
 
     <div id="warning-legend" class="leaflet-control leaflet-bar">
     <b>Bendungan Tiu Suntuk</b><br>
