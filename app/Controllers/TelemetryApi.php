@@ -40,20 +40,26 @@ class TelemetryApi extends BaseController
                     $tma = $json['data'][0]['data'][0]['value'];
                     $datetime = (new \DateTime($createdAtRaw, new \DateTimeZone('UTC')))->format('Y-m-d H:i:s');
 
-                    // --- INSERT ke data_all_telemetri jika belum ada ---
-                    $existing = $db->table('data_all_telemetri')
-                        ->where('id_telemetri', $info['id_telemetri'])
-                        ->where('waktu', $datetime)
-                        ->get()
-                        ->getRow();
+                    // --- Hanya INSERT ke data_all_telemetri jika menit == 00 dan belum ada ---
+                    $dt = new \DateTime($datetime);
+                    $minute = (int) $dt->format('i'); // Ambil menit
 
-                    if (!$existing) {
-                        $db->table('data_all_telemetri')->insert([
-                            'id_telemetri' => $info['id_telemetri'],
-                            'waktu'        => $datetime,
-                            'tma'          => $tma
-                        ]);
+                    if ($minute === 0) {
+                        $existing = $db->table('data_all_telemetri')
+                            ->where('id_telemetri', $info['id_telemetri'])
+                            ->where('waktu', $datetime)
+                            ->get()
+                            ->getRow();
+
+                        if (!$existing) {
+                            $db->table('data_all_telemetri')->insert([
+                                'id_telemetri' => $info['id_telemetri'],
+                                'waktu'        => $datetime,
+                                'tma'          => $tma
+                            ]);
+                        }
                     }
+
 
                     // --- UPDATE ke tb_telemetri ---
                     $db->table('tb_telemetri')
