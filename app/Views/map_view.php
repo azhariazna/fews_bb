@@ -133,19 +133,19 @@
 }
 
 #warning-legend {
-  display: block !important; /* pastikan tidak disembunyikan */
+  display: block !important;
   position: absolute;
-  bottom: 20px;
+  bottom: 65px;
   right: 20px;
   padding: 12px;
   max-width: 250px;
-  background-color: #fff5f5;
-  border: 2px solid red;
+  background-color: #fff;
+  border: 2px solid #ccc;
   border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  animation: blinkPanel 1s infinite;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   z-index: 1000;
 }
+
 
 
 
@@ -281,11 +281,13 @@
     
 <body>
 
-    <div id="warning-legend" class="leaflet-control leaflet-bar">
-    <b>Bendungan Tiu Suntuk</b><br>
-    Status: <span style="color:red;">Awas</span><br>
-    TMA: 39.00 m
-    </div>
+
+<div id="warning-legend">
+  <strong id="judul-bendungan"></strong><br>
+  Status: <span id="status"></span><br>
+  TMA: <span id="nilai-tma"></span> m
+</div>
+
 
 
 
@@ -302,42 +304,44 @@
 
     <script>
             document.addEventListener("DOMContentLoaded", function () {
-            const judul = document.getElementById("judul-bendungan");
-            const status = document.getElementById("status");
-            const nilai = document.getElementById("nilai-tma");
+  const judul = document.getElementById("judul-bendungan");
+  const status = document.getElementById("status");
+  const nilai = document.getElementById("nilai-tma");
+  const panel = document.getElementById("warning-legend");
 
-            // Simulasi nilai TMA
-            const tma = 39;
+  // Simulasi nilai TMA
+  const tma = 98;
 
-            console.log("🚀 Mulai update panel warning");
-            console.log("TMA:", tma);
+  judul.textContent = "Bendungan Tiu Suntuk";
+  nilai.textContent = tma.toFixed(2);
 
-            // Update konten
-            judul.textContent = "Bendungan Tiu Suntuk";
-            nilai.textContent = tma.toFixed(2);
+  // Reset animasi & warna dulu
+  panel.style.animation = "none";
 
-            if (tma <= 10) {
-                status.textContent = "Aman";
-                status.style.color = "green";
-            } else if (tma <= 20) {
-                status.textContent = "Siaga";
-                status.style.color = "orange";
-            } else {
-                status.textContent = "Awas";
-                status.style.color = "red";
-                status.style.animation = "blink 1s infinite";
-            }
+  if (tma < 94.75) {
+    status.textContent = "Aman";
+    status.style.color = "green";
+    panel.style.backgroundColor = "#e8fff0";  // hijau muda
+    panel.style.borderColor = "#5cb85c";
+  } else if (tma <= 95.5) {
+    status.textContent = "Waspada I";
+    status.style.color = "orange";
+    panel.style.animation = "blinkPanel 1s infinite";
+  } else if (tma <= 96.25) {
+    status.textContent = "Waspada II";
+    status.style.color = "orange";
+    panel.style.animation = "blinkPanel 1s infinite";
+  } else if (tma <= 97) {
+    status.textContent = "Siaga";
+    status.style.color = "yellow";
+    panel.style.animation = "blinkPanel 1s infinite";
+  } else {
+    status.textContent = "Awas";
+    status.style.color = "red";
+    panel.style.animation = "blinkPanel 1s infinite";
+  }
+});
 
-            // Tambah animasi jika belum ada
-            const style = document.createElement("style");
-            style.innerHTML = `
-                @keyframes blink {
-                0% { opacity: 1; }
-                50% { opacity: 0.3; }
-                100% { opacity: 1; }
-                }`;
-            document.head.appendChild(style);
-            });
 
 
         const layerOn = true; // atau false jika default ingin disembunyikan
