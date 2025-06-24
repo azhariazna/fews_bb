@@ -47,22 +47,43 @@ class Home extends BaseController
     }
 
     public function grafik($idTelemetri = null)
-        {
-            header('Access-Control-Allow-Origin: *');
-            header('Content-Type: application/json');
+    {
+        header('Access-Control-Allow-Origin: *');
+        header('Content-Type: application/json');
 
-            if (!$idTelemetri) {
-                return $this->response->setJSON([
-                    'status' => 'error',
-                    'message' => 'ID Telemetri tidak diberikan.'
-                ]);
-            }
-
-            $grafikModel = new \App\Models\GrafikModel();
-            $data = $grafikModel->getByTelemetriId($idTelemetri);
-
-            return $this->response->setJSON($data);
+        if (!$idTelemetri) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'ID Telemetri tidak diberikan.'
+            ]);
         }
+
+        $db = \Config\Database::connect();
+
+        $query = $db->query("
+            SELECT 
+                g.id_telemetri,
+                g.jam,
+                g.debit AS debit_prediksi,
+                d.tma AS tma_aktual,
+                g.update_at
+            FROM grafik g
+            LEFT JOIN data_all_telemetri d
+                ON g.id_telemetri = d.id_telemetri
+                AND DATE(g.update_at) = DATE(d.waktu)
+                AND HOUR(g.update_at) = HOUR(d.waktu)
+            WHERE g.id_telemetri = ?
+            ORDER BY g.update_at
+        ", [$idTelemetri]);
+
+        $data = $query->getResultArray();
+
+        return $this->response->setJSON([
+            'status' => 'success',
+            'data'   => $data
+        ]);
+    }
+
     public function bulkUpdate()
     {
         $request = service('request');

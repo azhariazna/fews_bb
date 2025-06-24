@@ -581,49 +581,82 @@
                     layer.on('popupopen', () => {
                         fetch(`api/grafik/${idTelemetri}`)
                             .then(res => res.json())
-                            .then(grafik => {
+                            .then(response => {
+                                const grafik = response.data || [];
+
                                 const ctx = document.getElementById(canvasId).getContext('2d');
 
                                 let waktuUpdate = 'Data tidak tersedia';
-
                                 if (grafik.length > 0 && grafik[0].update_at) {
-                                    waktuUpdate = grafik[0].update_at;  // Langsung tampilkan tanpa ubah apapun
+                                    waktuUpdate = grafik[0].update_at;
                                 }
 
                                 new Chart(ctx, {
                                     type: 'line',
                                     data: {
                                         labels: grafik.map(g => `Jam ${g.jam}`),
-                                        datasets: [{
-                                            label: 'Debit (m³/dt)',
-                                            data: grafik.map(g => g.debit),
-                                            borderColor: 'blue',
-                                            fill: false,
-                                            tension: 0.4
-                                        }]
+                                        datasets: [
+                                            {
+                                                label: 'Debit Prediksi (m³/dt)',
+                                                data: grafik.map(g => g.debit_prediksi),
+                                                borderColor: 'blue',
+                                                backgroundColor: 'blue',
+                                                pointRadius: 2,
+                                                borderWidth: 1,
+                                                fill: false,
+                                                tension: 0.4
+                                            },
+                                            {
+                                                label: 'TMA Aktual (m³/dt)',
+                                                data: grafik.map(g => g.tma_aktual),
+                                                borderColor: 'red',
+                                                backgroundColor: 'red',
+                                                pointRadius: 2,
+                                                borderWidth: 1,
+                                                fill: false,
+                                                tension: 0.4
+                                            }
+                                        ]
                                     },
                                     options: {
                                         responsive: false,
                                         plugins: {
-                                            legend: { display: false },
+                                            legend: {
+                                                display: true,
+                                                labels: {
+                                                    boxWidth: 12,
+                                                    font: { size: 10 }
+                                                }
+                                            },
                                             title: {
                                                 display: true,
                                                 text: `Hidrograf Prediksi Banjir (Update: ${waktuUpdate})`,
-                                                font: {
-                                                    size: 14
-                                                },
-                                                padding: {
-                                                    top: 5,
-                                                    bottom: 10
-                                                }
+                                                font: { size: 14 },
+                                                padding: { top: 5, bottom: 10 }
                                             }
                                         },
                                         scales: {
-                                            y: { beginAtZero: true }
+                                            x: {
+                                                ticks: {
+                                                    autoSkip: true,
+                                                    maxTicksLimit: 12,
+                                                    font: { size: 10 }
+                                                }
+                                            },
+                                            y: {
+                                                beginAtZero: true,
+                                                title: {
+                                                    display: true,
+                                                    text: 'Debit (m³/dt)'
+                                                }
+                                            }
                                         }
                                     }
                                 });
+
+
                             });
+
                     });
 
 
@@ -648,7 +681,7 @@
                         map.removeLayer(telemetriLayer);
                     }
                 });
-            });
+    });
 
         function toggleGradeGroup() {
             const group = document.getElementById("gradeGroup");
