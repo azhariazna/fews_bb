@@ -116,6 +116,39 @@
         .gradeGroup.collapsed {
             display: none;
         }
+
+@keyframes blinkPanel {
+  0% {
+    background-color: #fff5f5;
+    border-color: red;
+  }
+  50% {
+    background-color: #ffcccc;
+    border-color: transparent;
+  }
+  100% {
+    background-color: #fff5f5;
+    border-color: red;
+  }
+}
+
+#warning-legend {
+  display: block !important; /* pastikan tidak disembunyikan */
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px;
+  max-width: 250px;
+  background-color: #fff5f5;
+  border: 2px solid red;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  animation: blinkPanel 1s infinite;
+  z-index: 1000;
+}
+
+
+
     </style>
 </head>
 
@@ -244,6 +277,21 @@
         </ul>
     </div>
 
+       
+    
+<body>
+  <div id="map"></div>
+
+    <div id="warning-legend" class="leaflet-control leaflet-bar">
+    <b>Bendungan Tiu Suntuk</b><br>
+    Status: <span style="color:red;">Awas</span><br>
+    TMA: 39.00 m
+    </div>
+
+
+
+
+
     <button id="toggleSidebar" onclick="toggleSidebar()">≡</button>
     <div id="map" style="height: 100vh;"></div>
 
@@ -254,6 +302,45 @@
 
 
     <script>
+            document.addEventListener("DOMContentLoaded", function () {
+            const judul = document.getElementById("judul-bendungan");
+            const status = document.getElementById("status");
+            const nilai = document.getElementById("nilai-tma");
+
+            // Simulasi nilai TMA
+            const tma = 39;
+
+            console.log("🚀 Mulai update panel warning");
+            console.log("TMA:", tma);
+
+            // Update konten
+            judul.textContent = "Bendungan Tiu Suntuk";
+            nilai.textContent = tma.toFixed(2);
+
+            if (tma <= 10) {
+                status.textContent = "Aman";
+                status.style.color = "green";
+            } else if (tma <= 20) {
+                status.textContent = "Siaga";
+                status.style.color = "orange";
+            } else {
+                status.textContent = "Awas";
+                status.style.color = "red";
+                status.style.animation = "blink 1s infinite";
+            }
+
+            // Tambah animasi jika belum ada
+            const style = document.createElement("style");
+            style.innerHTML = `
+                @keyframes blink {
+                0% { opacity: 1; }
+                50% { opacity: 0.3; }
+                100% { opacity: 1; }
+                }`;
+            document.head.appendChild(style);
+            });
+
+
         const layerOn = true; // atau false jika default ingin disembunyikan
 
         const map = L.map('map').setView([-8.740373, 116.777827], 10);
@@ -755,7 +842,15 @@
         // 3. Zoom ke dua lokasi
         const group = new L.featureGroup([tiuSuntukMarker, bintangBanoMarker]);
         map.fitBounds(group.getBounds().pad(1));
-    </script>
+
+
+
+
+
+
+
+
+</script>
 </body>
 
 </html>
