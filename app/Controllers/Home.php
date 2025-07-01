@@ -11,15 +11,17 @@ class Home extends BaseController
         helper('url'); // ← panggil di sini
         return view('map_view');
     }
+    
     public function getTelemetriGeoJSON()
     {
         $model = new \App\Models\TelemetriModel();
-        $data = $model->findAll();
+        
+        // Ambil hanya yang status = 'aktif'
+        $data = $model->where('status', 'aktif')->findAll();
 
         $features = [];
 
         foreach ($data as $row) {
-            // Pisahkan koordinat jika tidak kosong
             if (!empty($row['koordinat']) && strpos($row['koordinat'], ',') !== false) {
                 list($lon, $lat) = explode(',', $row['koordinat']);
 
@@ -45,6 +47,7 @@ class Home extends BaseController
             'features' => $features
         ]);
     }
+
 
     public function grafik($idTelemetri = null)
     {

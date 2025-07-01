@@ -7,5 +7,5 @@ class TelemetriModel extends Model
 {
     protected $table = 'tb_telemetri';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['nama_lokasi', 'waktu', 'tma'];
+    protected $allowedFields = ['nama_lokasi', 'waktu', 'tma','status'];
 }
