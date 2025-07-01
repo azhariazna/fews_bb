@@ -194,4 +194,6 @@ class TelemetryController extends Controller
             return $this->response->setJSON($data);
         }
 
+    
+
 }

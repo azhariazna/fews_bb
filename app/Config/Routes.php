@@ -30,6 +30,13 @@ $routes->get('telemetri/latest', 'TelemetryController::getBintangBano');
 $routes->get('telemetri/tiusuntuk', 'TelemetryController::getTiuSuntuk');
 
 
+// simpan tma manual
+$routes->get('manual-tma', 'ManualTMAController::index');
+$routes->post('manual-tma/save', 'ManualTMAController::save');
+
+
+
+
 
 
 
