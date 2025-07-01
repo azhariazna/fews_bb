@@ -27,16 +27,40 @@ public function update($id)
 {
     $model = new TmaModel();
 
+    // Ambil input
+    $waktuInput = $this->request->getPost('waktu');
+    $tma = $this->request->getPost('tma');
+
+    // Format waktu ke Y-m-d H:i:s
+    $datetime = \DateTime::createFromFormat('Y-m-d\TH:i', $waktuInput);
+    $waktu = $datetime ? $datetime->format('Y-m-d H:i:s') : null;
+
     $data = [
-        'waktu' => $this->request->getPost('waktu'),
-        'tma'   => $this->request->getPost('tma')
+        'waktu' => $waktu,
+        'tma' => $tma
     ];
 
     if ($model->update($id, $data)) {
+        $db = \Config\Database::connect();
+
+        // Cek apakah waktu + id_telemetri sudah ada
+        $exists = $db->query("SELECT * FROM data_all_telemetri WHERE id_telemetri = ? AND waktu = ?", [$id, $waktu])->getRow();
+
+        if (!$exists) {
+            $db->table('data_all_telemetri')->insert([
+                'id_telemetri' => $id,
+                'waktu' => $waktu,
+                'tma' => $tma
+            ]);
+        }
+
         return redirect()->to(base_url('/manual-tma'))->with('success', 'TMA berhasil diupdate.');
     } else {
         return redirect()->back()->with('error', 'Gagal memperbarui data.');
     }
 }
+
+
+
 
 }
