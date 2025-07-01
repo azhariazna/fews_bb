@@ -10,60 +10,188 @@ class TelemetryController extends Controller
     {
         helper('url');
 
-        $id_telemetri = 10080;
-        $url = "https://bintangbano.monitoring4system.com/api/dataterakhir?idlogger=$id_telemetri&kategori=awlr";
-        $json = file_get_contents($url);
+        $results = [];
+        $model = new TelemetryModel();
+        $db = \Config\Database::connect();
 
-        if (!$json) {
-            return $this->response->setJSON(['status' => 'error', 'message' => 'API tidak bisa diakses']);
-        }
+        // ===============================
+        // === API 1: Bintang Bano ===
+        // ===============================
+        $id_telemetri_1 = 10080;
+        $url_1 = "https://bintangbano.monitoring4system.com/api/dataterakhir?idlogger=$id_telemetri_1&kategori=awlr";
 
-        $data = json_decode($json, true);
+        $json_1 = file_get_contents($url_1);
+        if ($json_1) {
+            $data = json_decode($json_1, true);
+            if (isset($data['waktu'], $data['data_terakhir'])) {
+                $waktu = $data['waktu'];
+                $tma = null;
 
-        if (!isset($data['waktu']) || !isset($data['data_terakhir'])) {
-            return $this->response->setJSON(['status' => 'error', 'message' => 'Format JSON tidak valid']);
-        }
+                foreach ($data['data_terakhir'] as $sensor) {
+                    if ($sensor['sensor'] === "Tinggi_Muka_Air") {
+                        $tma = $sensor['data'];
+                        break;
+                    }
+                }
 
-        $waktu = $data['waktu'];
-        $tma = null;
+                if ($tma !== null) {
+                    $exists = $model->where('id_telemetri', $id_telemetri_1)
+                                    ->where('waktu', $waktu)
+                                    ->first();
 
-        foreach ($data['data_terakhir'] as $sensor) {
-            if ($sensor['sensor'] == "Tinggi_Muka_Air") {
-                $tma = $sensor['data'];
-                break;
+                    if (!$exists) {
+                        $model->save([
+                            'id_telemetri' => $id_telemetri_1,
+                            'waktu' => $waktu,
+                            'tma' => $tma
+                        ]);
+
+                        // Update tb_telemetri
+                        $db->table('tb_telemetri')
+                           ->where('id', $id_telemetri_1)
+                           ->update(['waktu' => $waktu, 'tma' => $tma]);
+
+                        $results[] = [
+                            'id_telemetri' => $id_telemetri_1,
+                            'status' => 'inserted',
+                            'waktu' => $waktu,
+                            'tma' => $tma
+                        ];
+                    } else {
+                        $results[] = [
+                            'id_telemetri' => $id_telemetri_1,
+                            'status' => 'exists',
+                            'waktu' => $waktu
+                        ];
+                    }
+                } else {
+                    $results[] = [
+                        'id_telemetri' => $id_telemetri_1,
+                        'status' => 'error',
+                        'message' => 'TMA not found'
+                    ];
+                }
+            } else {
+                $results[] = [
+                    'id_telemetri' => $id_telemetri_1,
+                    'status' => 'error',
+                    'message' => 'Format JSON tidak valid'
+                ];
             }
-        }
-
-        if ($tma === null) {
-            return $this->response->setJSON(['status' => 'error', 'message' => 'TMA not found']);
-        }
-
-        $model = new TelemetryModel();
-
-        // Cek jika data dengan kombinasi id_telemetri dan waktu sudah ada
-        $exists = $model->where('id_telemetri', $id_telemetri)
-                        ->where('waktu', $waktu)
-                        ->first();
-
-        if (!$exists) {
-            $model->save([
-                'id_telemetri' => $id_telemetri,
-                'waktu' => $waktu,
-                'tma' => $tma
-            ]);
-            return $this->response->setJSON(['status' => 'inserted', 'waktu' => $waktu, 'tma' => $tma]);
         } else {
-            return $this->response->setJSON(['status' => 'exists', 'waktu' => $waktu]);
+            $results[] = [
+                'id_telemetri' => $id_telemetri_1,
+                'status' => 'error',
+                'message' => 'API Bintang Bano tidak bisa diakses'
+            ];
         }
+
+        // ===============================
+        // === API 2: Tiu Suntuk (Auth) ===
+        // ===============================
+        $id_telemetri_2 = 10187;
+        $url_2 = "https://tiusuntuk.monitoring4system.com/api/data_last?id_logger=$id_telemetri_2";
+
+        $options = [
+            "http" => [
+                "header" => "Authorization: Basic " . base64_encode("user_tiusuntuk:admin_tiusuntuk")
+            ]
+        ];
+        $context = stream_context_create($options);
+        $json_2 = file_get_contents($url_2, false, $context);
+
+        if ($json_2) {
+            $data = json_decode($json_2, true);
+
+            if (isset($data['data']['waktu'], $data['data']['data'])) {
+                $waktu = $data['data']['waktu'];
+                $tma = null;
+
+                foreach ($data['data']['data'] as $item) {
+                    if ($item['nama_parameter'] === "Tinggi_Muka_Air") {
+                        $tma = $item['nilai'];
+                        break;
+                    }
+                }
+
+                if ($tma !== null) {
+                    $exists = $model->where('id_telemetri', $id_telemetri_2)
+                                    ->where('waktu', $waktu)
+                                    ->first();
+
+                    if (!$exists) {
+                        $model->save([
+                            'id_telemetri' => $id_telemetri_2,
+                            'waktu' => $waktu,
+                            'tma' => $tma
+                        ]);
+
+                        // Update tb_telemetri
+                        $db->table('tb_telemetri')
+                           ->where('id', $id_telemetri_2)
+                           ->update(['waktu' => $waktu, 'tma' => $tma]);
+
+                        $results[] = [
+                            'id_telemetri' => $id_telemetri_2,
+                            'status' => 'inserted',
+                            'waktu' => $waktu,
+                            'tma' => $tma
+                        ];
+                    } else {
+                        $results[] = [
+                            'id_telemetri' => $id_telemetri_2,
+                            'status' => 'exists',
+                            'waktu' => $waktu
+                        ];
+                    }
+                } else {
+                    $results[] = [
+                        'id_telemetri' => $id_telemetri_2,
+                        'status' => 'error',
+                        'message' => 'TMA not found'
+                    ];
+                }
+            } else {
+                $results[] = [
+                    'id_telemetri' => $id_telemetri_2,
+                    'status' => 'error',
+                    'message' => 'Format JSON tidak valid (Tiu Suntuk)'
+                ];
+            }
+        } else {
+            $results[] = [
+                'id_telemetri' => $id_telemetri_2,
+                'status' => 'error',
+                'message' => 'API Tiu Suntuk tidak bisa diakses'
+            ];
+        }
+
+        // === Kembalikan response JSON
+        return $this->response->setJSON($results);
     }
 
-    public function getLatestTMA()
-    {
-        $model = new TelemetryModel();
-        $latest = $model->where('id_telemetri', 10080)
-                        ->orderBy('waktu', 'DESC')
-                        ->first();
+    public function getBintangBano()
+        {
+            $db = \Config\Database::connect();
+            $data = $db->table('tb_telemetri')
+                    ->where('id', 10080)
+                    ->select('waktu, tma')
+                    ->get()
+                    ->getRowArray();
 
-        return $this->response->setJSON($latest);
-    }
+            return $this->response->setJSON($data);
+        }
+
+    public function getTiuSuntuk()
+        {
+            $db = \Config\Database::connect();
+            $data = $db->table('tb_telemetri')
+                    ->where('id', 10187)
+                    ->select('waktu, tma')
+                    ->get()
+                    ->getRowArray();
+
+            return $this->response->setJSON($data);
+        }
+
 }

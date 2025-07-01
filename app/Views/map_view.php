@@ -818,27 +818,34 @@
 
             let bintangBanoMarker;
 
+            // === Marker Bendungan Tiu Suntuk ===
+            fetch('/telemetri/tiusuntuk')
+            .then(res => res.json())
+            .then(data => {
+                const content = `<b>Bendungan Tiu Suntuk</b><br>TMA: ${data.tma} m<br>Waktu: ${data.waktu}`;
+                const marker = L.marker([-8.7934844, 116.9222879], {
+                icon: iconTiuSuntuk
+                }).addTo(map)
+                .bindTooltip(content, {
+                    permanent: false,
+                    direction: "top"
+                }).openTooltip();
+            });
+
+            // === Marker Bendungan Bintang Bano ===
             fetch('/telemetri/latest')
             .then(res => res.json())
             .then(data => {
                 const content = `<b>Bendungan Bintang Bano</b><br>TMA: ${data.tma} m<br>Waktu: ${data.waktu}`;
-                
-                // Buat marker dan tampilkan tooltip
-                bintangBanoMarker = L.marker([-8.713588, 116.989053], {
+                const marker = L.marker([-8.713588, 116.989053], {
                 icon: iconBintangBano
-                })
-                .addTo(map)
+                }).addTo(map)
                 .bindTooltip(content, {
-                permanent: false,
-                direction: "top"
-                })
-                .openTooltip();
-
-                // Tambahkan layer hanya jika valid
-                if (telemetriLayer && typeof telemetriLayer.addTo === 'function') {
-                telemetriLayer.addTo(map);
-                }
+                    permanent: false,
+                    direction: "top"
+                }).openTooltip();
             });
+
 
 
 
