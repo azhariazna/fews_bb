@@ -25,6 +25,11 @@
                             📥 Download RTD
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="manual-tma" target="content-frame">
+                            ✍️ Input Manual TMA
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>

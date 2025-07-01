@@ -1,42 +1,42 @@
 <?php
-
 namespace App\Controllers;
-use CodeIgniter\Controller;
 
-class ManualTMAController extends Controller
+use App\Models\TmaModel;
+
+class ManualTMAController extends BaseController
 {
     public function index()
     {
-        return view('manual_input');
-    }
-
-    public function save()
-    {
-        $tma   = $this->request->getPost('tma');
-        $waktu = $this->request->getPost('waktu');
-        $id_telemetri = 10187; // Tiu Suntuk
-
-        if (!$tma || !$waktu) {
-            return redirect()->back()->with('error', 'Data tidak lengkap.');
+        if (!session()->get('logged_in')) {
+            return redirect()->to(base_url('login'));
         }
+        
+        $model = new TmaModel();
 
-        $db = \Config\Database::connect();
+        // Ambil 1 data terakhir khusus AWLR BENDUNGAN TIU SUNTUK (id = 10187)
+        $data_terakhir = $model->where('id', 10187)->orderBy('waktu', 'DESC')->first();
 
-        // Simpan ke data_all_telemetri
-        $db->table('data_all_telemetri')->insert([
-            'id_telemetri' => $id_telemetri,
-            'waktu' => $waktu,
-            'tma' => $tma
+        return view('manual_input', [
+            'tma' => $data_terakhir['tma'] ?? '',
+            'waktu' => $data_terakhir['waktu'] ?? '',
+            'id' => $data_terakhir['id'] ?? null
         ]);
-
-        // Update ke tb_telemetri
-        $db->table('tb_telemetri')
-           ->where('id', $id_telemetri)
-           ->update([
-               'waktu' => $waktu,
-               'tma' => $tma
-           ]);
-
-        return redirect()->to('/manual-tma')->with('success', 'TMA berhasil disimpan.');
     }
+
+public function update($id)
+{
+    $model = new TmaModel();
+
+    $data = [
+        'waktu' => $this->request->getPost('waktu'),
+        'tma'   => $this->request->getPost('tma')
+    ];
+
+    if ($model->update($id, $data)) {
+        return redirect()->to(base_url('/manual-tma'))->with('success', 'TMA berhasil diupdate.');
+    } else {
+        return redirect()->back()->with('error', 'Gagal memperbarui data.');
+    }
+}
+
 }

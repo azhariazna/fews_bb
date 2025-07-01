@@ -32,7 +32,10 @@ $routes->get('telemetri/tiusuntuk', 'TelemetryController::getTiuSuntuk');
 
 // simpan tma manual
 $routes->get('manual-tma', 'ManualTMAController::index');
-$routes->post('manual-tma/save', 'ManualTMAController::save');
+$routes->match(['get', 'post', 'put'], 'manual-tma/update/(:num)', 'ManualTMAController::update/$1');
+
+
+
 
 
 
