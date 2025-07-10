@@ -937,7 +937,7 @@
         });
 
         // 2. Tambah marker
-        const tiuSuntukMarker = L.marker([-8.7934844, 116.9222879], {
+        const tiuSuntukMarker = L.marker([-8.7941986,116.93022], {
                 icon: iconTiuSuntuk
             })
             .addTo(map)
