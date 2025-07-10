@@ -168,6 +168,48 @@
 
 
 
+.warning-toggle-container {
+    position: fixed;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    z-index: 999;
+    max-width: 240px;
+  }
+
+  .toggle-label {
+    display: block;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    background-color: red;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+
+  .warning-box {
+    padding: 8px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    font-size: 14px;
+    border-left: 5px solid gray;
+  }
+
+  #toggleAll:checked ~ .warning-wrapper {
+    display: none;
+  }
+
+  @keyframes blinkPanel {
+    50% { opacity: 0.5; }
+  }
     </style>
     <!-- Bootstrap 5 CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -381,11 +423,32 @@
     
 <body>
 
+<div class="warning-toggle-container">
+  <input type="checkbox" id="toggleAll" hidden>
+  <label for="toggleAll" class="toggle-label">!</label>
 
-<div id="warning-legend">
-  <strong id="judul-bendungan"></strong><br>
-  Status: <span id="status"></span><br>
-  TMA: <span id="nilai-tma"></span> m
+  <div class="warning-wrapper" id="warnings">
+    <!-- Bendungan A -->
+    <div class="warning-box" id="panel-a">
+      <strong id="judul-a">Bendungan A</strong><br>
+      Status: <span id="status-a"></span><br>
+      TMA: <span id="nilai-a"></span> m
+    </div>
+
+    <!-- Bendungan B -->
+    <div class="warning-box" id="panel-b">
+      <strong>Bendungan B</strong><br>
+      Status: <span id="status-b"></span><br>
+      TMA: <span id="nilai-b">11.2</span> m
+    </div>
+
+    <!-- Bendungan C -->
+    <div class="warning-box" id="panel-c">
+      <strong>Bendungan C</strong><br>
+      Status: <span id="status-c"></span><br>
+      TMA: <span id="nilai-c">7.3</span> m
+    </div>
+  </div>
 </div>
 
 
@@ -405,42 +468,83 @@
 
 
     <script>
-            document.addEventListener("DOMContentLoaded", function () {
-  const judul = document.getElementById("judul-bendungan");
-  const status = document.getElementById("status");
-  const nilai = document.getElementById("nilai-tma");
-  const panel = document.getElementById("warning-legend");
+  document.addEventListener("DOMContentLoaded", function () {
+  // === Bendungan A ===
+  const tmaA = 98;
+  const judulA = document.getElementById("judul-a");
+  const statusA = document.getElementById("status-a");
+  const nilaiA = document.getElementById("nilai-a");
+  const panelA = document.getElementById("panel-a");
 
-  // Simulasi nilai TMA
-  const tma = 98;
+  nilaiA.textContent = tmaA.toFixed(2);
+  judulA.textContent = "Bendungan A";
+  panelA.style.animation = "none";
 
-  judul.textContent = "Bendungan Tiu Suntuk";
-  nilai.textContent = tma.toFixed(2);
-
-  // Reset animasi & warna dulu
-  panel.style.animation = "none";
-
-  if (tma < 94.75) {
-    status.textContent = "Aman";
-    status.style.color = "green";
-    panel.style.backgroundColor = "#e8fff0";  // hijau muda
-    panel.style.borderColor = "#5cb85c";
-  } else if (tma <= 95.5) {
-    status.textContent = "Waspada I";
-    status.style.color = "orange";
-    panel.style.animation = "blinkPanel 1s infinite";
-  } else if (tma <= 96.25) {
-    status.textContent = "Waspada II";
-    status.style.color = "orange";
-    panel.style.animation = "blinkPanel 1s infinite";
-  } else if (tma <= 97) {
-    status.textContent = "Siaga";
-    status.style.color = "yellow";
-    panel.style.animation = "blinkPanel 1s infinite";
+  if (tmaA < 94.75) {
+    statusA.textContent = "Aman";
+    statusA.style.color = "green";
+    panelA.style.backgroundColor = "#e8fff0";
+    panelA.style.borderColor = "#5cb85c";
+  } else if (tmaA <= 95.5) {
+    statusA.textContent = "Waspada I";
+    statusA.style.color = "orange";
+    panelA.style.animation = "blinkPanel 1s infinite";
+  } else if (tmaA <= 96.25) {
+    statusA.textContent = "Waspada II";
+    statusA.style.color = "orange";
+    panelA.style.animation = "blinkPanel 1s infinite";
+  } else if (tmaA <= 97) {
+    statusA.textContent = "Siaga";
+    statusA.style.color = "yellow";
+    panelA.style.animation = "blinkPanel 1s infinite";
   } else {
-    status.textContent = "Awas";
-    status.style.color = "red";
-    panel.style.animation = "blinkPanel 1s infinite";
+    statusA.textContent = "Awas";
+    statusA.style.color = "red";
+    panelA.style.animation = "blinkPanel 1s infinite";
+  }
+
+  // === Bendungan B ===
+  const tmaB = parseFloat(document.getElementById("nilai-b").textContent);
+  const statusB = document.getElementById("status-b");
+  const panelB = document.getElementById("panel-b");
+
+  if (tmaB < 10.5) {
+    statusB.textContent = "Aman";
+    statusB.style.color = "green";
+  } else if (tmaB < 11) {
+    statusB.textContent = "Waspada";
+    statusB.style.color = "orange";
+    panelB.style.animation = "blinkPanel 1s infinite";
+  } else if (tmaB < 11.5) {
+    statusB.textContent = "Siaga";
+    statusB.style.color = "yellow";
+    panelB.style.animation = "blinkPanel 1s infinite";
+  } else {
+    statusB.textContent = "Awas";
+    statusB.style.color = "red";
+    panelB.style.animation = "blinkPanel 1s infinite";
+  }
+
+  // === Bendungan C ===
+  const tmaC = parseFloat(document.getElementById("nilai-c").textContent);
+  const statusC = document.getElementById("status-c");
+  const panelC = document.getElementById("panel-c");
+
+  if (tmaC < 7) {
+    statusC.textContent = "Aman";
+    statusC.style.color = "green";
+  } else if (tmaC < 7.5) {
+    statusC.textContent = "Waspada";
+    statusC.style.color = "orange";
+    panelC.style.animation = "blinkPanel 1s infinite";
+  } else if (tmaC < 8) {
+    statusC.textContent = "Siaga";
+    statusC.style.color = "yellow";
+    panelC.style.animation = "blinkPanel 1s infinite";
+  } else {
+    statusC.textContent = "Awas";
+    statusC.style.color = "red";
+    panelC.style.animation = "blinkPanel 1s infinite";
   }
 });
 
