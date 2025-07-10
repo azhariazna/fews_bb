@@ -6,6 +6,12 @@ use CodeIgniter\Model;
 class TmaModel extends Model
 {
     protected $table = 'tb_telemetri';
-    protected $primaryKey = 'id';
-    protected $allowedFields = ['waktu', 'tma'];
+    protected $allowedFields = ['nama_lokasi', 'tma', 'waktu'];
+
+    public function getLatestTMAByLocation($lokasi)
+    {
+        return $this->where('nama_lokasi', $lokasi)
+                    ->orderBy('waktu', 'DESC')
+                    ->first();
+    }
 }

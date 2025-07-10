@@ -1,15 +1,31 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\TmaModel;
 
 class Home extends BaseController
 {
     public function index(): string
     {
         header("Access-Control-Allow-Origin: *");
+        helper('url');
 
-        helper('url'); // ← panggil di sini
-        return view('map_view');
+        $model = new TmaModel();
+
+        $tmaSuntuk   = $model->getLatestTMAByLocation('AWLR BENDUNGAN TIU SUNTUK');
+        $tmaSampir   = $model->getLatestTMAByLocation('AWLR SAMPIR');
+        $tmaMenemeng = $model->getLatestTMAByLocation('AWLR MENEMENG');
+
+        $data = [
+            'tmaData' => [
+                'suntuk'   => $tmaSuntuk['tma'] ?? 0,
+                'sampir'   => $tmaSampir['tma'] ?? 0,
+                'menemeng' => $tmaMenemeng['tma'] ?? 0
+            ]
+        ];
+
+
+        return view('map_view', $data);
     }
     
     public function getTelemetriGeoJSON()

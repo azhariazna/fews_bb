@@ -9,3 +9,4 @@ class TelemetriModel extends Model
     protected $primaryKey = 'id';
     protected $allowedFields = ['nama_lokasi', 'waktu', 'tma','status'];
 }
+

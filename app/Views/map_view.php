@@ -476,12 +476,15 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
+
+</body>
+
     <script>
      // Data TMA dari sistem (misalnya dari AJAX/telemetri)
     const tmaData = {
-        A: 97.2,
-        B: 11.1,
-        C: 7.6
+        A: <?= esc($tmaData['suntuk'])?>,
+        B: <?= esc($tmaData['sampir'])/100?>,
+        C: <?= esc($tmaData['menemeng'])/100?>
     };
 
     function updateStatus(tma, batas, statusEl, tmaEl) {
@@ -1071,15 +1074,6 @@
         // 3. Zoom ke dua lokasi
         const group = new L.featureGroup([tiuSuntukMarker, bintangBanoMarker]);
         map.fitBounds(group.getBounds().pad(1));
-
-
-
-
-
-
-
-
 </script>
-</body>
 
 </html>
