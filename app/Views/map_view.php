@@ -954,7 +954,7 @@
             .then(res => res.json())
             .then(data => {
                 const content = `<b>Bendungan Tiu Suntuk</b><br>TMA: ${data.tma} m<br>Waktu: ${data.waktu}`;
-                const marker = L.marker([-8.7934844, 116.9222879], {
+                const marker = L.marker([-8.7941986,116.93022], {
                 icon: iconTiuSuntuk
                 }).addTo(map)
                 .bindTooltip(content, {
