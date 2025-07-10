@@ -197,9 +197,12 @@
                     </ul>
                 </div>
             <?php else: ?>
+                <div class="d-flex align-items-center justify-content-end gap-2 w-100" style="position: absolute; top: 10px; left: 0; right: 0; z-index: 1001; padding: 0 10px;">
                 <button class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
-            <?php endif; ?>      
-            <button id="toggleSidebar" onclick="toggleSidebar()">≡</button>
+            <?php endif; ?>     
+                <button id="toggleSidebar" class="btn btn-primary" onclick="toggleSidebar()">☰</button>
+            </div>
+
             </div>
         </div>
         </div>
