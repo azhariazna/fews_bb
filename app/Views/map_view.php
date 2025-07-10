@@ -161,6 +161,10 @@
   padding: 5px 12px;
 }
 
+.leaflet-bottom.leaflet-left {
+    bottom: 80px !important; /* Ganti angkanya sesuai seberapa atas yang kamu mau */
+}
+
 
 
 
@@ -390,7 +394,7 @@
     <div id="map" style="height: 100vh;"></div>
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.min.js"></script>
     <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
@@ -438,14 +442,46 @@
 });
 
 
+   // Inisialisasi peta
+    map = L.map('map').setView([-8.8, 117.8], 9); // gunakan ulang variabel
+
+
+    // Definisi tile layers
+    var openStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map); // default aktif
+
+    var googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+        maxZoom: 20,
+        subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+        attribution: '&copy; Google Satellite'
+    });
+
+    var esriImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: '&copy; Esri World Imagery'
+    });
+
+    // Tambahkan kontrol pemilihan base layer
+    var baseMaps = {
+        "OpenStreetMap": openStreetMap,
+        "Google Satellite": googleSat,
+        "Esri World Imagery": esriImagery
+    };
+
+    L.control.layers(baseMaps, null, {
+        position: 'bottomleft'
+    }).addTo(map);
+
+
+
+
+
+
 
         const layerOn = true; // atau false jika default ingin disembunyikan
 
-        const map = L.map('map').setView([-8.740373, 116.777827], 10);
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap contributors'
-        }).addTo(map);
 
         let genanganLayer, originalData, dasLayer, sungaiLayer, jalurEvakuasiLayer, titikEvakuasiLayer, titikTinjauLayer;
 
