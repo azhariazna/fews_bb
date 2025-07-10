@@ -46,16 +46,13 @@ html {
 
 /* Tombol toggle muncul di semua resolusi */
 #toggleSidebar {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    z-index: 1002;
-    background: #007bff;
-    color: #fff;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 5px;
-    cursor: pointer;
+  /* HAPUS position: fixed dan top/right */
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 /* Penyesuaian khusus saat mobile */

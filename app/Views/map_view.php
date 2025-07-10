@@ -146,19 +146,99 @@
   z-index: 1000;
 }
 
+#topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background-color: #005a9e;
+  height: 60px;
+  color: white;
+}
+
+#topbar .btn {
+  font-size: 14px;
+  padding: 5px 12px;
+}
+
 
 
 
     </style>
+    <!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 
 <body>
-    <div id="topbar">
-        <div class="topbar-content">
+        <div id="topbar">
+        <div class="topbar-content" style="width: 100%; display: flex; align-items: center; justify-content: space-between;">
+            <div class="d-flex align-items-center">
             <img src="assets/img/pu.png" alt="Logo" class="topbar-logo">
-            <span class="topbar-title">DASHBOARD MONITORING</span>
+            <span class="topbar-title">DASHBOARD MONITORING</span>             
+            </div>
+            <div class="d-flex align-items-center gap-2">   
+                 <?php if (session()->get('logged_in')): ?>
+                <div class="dropdown">
+                    <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        👤 <?= session()->get('username') ?>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item" href="<?= base_url('laporanrtd') ?>">Isi RTD</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('laporanrtd/download') ?>">Download RTD</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="<?= base_url('manual-tma') ?>">Input TMA Bendungan Tiu Suntuk</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="<?= base_url('logout') ?>">Logout</a></li>
+                    </ul>
+                </div>
+            <?php else: ?>
+                <button class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+            <?php endif; ?>      
+            <button id="toggleSidebar" onclick="toggleSidebar()">≡</button>
+            </div>
         </div>
+        </div>
+
+    
+
+<!-- Modal Login -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Arahkan ke controller Login::auth -->
+      <form action="<?= base_url('login/auth') ?>" method="post">
+        <?= csrf_field() ?> <!-- Ini yang penting untuk CSRF -->
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalLabel">Login Dashboard</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <?php if (session()->getFlashdata('error')): ?>
+              <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
+          <?php endif; ?>
+
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" name="username" required>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Login</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+        </div>
+      </form>
     </div>
+  </div>
+</div>
+
+
 
 
 
@@ -170,6 +250,32 @@
     <div class="sidebar" id="sidebar">
         <h3>Menu</h3>
         <ul>
+        <?php if (session()->get('logged_in')): ?>
+            <li>
+                <label><input type="checkbox" id="checkboxSungai" > Layer Sungai</label>
+            </li>
+
+            <li>
+                <label>
+                    <input type="checkbox" id="checkboxJalurEvakuasi" >
+                    Jalur Evakuasi
+                </label>
+            </li>
+
+             <li><label><input type="checkbox" id="checkboxTitikTinjau" > Titik Tinjau</label></li>
+
+            <li>
+                <label>
+                    <input type="checkbox" id="checkboxAwlr" >
+                    <img src="assets/img/tma.png" alt="TMA Icon" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
+                    AWLR
+                </label>
+            </li>
+
+        <?php endif; ?>
+
+
+
             <li>
                 <label>
                     <label style="cursor: pointer;" onclick="toggleGradeGroup()">
@@ -177,19 +283,19 @@
                         <span id="arrowToggle" style="display: inline-block; width: 16px;">▼</span>
                         Tinggi Genangan
                     </label>
-                    <ul class="gradeGroup collapsed" id="gradeGroup">
+                    <ul class="gradeGroup" id="gradeGroup">
                         <li>
                             <label>
                                 <input type="checkbox" class="gradeFilter" value="1" checked />
                                 <span style="
-        display:inline-block;
-        width:16px !important;
-        height:16px !important;
-        margin: 0 6px;
-        vertical-align: middle;
-        border: 2px solid #333;
-        border-radius: 4px;
-        background-color: #cce6ff;">
+                                    display:inline-block;
+                                    width:16px !important;
+                                    height:16px !important;
+                                    margin: 0 6px;
+                                    vertical-align: middle;
+                                    border: 2px solid #333;
+                                    border-radius: 4px;
+                                    background-color: #cce6ff;">
                                 </span>
                                 0–0.5 meter
                             </label>
@@ -198,14 +304,14 @@
                             <label>
                                 <input type="checkbox" class="gradeFilter" value="2" checked />
                                 <span style="
-        display:inline-block;
-        width:16px !important;
-        height:16px !important;
-        margin: 0 6px;
-        vertical-align: middle;
-        border: 2px solid #333;
-        border-radius: 4px;
-        background-color: #99ccff;">
+                                    display:inline-block;
+                                    width:16px !important;
+                                    height:16px !important;
+                                    margin: 0 6px;
+                                    vertical-align: middle;
+                                    border: 2px solid #333;
+                                    border-radius: 4px;
+                                    background-color: #99ccff;">
                                 </span>
                                 0.5–1.5 meter
                             </label>
@@ -214,14 +320,14 @@
                             <label>
                                 <input type="checkbox" class="gradeFilter" value="3" checked />
                                 <span style="
-        display:inline-block;
-        width:16px !important;
-        height:16px !important;
-        margin: 0 6px;
-        vertical-align: middle;
-        border: 2px solid #333;
-        border-radius: 4px;
-        background-color: #336699;">
+                                    display:inline-block;
+                                    width:16px !important;
+                                    height:16px !important;
+                                    margin: 0 6px;
+                                    vertical-align: middle;
+                                    border: 2px solid #333;
+                                    border-radius: 4px;
+                                    background-color: #336699;">
                                 </span>
                                 1.5–4 meter
                             </label>
@@ -230,14 +336,14 @@
                             <label>
                                 <input type="checkbox" class="gradeFilter" value="4" checked />
                                 <span style="
-        display:inline-block;
-        width:16px !important;
-        height:16px !important;
-        margin: 0 6px;
-        vertical-align: middle;
-        border: 2px solid #333;
-        border-radius: 4px;
-        background-color: #003366;">
+                                    display:inline-block;
+                                    width:16px !important;
+                                    height:16px !important;
+                                    margin: 0 6px;
+                                    vertical-align: middle;
+                                    border: 2px solid #333;
+                                    border-radius: 4px;
+                                    background-color: #003366;">
                                 </span>
                                 > 4 meter
                             </label>
@@ -248,15 +354,8 @@
             <li>
                 <label><input type="checkbox" id="checkboxDas" checked> Layer DAS</label>
             </li>
-            <li>
-                <label><input type="checkbox" id="checkboxSungai" checked> Layer Sungai</label>
-            </li>
-            <li>
-                <label>
-                    <input type="checkbox" id="checkboxJalurEvakuasi" checked>
-                    Jalur Evakuasi
-                </label>
-            </li>
+
+
 
             <li>
                 <label>
@@ -266,14 +365,8 @@
                 </label>
             </li>
 
-            <li><label><input type="checkbox" id="checkboxTitikTinjau" checked> Titik Tinjau</label></li>
-            <li>
-                <label>
-                    <input type="checkbox" id="checkboxAwlr" checked>
-                    <img src="assets/img/tma.png" alt="TMA Icon" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
-                    AWLR
-                </label>
-            </li>
+           
+
         </ul>
     </div>
 
@@ -293,8 +386,10 @@
 
 
 
-    <button id="toggleSidebar" onclick="toggleSidebar()">≡</button>
+    
     <div id="map" style="height: 100vh;"></div>
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.min.js"></script>
