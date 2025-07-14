@@ -1,9 +1,8 @@
-body,
-html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
+html, body {
+    max-width: 100%;
+    overflow-x: hidden !important;
 }
+
 
 #map {
   position: absolute;
@@ -70,6 +69,28 @@ html {
       right: auto;
     }
   }
+
+
+  #topbar {
+    background-color: #0d6efd !important;
+    opacity: 1 !important;
+}
+
+/* Dropdown tetap biru saat collapse */
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        background-color: #0d6efd !important;
+    }
+    .dropdown-menu {
+        background-color: #99bdf4 !important;
+    }
+    .dropdown-menu .dropdown-item {
+        color: rgb(0, 0, 0) !important;
+    }
+    .dropdown-menu .dropdown-item:hover {
+        background-color: #0b5ed7 !important;
+    }
+}
 
 
 .sidebar {

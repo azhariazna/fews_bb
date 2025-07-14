@@ -255,33 +255,50 @@
 
 </head>
 
-<body>
+<body style="overflow-x: hidden;">
+
         
 
 
-<nav id="topbar" class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm rounded-bottom px-3" style="height: 60px;">
+<nav id="topbar" class="navbar navbar-expand-lg navbar-dark shadow-sm rounded-bottom px-3"
+     style="height: 60px; background-color: #0068ff !important;">
+
     <div class="container-fluid h-100">
-        <!-- KIRI: Logo + Judul -->
+        <!-- Logo dan Judul -->
         <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-            <img src="assets/img/pu.png" alt="Logo" class="topbar-logo" style="height: 36px;">
-            <span class="topbar-title fw-bold fs-5">DASHBOARD MONITORING</span>
+            <img src="assets/img/pu.png" alt="Logo" style="height: 36px;">
+            <span class="fw-bold fs-5 text-white">DASHBOARD MONITORING</span>
         </a>
 
-        <!-- KANAN: Menu Navbar + Login Dropdown + Sidebar Button -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTopbar" aria-controls="navbarTopbar" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- Toggle untuk Mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTopbar" aria-controls="navbarTopbar" aria-expanded="false" aria-label="Toggle navigation" style="background-color: blue;">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        <!-- Menu Utama -->
         <div class="collapse navbar-collapse justify-content-end" id="navbarTopbar">
-            <ul class="navbar-nav align-items-center gap-lg-2">
+            <ul class="navbar-nav align-items-lg-center gap-lg-3 mb-2 mb-lg-0">
                 <!-- DATA INSTRUMEN -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dataInstrumenDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="instrumenDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         DATA INSTRUMEN
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dataInstrumenDropdown">
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="instrumenDropdown">
                         <li><a class="dropdown-item" href="<?= base_url('rtd/isi') ?>">Bendungan Tiu Suntuk</a></li>
                     </ul>
                 </li>
+
+                <!-- DATA SENSOR -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="sensorDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        DATA SENSOR
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="sensorDropdown">
+                        <li><a class="dropdown-item" href="<?= base_url('rtd/isi') ?>">Sensor AWLR</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('rtd/isi') ?>">Sensor ARR</a></li>
+                    </ul>
+                </li>
+
                 <!-- RTD -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="rtdDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -292,6 +309,7 @@
                         <li><a class="dropdown-item" href="<?= base_url('rtd/download') ?>">Download RTD</a></li>
                     </ul>
                 </li>
+
                 <!-- INPUT MANUAL -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="inputDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -303,18 +321,19 @@
                     </ul>
                 </li>
             </ul>
-            <!-- LOGIN/USER -->
-            <div class="ms-lg-3 d-flex align-items-center gap-2">
+
+            <!-- LOGIN / SIDEBAR -->
+            <div class="d-flex align-items-center ms-lg-3 gap-2">
                 <?php if (session()->get('logged_in')): ?>
                     <div class="dropdown">
-                        <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
                             👤 <?= session()->get('username') ?>
                         </button>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
                             <li><a class="dropdown-item" href="<?= base_url('laporanrtd') ?>">Isi RTD</a></li>
                             <li><a class="dropdown-item" href="<?= base_url('laporanrtd/download') ?>">Download RTD</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="<?= base_url('manual-tma') ?>">Input TMA Bendungan Tiu Suntuk</a></li>
+                            <li><a class="dropdown-item" href="<?= base_url('manual-tma') ?>">Input TMA</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item text-danger" href="<?= base_url('logout') ?>">Logout</a></li>
                         </ul>
@@ -322,14 +341,15 @@
                 <?php else: ?>
                     <button class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
                 <?php endif; ?>
-                <!-- TOGGLE SIDEBAR -->
-                <button id="toggleSidebar" class="btn btn-outline-light btn-sm ms-2" onclick="toggleSidebar()" title="Menu Sidebar">
+
+                <button id="toggleSidebar" class="btn btn-outline-light btn-sm ms-1" onclick="toggleSidebar()" title="Sidebar Menu">
                     ☰
                 </button>
             </div>
         </div>
     </div>
 </nav>
+
 
         
 
@@ -474,7 +494,7 @@
 
 <div class="warning-toggle-container" style="font-size: 1rem;">
   <input type="checkbox" id="toggleAll" style="display:none;">
-  <label for="toggleAll" class="toggle-label" style="font-size: 1rem; padding: 4px 10px;">!</label>
+  <label for="toggleAll" class="toggle-label" style="font-size: 0.8rem; padding: 4px 10px;">!</label>
 
   <div class="warning-wrapper">
     <!-- CARD 1 -->
@@ -522,7 +542,7 @@
 
 
 <!-- WRAPPER CUACA + TOGGLE BUTTON -->
-<div id="cuacaWrapper" class="position-absolute bottom-0 start-50 translate-middle-x mb-2 z-3 w-100 px-2" style="font-size: 0.8rem;">
+<div id="cuacaWrapper" class="position-absolute bottom-0 start-50 translate-middle-x mb-2 z-3 w-100 px-2" style="font-size: 0.8rem;max-width: 100vw; overflow-x: auto;">
     <!-- Tombol Toggle -->
     <div class="d-flex justify-content-end mb-1 px-2">
         <button id="toggleCuaca" class="btn btn-outline-primary btn-sm rounded-pill shadow">
