@@ -665,7 +665,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
    // Inisialisasi peta
-    map = L.map('map').setView([-8.8, 117.8], 9); // gunakan ulang variabel
+    map = L.map('map').setView([-8.7941986,116.93022], 11); // gunakan ulang variabel
 
 
     // Definisi tile layers
