@@ -256,37 +256,82 @@
 </head>
 
 <body>
-        <div id="topbar">
-        <div class="topbar-content" style="width: 100%; display: flex; align-items: center; justify-content: space-between;">
-            <div class="d-flex align-items-center">
-            <img src="assets/img/pu.png" alt="Logo" class="topbar-logo">
-            <span class="topbar-title">DASHBOARD MONITORING</span>             
-            </div>
-            <div class="d-flex align-items-center gap-2">   
-                 <?php if (session()->get('logged_in')): ?>
-                <div class="dropdown">
-                    <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        👤 <?= session()->get('username') ?>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                        <li><a class="dropdown-item" href="<?= base_url('laporanrtd') ?>">Isi RTD</a></li>
-                        <li><a class="dropdown-item" href="<?= base_url('laporanrtd/download') ?>">Download RTD</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="<?= base_url('manual-tma') ?>">Input TMA Bendungan Tiu Suntuk</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item text-danger" href="<?= base_url('logout') ?>">Logout</a></li>
-                    </ul>
-                </div>
-            <?php else: ?>
-                <div class="d-flex align-items-center justify-content-end gap-2 w-100" style="position: absolute; top: 10px; left: 0; right: 0; z-index: 1001; padding: 0 10px;">
-                <button class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
-            <?php endif; ?>     
-                <button id="toggleSidebar" class="btn btn-primary" onclick="toggleSidebar()">☰</button>
-            </div>
+        
 
+
+<nav id="topbar" class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm rounded-bottom px-3" style="height: 60px;">
+    <div class="container-fluid h-100">
+        <!-- KIRI: Logo + Judul -->
+        <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+            <img src="assets/img/pu.png" alt="Logo" class="topbar-logo" style="height: 36px;">
+            <span class="topbar-title fw-bold fs-5">DASHBOARD MONITORING</span>
+        </a>
+
+        <!-- KANAN: Menu Navbar + Login Dropdown + Sidebar Button -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTopbar" aria-controls="navbarTopbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarTopbar">
+            <ul class="navbar-nav align-items-center gap-lg-2">
+                <!-- DATA INSTRUMEN -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dataInstrumenDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        DATA INSTRUMEN
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dataInstrumenDropdown">
+                        <li><a class="dropdown-item" href="<?= base_url('rtd/isi') ?>">Bendungan Tiu Suntuk</a></li>
+                    </ul>
+                </li>
+                <!-- RTD -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="rtdDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        RTD
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="rtdDropdown">
+                        <li><a class="dropdown-item" href="<?= base_url('rtd/isi') ?>">Isi RTD</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('rtd/download') ?>">Download RTD</a></li>
+                    </ul>
+                </li>
+                <!-- INPUT MANUAL -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="inputDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        INPUT MANUAL
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="inputDropdown">
+                        <li><a class="dropdown-item" href="<?= base_url('input/tma') ?>">TMA Bendungan Tiu Suntuk</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('input/tma') ?>">TMA Bendungan Bintang Bano</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- LOGIN/USER -->
+            <div class="ms-lg-3 d-flex align-items-center gap-2">
+                <?php if (session()->get('logged_in')): ?>
+                    <div class="dropdown">
+                        <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            👤 <?= session()->get('username') ?>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                            <li><a class="dropdown-item" href="<?= base_url('laporanrtd') ?>">Isi RTD</a></li>
+                            <li><a class="dropdown-item" href="<?= base_url('laporanrtd/download') ?>">Download RTD</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="<?= base_url('manual-tma') ?>">Input TMA Bendungan Tiu Suntuk</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="<?= base_url('logout') ?>">Logout</a></li>
+                        </ul>
+                    </div>
+                <?php else: ?>
+                    <button class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                <?php endif; ?>
+                <!-- TOGGLE SIDEBAR -->
+                <button id="toggleSidebar" class="btn btn-outline-light btn-sm ms-2" onclick="toggleSidebar()" title="Menu Sidebar">
+                    ☰
+                </button>
             </div>
         </div>
-        </div>
+    </div>
+</nav>
+
+        
 
     
 
@@ -335,157 +380,138 @@
             <path d="M12 10a2 2 0 102.001 2.001A2.002 2.002 0 0012 10zm10 1h-2.071a8.004 8.004 0 00-6.929-6.929V2a1 1 0 10-2 0v2.071A8.004 8.004 0 004.071 11H2a1 1 0 100 2h2.071a8.004 8.004 0 006.929 6.929V22a1 1 0 102 0v-2.071a8.004 8.004 0 006.929-6.929H22a1 1 0 100-2zM12 18a6 6 0 116-6 6.006 6.006 0 01-6 6z" />
         </svg>
     </div>
-    <div class="sidebar" id="sidebar">
-        <h3>Menu</h3>
-        <ul>
+
+<div class="sidebar" id="sidebar" style="font-size: 0.8rem; padding: 8px 12px; width: 210px; background-color: #f8f9fa; border: 1px solid #ccc; border-radius: 6px;">
+    <h6 style="font-size: 1rem; font-weight: bold;">Info</h6>
+    <ul class="list-unstyled">
         <?php if (session()->get('logged_in')): ?>
-            <li>
-                <label><input type="checkbox" id="checkboxSungai" > Layer Sungai</label>
+            <li class="mb-2">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="checkboxSungai">
+                    <label class="form-check-label" for="checkboxSungai">Layer Sungai</label>
+                </div>
             </li>
-
-            <li>
-                <label>
-                    <input type="checkbox" id="checkboxJalurEvakuasi" >
-                    Jalur Evakuasi
-                </label>
+            <li class="mb-2">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="checkboxJalurEvakuasi">
+                    <label class="form-check-label" for="checkboxJalurEvakuasi">Jalur Evakuasi</label>
+                </div>
             </li>
-
-             <li><label><input type="checkbox" id="checkboxTitikTinjau" > Titik Tinjau</label></li>
-
-            <li>
-                <label>
-                    <input type="checkbox" id="checkboxAwlr" >
-                    <img src="assets/img/tma.png" alt="TMA Icon" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
-                    AWLR
-                </label>
+            <li class="mb-2">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="checkboxTitikTinjau">
+                    <label class="form-check-label" for="checkboxTitikTinjau">Titik Tinjau</label>
+                </div>
             </li>
-
+            <li class="mb-2">
+                <div class="form-check d-flex align-items-center">
+                    <input class="form-check-input me-2" type="checkbox" id="checkboxAwlr">
+                    <label class="form-check-label" for="checkboxAwlr">
+                        <img src="assets/img/tma.png" alt="TMA Icon" width="16" height="16" class="me-1">
+                        AWLR
+                    </label>
+                </div>
+            </li>
         <?php endif; ?>
 
+        <li class="mb-2">
+            <label style="cursor: pointer;" onclick="toggleGradeGroup()">
+                <span id="arrowToggle" style="display: inline-block; width: 16px;"></span>
+                Tinggi Genangan
+            </label>
+            <ul class="list-unstyled ps-3 mt-2" id="gradeGroup" style="font-size: 0.75rem;">
+                <li class="mb-1">
+                    <div class="form-check d-flex align-items-center">
+                        <input class="form-check-input me-2 gradeFilter" type="checkbox" value="1" checked>
+                        <span style="width:16px;height:16px;background-color:#cce6ff;border:1px solid #333;border-radius:4px;margin-right:6px;"></span>
+                        <label class="form-check-label">0–0.5 meter</label>
+                    </div>
+                </li>
+                <li class="mb-1">
+                    <div class="form-check d-flex align-items-center">
+                        <input class="form-check-input me-2 gradeFilter" type="checkbox" value="2" checked>
+                        <span style="width:16px;height:16px;background-color:#99ccff;border:1px solid #333;border-radius:4px;margin-right:6px;"></span>
+                        <label class="form-check-label">0.5–1.5 meter</label>
+                    </div>
+                </li>
+                <li class="mb-1">
+                    <div class="form-check d-flex align-items-center">
+                        <input class="form-check-input me-2 gradeFilter" type="checkbox" value="3" checked>
+                        <span style="width:16px;height:16px;background-color:#336699;border:1px solid #333;border-radius:4px;margin-right:6px;"></span>
+                        <label class="form-check-label">1.5–4 meter</label>
+                    </div>
+                </li>
+                <li class="mb-1">
+                    <div class="form-check d-flex align-items-center">
+                        <input class="form-check-input me-2 gradeFilter" type="checkbox" value="4" checked>
+                        <span style="width:16px;height:16px;background-color:#003366;border:1px solid #333;border-radius:4px;margin-right:6px;"></span>
+                        <label class="form-check-label">> 4 meter</label>
+                    </div>
+                </li>
+            </ul>
+        </li>
 
+        <li class="mb-2">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="checkboxDas" checked>
+                <label class="form-check-label" for="checkboxDas">Layer DAS</label>
+            </div>
+        </li>
+        <li class="mb-2">
+            <div class="form-check d-flex align-items-center">
+                <input class="form-check-input me-2" type="checkbox" id="checkboxTitikEvakuasi" checked>
+                <img src="assets/img/evakuasi.png" alt="Jalur Icon" width="16" height="16" class="me-1">
+                <label class="form-check-label" for="checkboxTitikEvakuasi">Titik Evakuasi</label>
+            </div>
+        </li>
+    </ul>
+</div>
 
-            <li>
-                <label>
-                    <label style="cursor: pointer;" onclick="toggleGradeGroup()">
-                        <!-- <input type="checkbox" id="checkboxGenangan" checked /> -->
-                        <span id="arrowToggle" style="display: inline-block; width: 16px;">▼</span>
-                        Tinggi Genangan
-                    </label>
-                    <ul class="gradeGroup" id="gradeGroup">
-                        <li>
-                            <label>
-                                <input type="checkbox" class="gradeFilter" value="1" checked />
-                                <span style="
-                                    display:inline-block;
-                                    width:16px !important;
-                                    height:16px !important;
-                                    margin: 0 6px;
-                                    vertical-align: middle;
-                                    border: 2px solid #333;
-                                    border-radius: 4px;
-                                    background-color: #cce6ff;">
-                                </span>
-                                0–0.5 meter
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox" class="gradeFilter" value="2" checked />
-                                <span style="
-                                    display:inline-block;
-                                    width:16px !important;
-                                    height:16px !important;
-                                    margin: 0 6px;
-                                    vertical-align: middle;
-                                    border: 2px solid #333;
-                                    border-radius: 4px;
-                                    background-color: #99ccff;">
-                                </span>
-                                0.5–1.5 meter
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox" class="gradeFilter" value="3" checked />
-                                <span style="
-                                    display:inline-block;
-                                    width:16px !important;
-                                    height:16px !important;
-                                    margin: 0 6px;
-                                    vertical-align: middle;
-                                    border: 2px solid #333;
-                                    border-radius: 4px;
-                                    background-color: #336699;">
-                                </span>
-                                1.5–4 meter
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox" class="gradeFilter" value="4" checked />
-                                <span style="
-                                    display:inline-block;
-                                    width:16px !important;
-                                    height:16px !important;
-                                    margin: 0 6px;
-                                    vertical-align: middle;
-                                    border: 2px solid #333;
-                                    border-radius: 4px;
-                                    background-color: #003366;">
-                                </span>
-                                > 4 meter
-                            </label>
-                        </li>
-                    </ul>
-
-            </li>
-            <li>
-                <label><input type="checkbox" id="checkboxDas" checked> Layer DAS</label>
-            </li>
-
-
-
-            <li>
-                <label>
-                    <input type="checkbox" id="checkboxTitikEvakuasi" checked>
-                    <img src="assets/img/evakuasi.png" alt="Jalur Icon" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
-                    Titik Evakuasi
-                </label>
-            </li>
-
-           
-
-        </ul>
-    </div>
 
        
     
 <body>
 
-<div class="warning-toggle-container">
+<div class="warning-toggle-container" style="font-size: 1rem;">
   <input type="checkbox" id="toggleAll" style="display:none;">
-  <label for="toggleAll" class="toggle-label">!</label>
+  <label for="toggleAll" class="toggle-label" style="font-size: 1rem; padding: 4px 10px;">!</label>
 
   <div class="warning-wrapper">
-    <div class="warning-box">
-      <strong>BENDUNGAN TIU SUNTUK</strong><br>
-      Status: <span id="status-a" class="status-text">-</span><br>
-      TMA: <span id="tma-a">-</span> m
+    <!-- CARD 1 -->
+    <div class="card mb-1 shadow-sm border-info" style="font-size: 0.8rem;">
+      <div class="card-body py-1 px-2">
+        <h6 class="card-title mb-1 text-info fw-bold" style="font-size: 0.9rem;">BENDUNGAN TIU SUNTUK</h6>
+        <div>
+          Status: <span id="status-a" class="status-text badge" style="font-size: 1rem;">-</span><br>
+          TMA: <span id="tma-a" class="fw-bold">-</span> m
+        </div>
+      </div>
     </div>
 
-    <div class="warning-box">
-      <strong>AWLR SAMPIR</strong><br>
-      Status: <span id="status-b" class="status-text">-</span><br>
-      TMA: <span id="tma-b">-</span> m
+    <!-- CARD 2 -->
+    <div class="card mb-1 shadow-sm border-info" style="font-size: 0.8rem;">
+      <div class="card-body py-1 px-2">
+        <h6 class="card-title mb-1 text-info fw-bold" style="font-size: 0.9rem;">AWLR SAMPIR</h6>
+        <div>
+          Status: <span id="status-b" class="status-text badge " style="font-size: 1rem;">-</span><br>
+          TMA: <span id="tma-b" class="fw-bold">-</span> m
+        </div>
+      </div>
     </div>
 
-    <div class="warning-box">
-      <strong>AWLR MENEMENG</strong><br>
-      Status: <span id="status-c" class="status-text">-</span><br>
-      TMA: <span id="tma-c">-</span> m
+    <!-- CARD 3 -->
+    <div class="card mb-1 shadow-sm border-info" style="font-size: 0.8rem;">
+      <div class="card-body py-1 px-2">
+        <h6 class="card-title mb-1 text-info fw-bold" style="font-size: 0.9rem;">AWLR MENEMENG</h6>
+        <div>
+          Status: <span id="status-c" class="status-text badge " style="font-size: 1rem;">-</span><br>
+          TMA: <span id="tma-c" class="fw-bold">-</span> m
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
 
 
 
@@ -496,23 +522,23 @@
 
 
 <!-- WRAPPER CUACA + TOGGLE BUTTON -->
-<div id="cuacaWrapper" class="position-absolute bottom-0 start-50 translate-middle-x mb-3 z-3 w-100 px-3">
+<div id="cuacaWrapper" class="position-absolute bottom-0 start-50 translate-middle-x mb-2 z-3 w-100 px-2" style="font-size: 0.8rem;">
     <!-- Tombol Toggle -->
-    <div class="d-flex justify-content-end mb-2 px-3">
+    <div class="d-flex justify-content-end mb-1 px-2">
         <button id="toggleCuaca" class="btn btn-outline-primary btn-sm rounded-pill shadow">
             Tampilkan / Sembunyikan Cuaca
         </button>
     </div>
 
     <!-- Isi Prakiraan Cuaca -->
-    <div id="cuacaContent" class="d-flex flex-row flex-nowrap overflow-auto bg-white bg-opacity-90 rounded shadow p-2 gap-2" style="pointer-events: auto;">
+    <div id="cuacaContent" class="d-flex flex-row flex-nowrap overflow-auto bg-white bg-opacity-90 rounded shadow p-1 gap-2" style="pointer-events: auto;">
         <?php foreach ($cuacaList as $periode): ?>
             <?php foreach ($periode as $item): ?>
-                <div class="card flex-shrink-0 text-center" style="min-width: 160px;">
-                    <div class="card-body p-2">
+                <div class="card flex-shrink-0 text-center" style="min-width: 130px;">
+                    <div class="card-body p-1">
                         <small class="text-muted"><?= $item['local_datetime'] ?></small>
-                        <h6 class="mb-1"><?= $item['weather_desc'] ?></h6>
-                        <img src="<?= $item['image'] ?>" alt="cuaca" width="36">
+                        <h6 class="mb-1" style="font-size: 0.85rem;"><?= $item['weather_desc'] ?></h6>
+                        <img src="<?= $item['image'] ?>" alt="cuaca" width="28">
                         <p class="mb-0"><small>Suhu: <?= $item['t'] ?>°C</small></p>
                         <p class="mb-0"><small>Kelembaban: <?= $item['hu'] ?>%</small></p>
                     </div>
@@ -521,6 +547,7 @@
         <?php endforeach; ?>
     </div>
 </div>
+
 
 
 
