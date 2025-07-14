@@ -280,7 +280,7 @@
             <ul class="navbar-nav align-items-lg-center gap-lg-3 mb-2 mb-lg-0">
                 <!-- DATA INSTRUMEN -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="instrumenDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle " style="font-size: 0.9rem;" href="#" id="instrumenDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         DATA INSTRUMEN
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="instrumenDropdown">
@@ -290,7 +290,7 @@
 
                 <!-- DATA SENSOR -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="sensorDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle " style="font-size: 0.9rem;" href="#" id="sensorDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         DATA SENSOR
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="sensorDropdown">
@@ -301,7 +301,7 @@
 
                 <!-- RTD -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="rtdDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" style="font-size: 0.9rem;" href="#" id="rtdDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         RTD
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="rtdDropdown">
@@ -312,7 +312,7 @@
 
                 <!-- INPUT MANUAL -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="inputDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" style="font-size: 0.9rem;" href="#" id="inputDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         INPUT MANUAL
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="inputDropdown">
@@ -401,86 +401,82 @@
         </svg>
     </div>
 
-<div class="sidebar" id="sidebar" style="font-size: 0.8rem; padding: 8px 12px; width: 210px; background-color: #f8f9fa; border: 1px solid #ccc; border-radius: 6px;">
-    <h6 style="font-size: 1rem; font-weight: bold;">Info</h6>
-    <ul class="list-unstyled">
+<div class="sidebar" id="sidebar" style="font-size: 0.7rem; padding: 6px 10px; width: 240px; background-color: #f8f9fa; border: 1px solid #ccc; border-radius: 6px;">
+    <h6 style="font-size: 0.85rem; font-weight: bold; margin-bottom: 4px;">Info</h6>
+    <ul class="list-unstyled" style="margin-bottom: 0; padding-left: 0;">
         <?php if (session()->get('logged_in')): ?>
-            <li class="mb-2">
+            <li style="margin-bottom: 2px;">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="checkboxSungai">
                     <label class="form-check-label" for="checkboxSungai">Layer Sungai</label>
                 </div>
             </li>
-            <li class="mb-2">
+            <li style="margin-bottom: 2px;">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="checkboxJalurEvakuasi">
                     <label class="form-check-label" for="checkboxJalurEvakuasi">Jalur Evakuasi</label>
                 </div>
             </li>
-            <li class="mb-2">
+            <li style="margin-bottom: 2px;">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="checkboxTitikTinjau">
                     <label class="form-check-label" for="checkboxTitikTinjau">Titik Tinjau</label>
                 </div>
             </li>
-            <li class="mb-2">
+            <li style="margin-bottom: 2px;">
                 <div class="form-check d-flex align-items-center">
-                    <input class="form-check-input me-2" type="checkbox" id="checkboxAwlr">
-                    <label class="form-check-label" for="checkboxAwlr">
-                        <img src="assets/img/tma.png" alt="TMA Icon" width="16" height="16" class="me-1">
-                        AWLR
-                    </label>
+                    <input class="form-check-input me-1" type="checkbox" id="checkboxAwlr">
+                    <img src="assets/img/tma.png" alt="TMA Icon" width="14" height="14" class="me-1">
+                    <label class="form-check-label" for="checkboxAwlr">AWLR</label>
                 </div>
             </li>
         <?php endif; ?>
 
-        <li class="mb-2">
-            <label style="cursor: pointer;" onclick="toggleGradeGroup()">
-                <span id="arrowToggle" style="display: inline-block; width: 16px;"></span>
-                Tinggi Genangan
-            </label>
-            <ul class="list-unstyled ps-3 mt-2" id="gradeGroup" style="font-size: 0.75rem;">
-                <li class="mb-1">
+        <li style="margin-bottom: 2px;">
+            <label style="cursor: pointer;" onclick="toggleGradeGroup()">Tinggi Genangan</label>
+            <ul class="list-unstyled ps-2 mt-1" id="gradeGroup" style="font-size: 0.7rem; margin-bottom: 0;">
+                <li>
                     <div class="form-check d-flex align-items-center">
-                        <input class="form-check-input me-2 gradeFilter" type="checkbox" value="1" checked>
-                        <span style="width:16px;height:16px;background-color:#cce6ff;border:1px solid #333;border-radius:4px;margin-right:6px;"></span>
-                        <label class="form-check-label">0–0.5 meter</label>
+                        <input class="form-check-input me-1 gradeFilter" type="checkbox" value="1" checked>
+                        <span style="width:12px;height:12px;background-color:#cce6ff;border:1px solid #333;border-radius:4px;margin-right:4px;"></span>
+                        <label class="form-check-label">0–0.5 m</label>
                     </div>
                 </li>
-                <li class="mb-1">
+                <li>
                     <div class="form-check d-flex align-items-center">
-                        <input class="form-check-input me-2 gradeFilter" type="checkbox" value="2" checked>
-                        <span style="width:16px;height:16px;background-color:#99ccff;border:1px solid #333;border-radius:4px;margin-right:6px;"></span>
-                        <label class="form-check-label">0.5–1.5 meter</label>
+                        <input class="form-check-input me-1 gradeFilter" type="checkbox" value="2" checked>
+                        <span style="width:12px;height:12px;background-color:#99ccff;border:1px solid #333;border-radius:4px;margin-right:4px;"></span>
+                        <label class="form-check-label">0.5–1.5 m</label>
                     </div>
                 </li>
-                <li class="mb-1">
+                <li>
                     <div class="form-check d-flex align-items-center">
-                        <input class="form-check-input me-2 gradeFilter" type="checkbox" value="3" checked>
-                        <span style="width:16px;height:16px;background-color:#336699;border:1px solid #333;border-radius:4px;margin-right:6px;"></span>
-                        <label class="form-check-label">1.5–4 meter</label>
+                        <input class="form-check-input me-1 gradeFilter" type="checkbox" value="3" checked>
+                        <span style="width:12px;height:12px;background-color:#336699;border:1px solid #333;border-radius:4px;margin-right:4px;"></span>
+                        <label class="form-check-label">1.5–4 m</label>
                     </div>
                 </li>
-                <li class="mb-1">
+                <li>
                     <div class="form-check d-flex align-items-center">
-                        <input class="form-check-input me-2 gradeFilter" type="checkbox" value="4" checked>
-                        <span style="width:16px;height:16px;background-color:#003366;border:1px solid #333;border-radius:4px;margin-right:6px;"></span>
-                        <label class="form-check-label">> 4 meter</label>
+                        <input class="form-check-input me-1 gradeFilter" type="checkbox" value="4" checked>
+                        <span style="width:12px;height:12px;background-color:#003366;border:1px solid #333;border-radius:4px;margin-right:4px;"></span>
+                        <label class="form-check-label">&gt; 4 m</label>
                     </div>
                 </li>
             </ul>
         </li>
 
-        <li class="mb-2">
+        <li style="margin-bottom: 2px;">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="checkboxDas" checked>
                 <label class="form-check-label" for="checkboxDas">Layer DAS</label>
             </div>
         </li>
-        <li class="mb-2">
+
+        <li style="margin-bottom: 0;">
             <div class="form-check d-flex align-items-center">
-                <input class="form-check-input me-2" type="checkbox" id="checkboxTitikEvakuasi" checked>
-                <img src="assets/img/evakuasi.png" alt="Jalur Icon" width="16" height="16" class="me-1">
+                <input class="form-check-input me-1" type="checkbox" id="checkboxTitikEvakuasi" checked>
+                <img src="assets/img/evakuasi.png" alt="Evakuasi Icon" width="14" height="14" class="me-1">
                 <label class="form-check-label" for="checkboxTitikEvakuasi">Titik Evakuasi</label>
             </div>
         </li>
@@ -488,43 +484,45 @@
 </div>
 
 
+
+
        
     
 <body>
 
-<div class="warning-toggle-container" style="font-size: 1rem;">
+<div class="warning-toggle-container" style="font-size: 0.65rem;">
   <input type="checkbox" id="toggleAll" style="display:none;">
-  <label for="toggleAll" class="toggle-label" style="font-size: 0.8rem; padding: 4px 10px;">!</label>
+  <label for="toggleAll" class="toggle-label" style="font-size: 0.6rem; padding: 2px 6px;">!</label>
 
   <div class="warning-wrapper">
     <!-- CARD 1 -->
-    <div class="card mb-1 shadow-sm border-info" style="font-size: 0.8rem;">
+    <div class="card mb-1 shadow-sm border-info" style="font-size: 0.65rem;">
       <div class="card-body py-1 px-2">
-        <h6 class="card-title mb-1 text-info fw-bold" style="font-size: 0.9rem;">BENDUNGAN TIU SUNTUK</h6>
+        <h6 class="card-title mb-1 text-info fw-bold" style="font-size: 0.7rem;">BENDUNGAN TIU SUNTUK</h6>
         <div>
-          Status: <span id="status-a" class="status-text badge" style="font-size: 1rem;">-</span><br>
+          Status: <span id="status-a" class="status-text badge" style="font-size: 0.65rem;">-</span><br>
           TMA: <span id="tma-a" class="fw-bold">-</span> m
         </div>
       </div>
     </div>
 
     <!-- CARD 2 -->
-    <div class="card mb-1 shadow-sm border-info" style="font-size: 0.8rem;">
+    <div class="card mb-1 shadow-sm border-info" style="font-size: 0.65rem;">
       <div class="card-body py-1 px-2">
-        <h6 class="card-title mb-1 text-info fw-bold" style="font-size: 0.9rem;">AWLR SAMPIR</h6>
+        <h6 class="card-title mb-1 text-info fw-bold" style="font-size: 0.7rem;">AWLR SAMPIR</h6>
         <div>
-          Status: <span id="status-b" class="status-text badge " style="font-size: 1rem;">-</span><br>
+          Status: <span id="status-b" class="status-text badge" style="font-size: 0.65rem;">-</span><br>
           TMA: <span id="tma-b" class="fw-bold">-</span> m
         </div>
       </div>
     </div>
 
     <!-- CARD 3 -->
-    <div class="card mb-1 shadow-sm border-info" style="font-size: 0.8rem;">
+    <div class="card mb-1 shadow-sm border-info" style="font-size: 0.65rem;">
       <div class="card-body py-1 px-2">
-        <h6 class="card-title mb-1 text-info fw-bold" style="font-size: 0.9rem;">AWLR MENEMENG</h6>
+        <h6 class="card-title mb-1 text-info fw-bold" style="font-size: 0.7rem;">AWLR MENEMENG</h6>
         <div>
-          Status: <span id="status-c" class="status-text badge " style="font-size: 1rem;">-</span><br>
+          Status: <span id="status-c" class="status-text badge" style="font-size: 0.65rem;">-</span><br>
           TMA: <span id="tma-c" class="fw-bold">-</span> m
         </div>
       </div>
@@ -536,31 +534,30 @@
 
 
 
-
     
     <div id="map" style="height: 100vh;"></div>
 
 
 <!-- WRAPPER CUACA + TOGGLE BUTTON -->
-<div id="cuacaWrapper" class="position-absolute bottom-0 start-50 translate-middle-x mb-2 z-3 w-100 px-2" style="font-size: 0.8rem;max-width: 100vw; overflow-x: auto;">
+<div id="cuacaWrapper" class="position-absolute bottom-0 start-50 translate-middle-x mb-1 z-3 w-100 px-2" style="font-size: 0.7rem; max-width: 100vw; overflow-x: auto;">
     <!-- Tombol Toggle -->
     <div class="d-flex justify-content-end mb-1 px-2">
-        <button id="toggleCuaca" class="btn btn-outline-primary btn-sm rounded-pill shadow">
+        <button id="toggleCuaca" class="btn btn-outline-primary btn-sm rounded-pill shadow" style="font-size: 0.65rem; padding: 2px 8px;">
             Tampilkan / Sembunyikan Cuaca
         </button>
     </div>
 
     <!-- Isi Prakiraan Cuaca -->
-    <div id="cuacaContent" class="d-flex flex-row flex-nowrap overflow-auto bg-white bg-opacity-90 rounded shadow p-1 gap-2" style="pointer-events: auto;">
+    <div id="cuacaContent" class="d-flex flex-row flex-nowrap overflow-auto bg-white bg-opacity-90 rounded shadow p-1 gap-1" style="pointer-events: auto;">
         <?php foreach ($cuacaList as $periode): ?>
             <?php foreach ($periode as $item): ?>
-                <div class="card flex-shrink-0 text-center" style="min-width: 130px;">
+                <div class="card flex-shrink-0 text-center" style="min-width: 110px;">
                     <div class="card-body p-1">
-                        <small class="text-muted"><?= $item['local_datetime'] ?></small>
-                        <h6 class="mb-1" style="font-size: 0.85rem;"><?= $item['weather_desc'] ?></h6>
-                        <img src="<?= $item['image'] ?>" alt="cuaca" width="28">
-                        <p class="mb-0"><small>Suhu: <?= $item['t'] ?>°C</small></p>
-                        <p class="mb-0"><small>Kelembaban: <?= $item['hu'] ?>%</small></p>
+                        <small class="text-muted" style="font-size: 0.65rem;"><?= $item['local_datetime'] ?></small>
+                        <h6 class="mb-1" style="font-size: 0.7rem;"><?= $item['weather_desc'] ?></h6>
+                        <img src="<?= $item['image'] ?>" alt="cuaca" width="22" height="22">
+                        <p class="mb-0" style="font-size: 0.65rem;"><small>Suhu: <?= $item['t'] ?>°C</small></p>
+                        <p class="mb-0" style="font-size: 0.65rem;"><small>Kelembaban: <?= $item['hu'] ?>%</small></p>
                     </div>
                 </div>
             <?php endforeach; ?>
