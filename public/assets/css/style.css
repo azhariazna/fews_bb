@@ -113,7 +113,7 @@ html {
 
 .locate-control {
     position: absolute;
-    bottom: 20px;
+    bottom: 250px;
     right: 20px;
     background-color: white;
     border-radius: 50%;
@@ -172,3 +172,5 @@ html {
     stroke-dasharray: 8, 8;
     animation: blink 1s infinite;
 }
+
+

@@ -7,7 +7,6 @@ class Home extends BaseController
 {
     public function index(): string
     {
-        header("Access-Control-Allow-Origin: *");
         helper('url');
 
         $model = new TmaModel();
@@ -16,17 +15,23 @@ class Home extends BaseController
         $tmaSampir   = $model->getLatestTMAByLocation('AWLR SAMPIR');
         $tmaMenemeng = $model->getLatestTMAByLocation('AWLR MENEMENG');
 
+        // Ambil cuaca dari API BMKG
+        $response = file_get_contents("https://api.bmkg.go.id/publik/prakiraan-cuaca?adm4=52.07.07.2002");
+        $json = json_decode($response, true);
+        $cuacaArray = $json['data'][0]['cuaca'] ?? [];
+
         $data = [
             'tmaData' => [
-                'suntuk'   => $tmaSuntuk['tma'] ?? 0,
-                'sampir'   => $tmaSampir['tma'] ?? 0,
+                'suntuk' => $tmaSuntuk['tma'] ?? 0,
+                'sampir' => $tmaSampir['tma'] ?? 0,
                 'menemeng' => $tmaMenemeng['tma'] ?? 0
-            ]
+            ],
+            'cuacaList' => $cuacaArray
         ];
-
 
         return view('map_view', $data);
     }
+
     
     public function getTelemetriGeoJSON()
     {

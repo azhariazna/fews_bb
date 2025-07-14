@@ -223,6 +223,32 @@
       0%, 100% { opacity: 1; }
       50% { opacity: 0.2; }
     }
+
+
+    #cuacaWrapper {
+        z-index: 9999 !important;
+    }
+
+    #cuacaContent::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    #cuacaContent::-webkit-scrollbar-thumb {
+        background-color: #ccc;
+        border-radius: 3px;
+    }
+    #toggleCuaca.fixed-top-right {
+    position: fixed;
+    bottom: 90px; /* atau 100px jika ingin lebih naik */
+    right: 20px;
+    z-index: 1050; /* pastikan di atas Leaflet dan komponen lain */
+}
+
+
+
+
+
+
     </style>
     <!-- Bootstrap 5 CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -467,6 +493,42 @@
 
     
     <div id="map" style="height: 100vh;"></div>
+
+
+<!-- WRAPPER CUACA + TOGGLE BUTTON -->
+<div id="cuacaWrapper" class="position-absolute bottom-0 start-50 translate-middle-x mb-3 z-3 w-100 px-3">
+    <!-- Tombol Toggle -->
+    <div class="d-flex justify-content-end mb-2 px-3">
+        <button id="toggleCuaca" class="btn btn-outline-primary btn-sm rounded-pill shadow">
+            Tampilkan / Sembunyikan Cuaca
+        </button>
+    </div>
+
+    <!-- Isi Prakiraan Cuaca -->
+    <div id="cuacaContent" class="d-flex flex-row flex-nowrap overflow-auto bg-white bg-opacity-90 rounded shadow p-2 gap-2" style="pointer-events: auto;">
+        <?php foreach ($cuacaList as $periode): ?>
+            <?php foreach ($periode as $item): ?>
+                <div class="card flex-shrink-0 text-center" style="min-width: 160px;">
+                    <div class="card-body p-2">
+                        <small class="text-muted"><?= $item['local_datetime'] ?></small>
+                        <h6 class="mb-1"><?= $item['weather_desc'] ?></h6>
+                        <img src="<?= $item['image'] ?>" alt="cuaca" width="36">
+                        <p class="mb-0"><small>Suhu: <?= $item['t'] ?>°C</small></p>
+                        <p class="mb-0"><small>Kelembaban: <?= $item['hu'] ?>%</small></p>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php endforeach; ?>
+    </div>
+</div>
+
+
+
+
+
+
+
+
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -474,6 +536,31 @@
     <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.min.js"></script>
     <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Paling akhir sebelum </body> -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const toggleBtn = document.getElementById("toggleCuaca");
+    const cuacaContent = document.getElementById("cuacaContent");
+
+    console.log("Script loaded!");
+    if (toggleBtn && cuacaContent) {
+        console.log("Tombol ditemukan.");
+
+        toggleBtn.addEventListener("click", function () {
+            console.log("Tombol diklik");
+            cuacaContent.classList.toggle("d-none");
+
+            toggleBtn.innerText = cuacaContent.classList.contains("d-none")
+                ? "Tampilkan Cuaca"
+                : "Sembunyikan Cuaca";
+        });
+    } else {
+        console.error("Elemen toggle atau cuacaContent tidak ditemukan!");
+    }
+});
+</script>
+
 
 
 
@@ -1065,6 +1152,8 @@
         // 3. Zoom ke dua lokasi
         const group = new L.featureGroup([tiuSuntukMarker, bintangBanoMarker]);
         map.fitBounds(group.getBounds().pad(1));
+
+
 </script>
 
 </html>
