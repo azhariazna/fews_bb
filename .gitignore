@@ -6,3 +6,4 @@
 /vendor/
 writable/logs/
 .env
+writable/session/

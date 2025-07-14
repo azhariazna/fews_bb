@@ -442,7 +442,7 @@
 
   <div class="warning-wrapper">
     <div class="warning-box">
-      <strong>Bendungan TIU SUNTUK</strong><br>
+      <strong>BENDUNGAN TIU SUNTUK</strong><br>
       Status: <span id="status-a" class="status-text">-</span><br>
       TMA: <span id="tma-a">-</span> m
     </div>
@@ -1027,16 +1027,7 @@
             popupAnchor: [0, -32]
         });
 
-        // 2. Tambah marker
-        const tiuSuntukMarker = L.marker([-8.7941986,116.93022], {
-                icon: iconTiuSuntuk
-            })
-            .addTo(map)
-            .bindTooltip("<b>Bendungan Tiu Suntuk</b><br>-8.7934844, 116.9222879", {
-                permanent: false,
-                direction: "top"
-            })
-            .openTooltip();
+
 
             let bintangBanoMarker;
 
