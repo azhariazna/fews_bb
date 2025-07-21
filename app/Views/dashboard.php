@@ -37,6 +37,13 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            <a href="<?php echo base_url()?>" class="nav-link" target="content-frame">
+              <i class="nav-icon fas fa-map"></i>
+              <p>Dashboard Peta</p>
+            </a>
+          </li>
+
           <!-- Dropdown Menu RTD -->
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
