@@ -278,15 +278,8 @@
         <!-- Menu Utama -->
         <div class="collapse navbar-collapse justify-content-end" id="navbarTopbar">
             <ul class="navbar-nav align-items-lg-center gap-lg-3 mb-2 mb-lg-0">
-                <!-- DATA INSTRUMEN -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle " style="font-size: 0.9rem;" href="#" id="instrumenDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        DATA INSTRUMEN
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="instrumenDropdown">
-                        <li><a class="dropdown-item" href="<?= base_url('rtd/isi') ?>">Bendungan Tiu Suntuk</a></li>
-                    </ul>
-                </li>
+            <a href="<?= base_url('dashboard') ?>" class="text-white fw-bold text-decoration-none">Data Instrumen</a>
+
 
                 <!-- DATA SENSOR -->
                 <li class="nav-item dropdown">
@@ -305,8 +298,8 @@
                         RTD
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="rtdDropdown">
-                        <li><a class="dropdown-item" href="<?= base_url('rtd/isi') ?>">Isi RTD</a></li>
-                        <li><a class="dropdown-item" href="<?= base_url('rtd/download') ?>">Download RTD</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('dashboard?rtd=isi') ?>">Isi RTD</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('dashboard?rtd=download') ?>">Download RTD</a></li>
                     </ul>
                 </li>
 
@@ -316,7 +309,7 @@
                         INPUT MANUAL
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="inputDropdown">
-                        <li><a class="dropdown-item" href="<?= base_url('input/tma') ?>">TMA Bendungan Tiu Suntuk</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('dashboard?menu=manual-tma') ?>">TMA Bendungan Tiu Suntuk</a></li>
                         <li><a class="dropdown-item" href="<?= base_url('input/tma') ?>">TMA Bendungan Bintang Bano</a></li>
                     </ul>
                 </li>
@@ -330,11 +323,6 @@
                             👤 <?= session()->get('username') ?>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
-                            <li><a class="dropdown-item" href="<?= base_url('laporanrtd') ?>">Isi RTD</a></li>
-                            <li><a class="dropdown-item" href="<?= base_url('laporanrtd/download') ?>">Download RTD</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="<?= base_url('manual-tma') ?>">Input TMA</a></li>
-                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item text-danger" href="<?= base_url('logout') ?>">Logout</a></li>
                         </ul>
                     </div>
@@ -407,25 +395,25 @@
         <?php if (session()->get('logged_in')): ?>
             <li style="margin-bottom: 2px;">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="checkboxSungai">
+                    <input class="form-check-input" type="checkbox" id="checkboxSungai" checked>
                     <label class="form-check-label" for="checkboxSungai">Layer Sungai</label>
                 </div>
             </li>
             <li style="margin-bottom: 2px;">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="checkboxJalurEvakuasi">
+                    <input class="form-check-input" type="checkbox" id="checkboxJalurEvakuasi" checked>
                     <label class="form-check-label" for="checkboxJalurEvakuasi">Jalur Evakuasi</label>
                 </div>
             </li>
             <li style="margin-bottom: 2px;">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="checkboxTitikTinjau">
+                    <input class="form-check-input" type="checkbox" id="checkboxTitikTinjau" checked>
                     <label class="form-check-label" for="checkboxTitikTinjau">Titik Tinjau</label>
                 </div>
             </li>
             <li style="margin-bottom: 2px;">
                 <div class="form-check d-flex align-items-center">
-                    <input class="form-check-input me-1" type="checkbox" id="checkboxAwlr">
+                    <input class="form-check-input me-1" type="checkbox" id="checkboxAwlr" checked>
                     <img src="assets/img/tma.png" alt="TMA Icon" width="14" height="14" class="me-1">
                     <label class="form-check-label" for="checkboxAwlr">AWLR</label>
                 </div>

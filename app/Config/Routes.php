@@ -36,6 +36,11 @@ $routes->match(['get', 'post', 'put'], 'manual-tma/update/(:num)', 'ManualTMACon
 
 
 
+//admin
+$routes->get('admin', 'Admin::index');
+$routes->get('admin/data', 'Admin::data'); // ← endpoint untuk dashboard AJAX
+
+
 
 
 
