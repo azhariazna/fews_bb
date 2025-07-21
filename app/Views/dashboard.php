@@ -38,7 +38,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="<?php echo base_url()?>" class="nav-link" target="content-frame">
+            <a href="<?php echo base_url('/')?>" class="nav-link" target="content-frame">
               <i class="nav-icon fas fa-map"></i>
               <p>Dashboard Peta</p>
             </a>
@@ -83,7 +83,7 @@
   <!-- Konten -->
   <div class="content-wrapper">
     <div class="content pt-3 px-3">
-      <iframe id="content-frame" name="content-frame" style="width:100%; height:75vh; border:none;"></iframe>
+      <iframe id="content-frame" name="content-frame" style="width:100%; height:90vh; border:none;"></iframe>
     </div>
   </div>
 
