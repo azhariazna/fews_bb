@@ -11,6 +11,13 @@
 <body class="p-3">
     <div class="container-fluid">
 
+    <!-- JUDUL DATA INSTRUMEN -->
+    <div class="row">
+      <div class="col-12">
+        <h4 class="fw-bold mb-3 text-primary" style="letter-spacing:1px;">DATA INSTRUMEN</h4>
+      </div>
+    </div>
+
     <div class="row">
         <!-- GROUP 1: Bendungan Tiu Suntuk -->
         <div class="col-12 col-lg-6 mb-3">

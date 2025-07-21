@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -38,7 +39,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="<?php echo base_url('/')?>" class="nav-link" target="content-frame">
+            <a href="<?php echo base_url('/')?>" class="nav-link">
               <i class="nav-icon fas fa-map"></i>
               <p>Dashboard Peta</p>
             </a>
