@@ -278,7 +278,7 @@
         <!-- Menu Utama -->
         <div class="collapse navbar-collapse justify-content-end" id="navbarTopbar">
             <ul class="navbar-nav align-items-lg-center gap-lg-3 mb-2 mb-lg-0">
-            <a href="<?= base_url('dashboard') ?>" class="text-white fw-bold text-decoration-none">Data Instrumen</a>
+            <a class="nav-link" style="font-size: 0.9rem;" href="<?= base_url('dashboard') ?>" class="text-white fw-bold text-decoration-none">DATA INSTRUMENT</a>
 
 
                 <!-- DATA SENSOR -->
@@ -303,16 +303,7 @@
                     </ul>
                 </li>
 
-                <!-- INPUT MANUAL -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" style="font-size: 0.9rem;" href="#" id="inputDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        INPUT MANUAL
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="inputDropdown">
-                        <li><a class="dropdown-item" href="<?= base_url('dashboard?menu=manual-tma') ?>">TMA Bendungan Tiu Suntuk</a></li>
-                        <li><a class="dropdown-item" href="<?= base_url('input/tma') ?>">TMA Bendungan Bintang Bano</a></li>
-                    </ul>
-                </li>
+                <a class="nav-link" style="font-size: 0.9rem;" href="<?= base_url('dashboard?menu=manual-tma') ?>" class="text-white fw-bold text-decoration-none">INPUT TMA MANUAL</a>
             </ul>
 
             <!-- LOGIN / SIDEBAR -->

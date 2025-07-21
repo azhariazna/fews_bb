@@ -61,7 +61,7 @@ $bendungan = $bendungan ?? 'Tidak diketahui';
                 </div>
 
                 <button type="submit" class="btn btn-success"><?= $id ? 'Update' : 'Simpan' ?></button>
-                <a href="<?= base_url('/manual-tma') ?>" class="btn btn-secondary">Kembali</a>
+                
             </form>
         </div>
     </div>
