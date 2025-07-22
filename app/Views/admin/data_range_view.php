@@ -17,13 +17,13 @@
 
         <div class="row mb-3">
             <div class="col-md-4">
-                <label for="id_logger" class="form-label">Pilih Pos</label>
+                <label for="id_logger" class="form-label">Pilih Instrumen</label>
                 <select name="id_logger" id="id_logger" class="form-select">
                     <option value="">-- Pilih --</option>
-                    <option value="10187" <?= $id_logger == '10187' ? 'selected' : '' ?>>Pos AWLR</option>
-                    <option value="10217" <?= $id_logger == '10217' ? 'selected' : '' ?>>Pos AWR</option>
-                    <option value="10246" <?= $id_logger == '10246' ? 'selected' : '' ?>>Pos ARR</option>
-                    <option value="10244" <?= $id_logger == '10244' ? 'selected' : '' ?>>Pos V Notch</option>
+                    <option value="10187" <?= $id_logger == '10187' ? 'selected' : '' ?>>AWLR</option>
+                    <option value="10217" <?= $id_logger == '10217' ? 'selected' : '' ?>>AWR</option>
+                    <option value="10246" <?= $id_logger == '10246' ? 'selected' : '' ?>>ARR</option>
+                    <option value="10244" <?= $id_logger == '10244' ? 'selected' : '' ?>>V Notch</option>
                 </select>
             </div>
             <div class="col-md-3">
