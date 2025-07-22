@@ -58,6 +58,13 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            <a href="<?php echo base_url('simulasi')?>" target="content-frame" class="nav-link">
+              <i class="nav-icon fas fa-laptop"></i>
+              <p>Hasil Simulasi</p>
+            </a>
+          </li>
+
 
             <!-- Dropdown Menu RTD -->
           <li class="nav-item has-treeview">

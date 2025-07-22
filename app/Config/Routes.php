@@ -46,6 +46,10 @@ $routes->get('logger-range', 'Data_api::index');
 $routes->get('data-awlr', 'AwlrController::index');
 
 
+//upload simulasi
+$routes->post('api/update-simulasi', 'ApiSimulasi::updateSimulasi');
+$routes->post('api/update-simulasi-gabungan', 'ApiSimulasi::updateSimulasiGabungan');
+$routes->get('simulasi', 'SimulasiController::index');
 
 
 

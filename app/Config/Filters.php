@@ -81,7 +81,8 @@ class Filters extends BaseFilters
                     'api/bulk-update-data',
                     'api/update-data',
                     'api/last-awlr',
-                    'telemetri/manual/save'
+                    'telemetri/manual/save',
+                    'api/update-simulasi-gabungan'
                 ]
             ],
             // 'invalidchars',
