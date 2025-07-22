@@ -143,6 +143,8 @@
     if (params.has("menu")) {
       const menu = params.get("menu");
       if (menu === "manual-tma") target = "manual-tma";
+      if (menu === "data-awlr") target = "data-awlr";
+      if (menu === "logger-range") target = "logger-range";
     }
 
   // Set iframe src sesuai target
