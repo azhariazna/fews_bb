@@ -6,31 +6,50 @@ use App\Models\TmaModel;
 class Home extends BaseController
 {
     public function index(): string
-    {
-        helper('url');
+{
+    helper('url');
 
-        $model = new TmaModel();
+    $model = new TmaModel();
 
-        $tmaSuntuk   = $model->getLatestTMAByLocation('AWLR BENDUNGAN TIU SUNTUK');
-        $tmaSampir   = $model->getLatestTMAByLocation('AWLR SAMPIR');
-        $tmaMenemeng = $model->getLatestTMAByLocation('AWLR MENEMENG');
+    $tmaSuntuk   = $model->getLatestTMAByLocation('AWLR BENDUNGAN TIU SUNTUK');
+    $tmaSampir   = $model->getLatestTMAByLocation('AWLR SAMPIR');
+    $tmaMenemeng = $model->getLatestTMAByLocation('AWLR MENEMENG');
 
-        // Ambil cuaca dari API BMKG
-        $response = file_get_contents("https://api.bmkg.go.id/publik/prakiraan-cuaca?adm4=52.07.07.2002");
-        $json = json_decode($response, true);
-        $cuacaArray = $json['data'][0]['cuaca'] ?? [];
+    // Default kosong jika cuaca gagal diambil
+    $cuacaArray = [];
 
-        $data = [
-            'tmaData' => [
-                'suntuk' => $tmaSuntuk['tma'] ?? 0,
-                'sampir' => $tmaSampir['tma'] ?? 0,
-                'menemeng' => $tmaMenemeng['tma'] ?? 0
-            ],
-            'cuacaList' => $cuacaArray
-        ];
+    // Ambil cuaca dari API BMKG dengan try-catch + file_get_contents aman
+    try {
+        $context = stream_context_create([
+            'http' => [
+                'timeout' => 5 // Timeout maksimal 5 detik
+            ]
+        ]);
 
-        return view('map_view', $data);
+        $response = @file_get_contents("https://api.bmkg.go.id/publik/prakiraan-cuaca?adm4=52.07.07.2002", false, $context);
+
+        if ($response !== false) {
+            $json = json_decode($response, true);
+            $cuacaArray = $json['data'][0]['cuaca'] ?? [];
+        } else {
+            log_message('error', 'Gagal mengambil data dari API BMKG (network unreachable)');
+        }
+    } catch (\Throwable $e) {
+        log_message('error', 'Exception saat ambil API BMKG: ' . $e->getMessage());
     }
+
+    $data = [
+        'tmaData' => [
+            'suntuk' => $tmaSuntuk['tma'] ?? 0,
+            'sampir' => $tmaSampir['tma'] ?? 0,
+            'menemeng' => $tmaMenemeng['tma'] ?? 0
+        ],
+        'cuacaList' => $cuacaArray
+    ];
+
+    return view('map_view', $data);
+}
+
 
     
     public function getTelemetriGeoJSON()
