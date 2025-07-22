@@ -58,11 +58,29 @@
             </a>
           </li>
 
-          <li class="nav-item">
-            <a href="<?php echo base_url('simulasi')?>" target="content-frame" class="nav-link">
+             <!-- Dropdown Menu RTD -->
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-laptop"></i>
-              <p>Hasil Simulasi</p>
+              <p>
+                Hasil Simulasi
+                <i class="right fas fa-angle-left"></i>
+              </p>
             </a>
+            <ul class="nav nav-treeview pl-3">
+              <li class="nav-item">
+                <a href="simulasi" class="nav-link" target="content-frame" id="menu-isi-rtd">
+                  <i class="far fa-tint nav-icon"></i>
+                  <p>Bendungan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="data-awlr" class="nav-link" target="content-frame" id="menu-download-rtd">
+                  <i class="far fa-tint  nav-icon"></i>
+                  <p>AWLR</p>
+                </a>
+              </li>
+            </ul>
           </li>
 
 

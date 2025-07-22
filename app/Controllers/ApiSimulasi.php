@@ -89,6 +89,65 @@ class ApiSimulasi extends ResourceController
             'updated' => $result,
             'message' => "Berhasil memperbarui data untuk: " . implode(', ', array_keys($result))
         ]);
+        
     }
+
+
+    public function updateGabunganAwlr()
+         {
+        $json = $this->request->getJSON(true);
+
+        if (!$json || (!isset($json['sampir']) && !isset($json['menemeng']))) {
+            return $this->fail('Payload tidak valid.', 400);
+        }
+
+        $db = db_connect();
+        $success = [];
+        $error = [];
+
+        // Update sampir
+        if (isset($json['sampir']) && is_array($json['sampir'])) {
+            foreach ($json['sampir'] as $row) {
+                if (!isset($row['id']) || !isset($row['waktu']) || !isset($row['tma'])) continue;
+
+                try {
+                    $db->table('simulasi_awlr_sampir')
+                        ->where('id', $row['id'])
+                        ->update([
+                            'waktu' => $row['waktu'],
+                            'tma'   => $row['tma']
+                        ]);
+                    $success[] = "sampir ID {$row['id']}";
+                } catch (\Exception $e) {
+                    $error[] = "sampir ID {$row['id']} gagal: " . $e->getMessage();
+                }
+            }
+        }
+
+        // Update menemeng
+        if (isset($json['menemeng']) && is_array($json['menemeng'])) {
+            foreach ($json['menemeng'] as $row) {
+                if (!isset($row['id']) || !isset($row['waktu']) || !isset($row['tma'])) continue;
+
+                try {
+                    $db->table('simulasi_awlr_menemeng')
+                        ->where('id', $row['id'])
+                        ->update([
+                            'waktu' => $row['waktu'],
+                            'tma'   => $row['tma']
+                        ]);
+                    $success[] = "menemeng ID {$row['id']}";
+                } catch (\Exception $e) {
+                    $error[] = "menemeng ID {$row['id']} gagal: " . $e->getMessage();
+                }
+            }
+        }
+
+        return $this->respond([
+            'status' => true,
+            'updated' => $success,
+            'error' => $error
+        ]);
+     }
 
 }
