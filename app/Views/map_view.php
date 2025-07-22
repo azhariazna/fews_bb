@@ -292,6 +292,17 @@
                     </ul>
                 </li>
 
+                                <!-- DATA SENSOR -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle " style="font-size: 0.9rem;" href="#" id="sensorDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        HASIL SIMULASI
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="sensorDropdown">
+                        <li><a class="dropdown-item" href="<?= base_url('dashboard?menu=simulasi') ?>">BENDUNGAN</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('dashboard?menu=simulasi-awlr') ?>">AWLR</a></li>
+                    </ul>
+                </li>
+
                 <!-- RTD -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" style="font-size: 0.9rem;" href="#" id="rtdDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

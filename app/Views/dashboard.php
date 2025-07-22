@@ -169,6 +169,8 @@
       if (menu === "manual-tma") target = "manual-tma";
       if (menu === "data-awlr") target = "data-awlr";
       if (menu === "logger-range") target = "logger-range";
+      if (menu === "simulasi") target = "simulasi";
+      if (menu === "simulasi-awlr") target = "simulasi-awlr";
     }
 
   // Set iframe src sesuai target
