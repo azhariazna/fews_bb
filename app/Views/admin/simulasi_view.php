@@ -82,9 +82,10 @@
                                     <tr>
                                         <td><?= esc($row['id']) ?></td>
                                         <td><?= esc($row['waktu']) ?></td>
-                                        <td><?= esc($row['inflow']) ?></td>
-                                        <td><?= esc($row['outflow']) ?></td>
-                                        <td><?= esc($row['elevasi']) ?></td>
+                                        <td><?= number_format($row['inflow'], 2) ?></td>
+                                        <td><?= number_format($row['outflow'], 2) ?></td>
+                                        <td><?= number_format($row['elevasi'], 2) ?></td>
+
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -117,9 +118,10 @@
                                     <tr>
                                         <td><?= esc($row['id']) ?></td>
                                         <td><?= esc($row['waktu']) ?></td>
-                                        <td><?= esc($row['inflow']) ?></td>
-                                        <td><?= esc($row['outflow']) ?></td>
-                                        <td><?= esc($row['elevasi']) ?></td>
+                                        <td><?= number_format($row['inflow'], 2) ?></td>
+                                        <td><?= number_format($row['outflow'], 2) ?></td>
+                                        <td><?= number_format($row['elevasi'], 2) ?></td>
+
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
