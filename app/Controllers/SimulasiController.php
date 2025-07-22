@@ -6,6 +6,10 @@ class SimulasiController extends BaseController
 {
     public function index()
     {
+        if (!session()->get('logged_in')) {
+            return redirect()->to(base_url('login'));
+        }
+        
         $db = db_connect();
 
         // Ambil data dari database

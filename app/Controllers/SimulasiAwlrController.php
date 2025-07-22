@@ -8,6 +8,10 @@ class SimulasiAwlrController extends BaseController
 {
     public function index()
     {
+        if (!session()->get('logged_in')) {
+            return redirect()->to(base_url('login'));
+        }
+        
         $sampirModel = new SimulasiSampirModel();
         $menemengModel = new SimulasiMenemengModel();
 
