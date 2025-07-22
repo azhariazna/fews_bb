@@ -153,7 +153,8 @@
                         borderColor: 'blue',
                         yAxisID: 'y',
                         tension: 0.3,
-                        fill: false
+                        fill: false,
+                        pointRadius: 0
                     },
                     {
                         label: 'Inflow (m³/dtk)',
@@ -161,7 +162,8 @@
                         borderColor: 'orange',
                         yAxisID: 'y1',
                         tension: 0.3,
-                        fill: false
+                        fill: false,
+                        pointRadius: 0
                     },
                     {
                         label: 'Outflow (m³/dtk)',
@@ -169,7 +171,8 @@
                         borderColor: 'red',
                         yAxisID: 'y1',
                         tension: 0.3,
-                        fill: false
+                        fill: false,
+                        pointRadius: 0
                     }
                 ]
             },
@@ -216,7 +219,8 @@
                         borderColor: 'green',
                         yAxisID: 'y',
                         tension: 0.3,
-                        fill: false
+                        fill: false,
+                        pointRadius: 0
                     },
                     {
                         label: 'Inflow (m³/dtk)',
@@ -224,7 +228,8 @@
                         borderColor: 'orange',
                         yAxisID: 'y1',
                         tension: 0.3,
-                        fill: false
+                        fill: false,
+                        pointRadius: 0
                     },
                     {
                         label: 'Outflow (m³/dtk)',
@@ -232,7 +237,8 @@
                         borderColor: 'red',
                         yAxisID: 'y1',
                         tension: 0.3,
-                        fill: false
+                        fill: false,
+                        pointRadius: 0
                     }
                 ]
             },
