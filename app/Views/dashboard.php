@@ -75,7 +75,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="data-awlr" class="nav-link" target="content-frame" id="menu-download-rtd">
+                <a href="simulasi-awlr" class="nav-link" target="content-frame" id="menu-download-rtd">
                   <i class="far fa-tint  nav-icon"></i>
                   <p>AWLR</p>
                 </a>
