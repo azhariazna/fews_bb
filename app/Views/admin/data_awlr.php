@@ -32,10 +32,12 @@
     </form>
 
     <?php if (!empty($data)): ?>
-        <div class="table-responsive">
-            <table class="table table-bordered table-sm table-hover">
-                <button id="exportBtn" class="btn btn-success mt-3">Export ke Excel</button>
+        <div class="mb-3 text-end">
+            <button id="exportBtn" class="btn btn-success">Export ke Excel</button>
+        </div>
 
+        <div class="table-responsive">
+            <table class="table table-bordered table-sm table-hover" id="awlrTable">
                 <thead class="table-light">
                     <tr>
                         <th>Waktu</th>
@@ -59,11 +61,12 @@
 
 <?= $this->endSection() ?>
 
+<!-- Export Script -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
-    document.getElementById("exportBtn").addEventListener("click", function () {
+    document.getElementById("exportBtn")?.addEventListener("click", function () {
         var wb = XLSX.utils.book_new();
-        var table = document.querySelector("table");
+        var table = document.getElementById("awlrTable");
         var ws = XLSX.utils.table_to_sheet(table);
         XLSX.utils.book_append_sheet(wb, ws, "Data");
 
