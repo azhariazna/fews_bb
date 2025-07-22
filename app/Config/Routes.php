@@ -43,6 +43,8 @@ $routes->get('admin/data', 'Admin::data'); // ← endpoint untuk dashboard AJAX
 
 //data api
 $routes->get('logger-range', 'Data_api::index');
+$routes->get('data-awlr', 'AwlrController::index');
+
 
 
 

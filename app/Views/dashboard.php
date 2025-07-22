@@ -61,7 +61,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="laporanrtd/download" class="nav-link" target="content-frame" id="menu-download-rtd">
+                <a href="data-awlr" class="nav-link" target="content-frame" id="menu-download-rtd">
                   <i class="far fa-circle nav-icon"></i>
                   <p>AWLR</p>
                 </a>
