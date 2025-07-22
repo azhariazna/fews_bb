@@ -34,6 +34,8 @@
     <?php if (!empty($data)): ?>
         <div class="table-responsive">
             <table class="table table-bordered table-sm table-hover">
+                <button id="exportBtn" class="btn btn-success mt-3">Export ke Excel</button>
+
                 <thead class="table-light">
                     <tr>
                         <th>Waktu</th>
@@ -56,3 +58,20 @@
 </div>
 
 <?= $this->endSection() ?>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+    document.getElementById("exportBtn").addEventListener("click", function () {
+        var wb = XLSX.utils.book_new();
+        var table = document.querySelector("table");
+        var ws = XLSX.utils.table_to_sheet(table);
+        XLSX.utils.book_append_sheet(wb, ws, "Data");
+
+        let namaPos = document.getElementById("id_awlr").selectedOptions[0].text.replace(/\s+/g, "_");
+        let start = document.getElementById("start").value;
+        let end = document.getElementById("end").value;
+        let filename = `${namaPos}_${start}_sd_${end}.xlsx`;
+
+        XLSX.writeFile(wb, filename);
+    });
+</script>

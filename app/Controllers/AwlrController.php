@@ -35,4 +35,6 @@ class AwlrController extends BaseController
             'end' => $end
         ]);
     }
+
+    
 }
