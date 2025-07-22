@@ -44,6 +44,33 @@
             </a>
           </li>
 
+            <!-- Dropdown Menu RTD -->
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-folder-open"></i>
+              <p>
+                Data Sensor
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview pl-3">
+              <li class="nav-item">
+                <a href="logger-range" class="nav-link" target="content-frame" id="menu-isi-rtd">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Bendungan Tiu Suntuk</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="laporanrtd/download" class="nav-link" target="content-frame" id="menu-download-rtd">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>AWLR</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+
+
           <li class="nav-item">
             <a href="<?php echo base_url('/')?>" class="nav-link">
               <i class="nav-icon fas fa-map"></i>

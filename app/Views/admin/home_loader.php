@@ -17,6 +17,11 @@
       justify-content: center;
       flex-direction: column;
     }
+
+        #loadingSpinner {
+        text-align: center;
+        padding: 40px 0;
+    }
   </style>
 </head>
 <body>
@@ -42,6 +47,8 @@
       $('#loading-screen').fadeOut(300);
     });
   });
+
+
 </script>
 
 </body>

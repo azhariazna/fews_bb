@@ -330,7 +330,14 @@
 </nav>
 
 
-        
+
+<!-- Tambahkan tombol + untuk toggle informasi sisi kiri -->
+<div id="floatingToggle" class="position-fixed bottom-0 end-0 m-3" style="z-index: 1060;">
+  <button class="btn btn-danger rounded-circle shadow" style="width: 40px; height: 40px; font-weight: bold; font-size: 18px; padding: 0; line-height: 36px;"
+          onclick="toggleWarningBox()">
+    +
+  </button>
+</div>
 
     
 
@@ -1175,6 +1182,16 @@ document.addEventListener("DOMContentLoaded", function () {
         // 3. Zoom ke dua lokasi
         const group = new L.featureGroup([tiuSuntukMarker, bintangBanoMarker]);
         map.fitBounds(group.getBounds().pad(1));
+
+
+
+          function toggleWarningBox() {
+            const wrapper = document.querySelector('.warning-toggle-container');
+            if (wrapper) {
+            const checkbox = wrapper.querySelector('#toggleAll');
+            if (checkbox) checkbox.checked = !checkbox.checked;
+            }
+        }
 
 
 </script>
