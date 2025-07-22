@@ -51,6 +51,14 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            <a href="manual-tma" class="nav-link" target="content-frame">
+              <i class="nav-icon fas fa-keyboard"></i>
+              <p>Input Manual TMA</p>
+            </a>
+          </li>
+
+
             <!-- Dropdown Menu RTD -->
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -74,13 +82,6 @@
                 </a>
               </li>
             </ul>
-          </li>
-
-          <li class="nav-item">
-            <a href="manual-tma" class="nav-link" target="content-frame">
-              <i class="nav-icon fas fa-keyboard"></i>
-              <p>Input Manual TMA</p>
-            </a>
           </li>
 
                 <!-- Dropdown Menu RTD -->
