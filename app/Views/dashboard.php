@@ -101,6 +101,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="api-download/fetch" class="nav-link" target="content-frame" id="menu-isi-rtd">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>AVW</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="data-awlr" class="nav-link" target="content-frame" id="menu-download-rtd">
                   <i class="far fa-circle nav-icon"></i>
                   <p>AWLR</p>

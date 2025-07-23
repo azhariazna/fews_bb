@@ -9,13 +9,98 @@
 
 </head>
 <body class="p-3">
-    <div class="container-fluid">
+      <div class="card-header bg-dark text-white py-2 px-3 d-flex align-items-center" style="font-size:0.95rem;">
+        <span class="fw-bold"><i class="fas fa-water me-2"></i> DATA INSTRUMEN</span>
+    </div>
 
-    <!-- JUDUL DATA INSTRUMEN -->
+    <div class="container-fluid">
+    <!-- INFO & JUDUL DATA INSTRUMEN -->
     <div class="row">
-      <div class="col-12">
-        <h4 class="fw-bold mb-3 text-primary" style="letter-spacing:1px;">DATA INSTRUMEN</h4>
+      <div class="col-12 mb-2">
+        <!-- Penampang 1 -->
+        <h5 class="fw-bold text-secondary mb-2">AVWR STA. 0+100</h5>
+        <div class="row g-2 align-items-start">
+          <div class="col-12 col-md-8 col-lg-7 d-flex align-items-start">
+            <img src="<?= base_url('assets/img/100.jpg') ?>" alt="Skema AVWR" style="max-width:100%; width:100%; height:auto; border:1px solid #ccc; background:#fff; padding:4px;">
+          </div>
+          <div class="col-12 col-md-4 col-lg-5 d-flex align-items-start">
+            <div class="table-responsive w-100">
+              <table class="table table-bordered table-sm mb-0" style="font-size:0.93em; min-width:320px;">
+                <thead class="thead-light" style="background:#e9ecef;">
+                  <tr>
+                    <th class="align-top text-center border border-dark" style="background:#e9ecef;">Lokasi</th>
+                    <th class="align-top text-center border border-dark" style="background:#e9ecef;">Kode</th>
+                    <th class="align-top text-center border border-dark" style="background:#e9ecef;">Elevasi</th>
+                    <th class="align-top text-center border border-dark" style="background:#e9ecef;">Frekuensi (Hz)</th>
+                    <th class="align-top text-center border border-dark" style="background:#e9ecef;">P (kPa)</th>
+                    <th class="align-top text-center border border-dark" style="background:#e9ecef;">P (mH2O)</th>
+                    <th class="align-top text-center border border-dark" style="background:#e9ecef;">Temp. (°C)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td rowspan="4" class="align-middle">Pondasi</td><td>FP 1</td><td>36.50</td><td><?= esc($avwData['FP1'][0] ?? '-') ?></td><td><?= esc($avwData['FP1'][1] ?? '-') ?></td><td><?= esc($avwData['FP1'][2] ?? '-') ?></td><td><?= esc($avwData['FP1'][3] ?? '-') ?></td></tr>
+                  <tr><td>FP 2</td><td>36.50</td><td><?= esc($avwData['FP2'][0] ?? '-') ?></td><td><?= esc($avwData['FP2'][1] ?? '-') ?></td><td><?= esc($avwData['FP2'][2] ?? '-') ?></td><td><?= esc($avwData['FP2'][3] ?? '-') ?></td></tr>
+                  <tr><td>FP 3</td><td>46.50</td><td><?= esc($avwData['FP3'][0] ?? '-') ?></td><td><?= esc($avwData['FP3'][1] ?? '-') ?></td><td><?= esc($avwData['FP3'][2] ?? '-') ?></td><td><?= esc($avwData['FP3'][3] ?? '-') ?></td></tr>
+                  <tr><td>FP 4</td><td>46.50</td><td><?= esc($avwData['FP4'][0] ?? '-') ?></td><td><?= esc($avwData['FP4'][1] ?? '-') ?></td><td><?= esc($avwData['FP4'][2] ?? '-') ?></td><td><?= esc($avwData['FP4'][3] ?? '-') ?></td></tr>
+                  <tr><td rowspan="9" class="align-middle">Timbunan</td><td>EP 1</td><td>60.50</td><td><?= esc($avwData['FP1'][0] ?? '-') ?></td><td><?= esc($avwData['FP1'][1] ?? '-') ?></td><td><?= esc($avwData['FP1'][2] ?? '-') ?></td><td><?= esc($avwData['FP1'][3] ?? '-') ?></td></tr>
+                  <tr><td>EP 1</td><td>60.50</td><td><?= esc($avwData['EP1'][0] ?? '-') ?></td><td><?= esc($avwData['EP1'][1] ?? '-') ?></td><td><?= esc($avwData['EP1'][2] ?? '-') ?></td><td><?= esc($avwData['EP1'][3] ?? '-') ?></td></tr>
+                  <tr><td>EP 2</td><td>60.50</td><td><?= esc($avwData['EP2'][0] ?? '-') ?></td><td><?= esc($avwData['EP2'][1] ?? '-') ?></td><td><?= esc($avwData['EP2'][2] ?? '-') ?></td><td><?= esc($avwData['EP2'][3] ?? '-') ?></td></tr>
+                  <tr><td>EP 3</td><td>60.50</td><td><?= esc($avwData['EP3'][0] ?? '-') ?></td><td><?= esc($avwData['EP3'][1] ?? '-') ?></td><td><?= esc($avwData['EP3'][2] ?? '-') ?></td><td><?= esc($avwData['EP3'][3] ?? '-') ?></td></tr>
+                  <tr><td>EP 4</td><td>60.50</td><td><?= esc($avwData['EP4'][0] ?? '-') ?></td><td><?= esc($avwData['EP4'][1] ?? '-') ?></td><td><?= esc($avwData['EP4'][2] ?? '-') ?></td><td><?= esc($avwData['EP4'][3] ?? '-') ?></td></tr>
+                  <tr><td>EP 5</td><td>60.50</td><td><?= esc($avwData['EP5'][0] ?? '-') ?></td><td><?= esc($avwData['EP5'][1] ?? '-') ?></td><td><?= esc($avwData['EP5'][2] ?? '-') ?></td><td><?= esc($avwData['EP5'][3] ?? '-') ?></td></tr>
+                  <tr><td>EP 6</td><td>73.00</td><td><?= esc($avwData['EP6'][0] ?? '-') ?></td><td><?= esc($avwData['EP6'][1] ?? '-') ?></td><td><?= esc($avwData['EP6'][2] ?? '-') ?></td><td><?= esc($avwData['EP6'][3] ?? '-') ?></td></tr>
+                  <tr><td>EP 7</td><td>73.00</td><td><?= esc($avwData['EP7'][0] ?? '-') ?></td><td><?= esc($avwData['EP7'][1] ?? '-') ?></td><td><?= esc($avwData['EP7'][2] ?? '-') ?></td><td><?= esc($avwData['EP7'][3] ?? '-') ?></td></tr>
+                  <tr><td>EP 8</td><td>85.50</td><td><?= esc($avwData['EP8'][0] ?? '-') ?></td><td><?= esc($avwData['EP8'][1] ?? '-') ?></td><td><?= esc($avwData['EP8'][2] ?? '-') ?></td><td><?= esc($avwData['EP8'][3] ?? '-') ?></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- Penampang 2 -->
+        <h5 class="fw-bold text-secondary mt-4 mb-2">AVWR STA. 0+180</h5>
+        <div class="row g-2 align-items-start">
+          <div class="col-12 col-md-8 col-lg-7 d-flex align-items-start">
+            <img src="<?= base_url('assets/img/180.jpg') ?>" alt="Skema Penampang 2" style="max-width:100%; width:100%; height:auto; border:1px solid #ccc; background:#fff; padding:4px;">
+          </div>
+          <div class="col-12 col-md-4 col-lg-5 d-flex align-items-start">
+            <div class="table-responsive w-100">
+              <table class="table table-bordered table-sm mb-0" style="font-size:0.93em; min-width:320px;">
+                <thead class="thead-light" style="background:#e9ecef;">
+                  <tr>
+                    <th class="align-top text-center border border-dark" style="background:#e9ecef;">Lokasi</th>
+                    <th class="align-top text-center border border-dark" style="background:#e9ecef;">Kode</th>
+                    <th class="align-top text-center border border-dark" style="background:#e9ecef;">Elevasi</th>
+                    <th class="align-top text-center border border-dark" style="background:#e9ecef;">Frekuensi (Hz)</th>
+                    <th class="align-top text-center border border-dark" style="background:#e9ecef;">P (kPa)</th>
+                    <th class="align-top text-center border border-dark" style="background:#e9ecef;">P (mH2O)</th>
+                    <th class="align-top text-center border border-dark" style="background:#e9ecef;">Temp. (°C)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Contoh data penampang 2, silakan sesuaikan -->
+                  <tr><td rowspan="4" class="align-middle">Pondasi</td><td>FP 5</td><td>28.00</td><td><?= esc($avwData['FP5'][0] ?? '-') ?></td><td><?= esc($avwData['FP5'][1] ?? '-') ?></td><td><?= esc($avwData['FP5'][2] ?? '-') ?></td><td><?= esc($avwData['FP5'][3] ?? '-') ?></td></tr>
+                  <tr><td>FP 6</td><td>28.00</td><td><?= esc($avwData['FP6'][0] ?? '-') ?></td><td><?= esc($avwData['FP6'][1] ?? '-') ?></td><td><?= esc($avwData['FP6'][2] ?? '-') ?></td><td><?= esc($avwData['FP6'][3] ?? '-') ?></td></tr>
+                  <tr><td>FP 7</td><td>38.00</td><td><?= esc($avwData['FP7'][0] ?? '-') ?></td><td><?= esc($avwData['FP7'][1] ?? '-') ?></td><td><?= esc($avwData['FP7'][2] ?? '-') ?></td><td><?= esc($avwData['FP7'][3] ?? '-') ?></td></tr>
+                  <tr><td>FP 8</td><td>38.00</td><td><?= esc($avwData['FP8'][0] ?? '-') ?></td><td><?= esc($avwData['FP8'][1] ?? '-') ?></td><td><?= esc($avwData['FP8'][2] ?? '-') ?></td><td><?= esc($avwData['FP8'][3] ?? '-') ?></td></tr>
+                  <tr><td rowspan="12" class="align-middle">Timbunan</td><td>EP 9</td><td>48.00</td><td><?= esc($avwData['EP9'][0] ?? '-') ?></td><td><?= esc($avwData['EP9'][1] ?? '-') ?></td><td><?= esc($avwData['EP9'][2] ?? '-') ?></td><td><?= esc($avwData['EP9'][3] ?? '-') ?></td></tr>
+                  <tr><td>EP 10</td><td>48.00</td><td><?= esc($avwData['EP10'][0] ?? '-') ?></td><td><?= esc($avwData['EP10'][1] ?? '-') ?></td><td><?= esc($avwData['EP10'][2] ?? '-') ?></td><td><?= esc($avwData['EP10'][3] ?? '-') ?></td></tr>
+                  <tr><td>EP 11</td><td>48.00</td><td><?= esc($avwData['EP11'][0] ?? '-') ?></td><td><?= esc($avwData['EP11'][1] ?? '-') ?></td><td><?= esc($avwData['EP11'][2] ?? '-') ?></td><td><?= esc($avwData['EP11'][3] ?? '-') ?></td></tr>
+                  <tr><td>EP 12</td><td>48.00</td><td><?= esc($avwData['EP12'][0] ?? '-') ?></td><td><?= esc($avwData['EP12'][1] ?? '-') ?></td><td><?= esc($avwData['EP12'][2] ?? '-') ?></td><td><?= esc($avwData['EP12'][3] ?? '-') ?></td></tr>
+                  <tr><td>EP 13</td><td>60.50</td><td><?= esc($avwData['EP13'][0] ?? '-') ?></td><td><?= esc($avwData['EP13'][1] ?? '-') ?></td><td><?= esc($avwData['EP13'][2] ?? '-') ?></td><td><?= esc($avwData['EP13'][3] ?? '-') ?></td></tr>
+                  <tr><td>EP 14</td><td>60.50</td><td><?= esc($avwData['EP14'][0] ?? '-') ?></td><td><?= esc($avwData['EP14'][1] ?? '-') ?></td><td><?= esc($avwData['EP14'][2] ?? '-') ?></td><td><?= esc($avwData['EP14'][3] ?? '-') ?></td></tr>
+                  <tr><td>EP 15</td><td>60.50</td><td><?= esc($avwData['EP15'][0] ?? '-') ?></td><td><?= esc($avwData['EP15'][1] ?? '-') ?></td><td><?= esc($avwData['EP15'][2] ?? '-') ?></td><td><?= esc($avwData['EP15'][3] ?? '-') ?></td></tr>
+                  <tr><td>EP 16</td><td>60.50</td><td><?= esc($avwData['EP16'][0] ?? '-') ?></td><td><?= esc($avwData['EP16'][1] ?? '-') ?></td><td><?= esc($avwData['EP16'][2] ?? '-') ?></td><td><?= esc($avwData['EP16'][3] ?? '-') ?></td></tr>
+                  <tr><td>EP 17</td><td>60.50</td><td><?= esc($avwData['EP17'][0] ?? '-') ?></td><td><?= esc($avwData['EP17'][1] ?? '-') ?></td><td><?= esc($avwData['EP17'][2] ?? '-') ?></td><td><?= esc($avwData['EP17'][3] ?? '-') ?></td></tr>
+                  <tr><td>EP 18</td><td>73.00</td><td><?= esc($avwData['EP18'][0] ?? '-') ?></td><td><?= esc($avwData['EP18'][1] ?? '-') ?></td><td><?= esc($avwData['EP18'][2] ?? '-') ?></td><td><?= esc($avwData['EP18'][3] ?? '-') ?></td></tr>
+                  <tr><td>EP 19</td><td>73.00</td><td><?= esc($avwData['EP19'][0] ?? '-') ?></td><td><?= esc($avwData['EP19'][1] ?? '-') ?></td><td><?= esc($avwData['EP19'][2] ?? '-') ?></td><td><?= esc($avwData['EP19'][3] ?? '-') ?></td></tr>
+                  <tr><td>EP 20</td><td>85.50</td><td><?= esc($avwData['EP20'][0] ?? '-') ?></td><td><?= esc($avwData['EP20'][1] ?? '-') ?></td><td><?= esc($avwData['EP20'][2] ?? '-') ?></td><td><?= esc($avwData['EP20'][3] ?? '-') ?></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
+
     </div>
 
     <div class="row">

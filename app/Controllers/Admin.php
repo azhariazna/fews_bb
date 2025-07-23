@@ -58,6 +58,48 @@ class Admin extends BaseController
 
         $data['awlrSungaiList'] = $awlrSungaiList;
 
+        // Jangan overwrite $context jika sudah ada!
+        // Hapus pembuatan ulang $context di bawah ini:
+        // $context = stream_context_create([
+        //     "http" => [
+        //         "header" => "Authorization: Basic " . base64_encode("user_tiusuntuk:admin_tiusuntuk")
+        //     ]
+        // ]);
+
+        // ...lanjutkan kode pengambilan AVW sensor...
+        $avwSensors = [
+            'FP1','FP2','FP3','FP4','EPC4','EPC5','EPC6',
+            'EP1','EP2','EP3','EP4','EP5','EP6','EP7',
+            'FP5','FP6','FP7','FP8','EPC1','EPC2','EPC3',
+            'EP9','EP10','EP11','EP12','EP13','EP14','EP15','EP16','EP17','EP18','EP19','EP8','EP20'
+        ];
+        $avwSensors = array_unique($avwSensors);
+
+        $avwData = [];
+        $avwBaseUrl = 'https://tiusuntuk.monitoring4system.com/api/avw_new?id_logger=10245&id_avw=';
+
+        foreach ($avwSensors as $sensor) {
+            $url = $avwBaseUrl . urlencode($sensor);
+            $json = @file_get_contents($url, false, $context);
+            $parsed = json_decode($json, true);
+
+            $avwData[$sensor] = [];
+            if (isset($parsed['data'][0])) {
+                $dataAvw = $parsed['data'][0];
+                $params = [];
+                if (isset($dataAvw['data']) && is_array($dataAvw['data'])) {
+                    foreach ($dataAvw['data'] as $param) {
+                        $params[] = isset($param['nilai']) ? $param['nilai'] : null;
+                    }
+                }
+                $avwData[$sensor] = $params;
+                if (isset($dataAvw['waktu'])) {
+                    $avwData[$sensor . '_waktu'] = $dataAvw['waktu'];
+                }
+            }
+        }
+        $data['avwData'] = $avwData;
+
         // Opsional: pastikan waktu render minimal 1.5 detik
         $elapsed = microtime(true) - $start;
         if ($elapsed < 1.5) {

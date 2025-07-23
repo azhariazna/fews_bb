@@ -51,10 +51,16 @@ $routes->post('api/update-simulasi', 'ApiSimulasi::updateSimulasi');
 $routes->post('api/update-simulasi-gabungan', 'ApiSimulasi::updateSimulasiGabungan');
 $routes->post('api/update-simulasi-awlr', 'ApiSimulasi::updateGabunganAwlr');
 
-$routes->get('/simulasi-awlr', 'SimulasiAwlrController::index');
+$routes->get('simulasi-awlr', 'SimulasiAwlrController::index');
 
 
 $routes->get('simulasi', 'SimulasiController::index');
+
+
+//download Avw
+$routes->match(['get', 'post'], 'api-download/fetch', 'ApiDownloadController::index');
+
+
 
 
 
