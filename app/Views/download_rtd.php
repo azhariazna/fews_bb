@@ -38,7 +38,7 @@
         }
     </style>
 </head>
-<body>
+<body style="background-color: skyblue;">
     <h2>Daftar Laporan RTD</h2>
 
     <?php if (!empty($laporanList)) : ?>

@@ -49,7 +49,7 @@
         }
     </style>
 </head>
-<body>
+<body style="background-color: skyblue;">
     <h2>Form Laporan Keadaan Darurat</h2>
 
     <form action="<?= base_url('laporanrtd/submit') ?>" method="post">

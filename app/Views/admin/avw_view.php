@@ -4,7 +4,7 @@
     <title>Data AVW</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="container mt-4">
+<body class="container mt-4" style="background-color: skyblue;">
     <h3 class="mb-4">Data AVW Logger 10245</h3>
     <?php if (!empty($errorMsg)): ?>
         <div class="alert alert-danger"><?= esc($errorMsg) ?></div>

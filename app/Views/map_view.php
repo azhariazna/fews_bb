@@ -288,6 +288,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="sensorDropdown">
                         <li><a class="dropdown-item" href="<?= base_url('dashboard?menu=logger-range') ?>">BENDUNGAN TIU SUNTUK</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('dashboard?menu=api-download-fetch') ?>">AVW</a></li>
                         <li><a class="dropdown-item" href="<?= base_url('dashboard?menu=data-awlr') ?>">AWLR</a></li>
                     </ul>
                 </li>

@@ -8,6 +8,9 @@ class ApiDownloadController extends Controller
 {
    public function index()
 {
+    if (!session()->has('username')) {
+            return redirect()->to(base_url('login'));
+        }
     helper(['form', 'url']);
 
     $sensors = [
