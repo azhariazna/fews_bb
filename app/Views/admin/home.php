@@ -25,19 +25,19 @@
           </div>
           <div class="col-12 col-md-4 col-lg-5 d-flex align-items-start">
             <div class="table-responsive w-100">
-              <table class="table table-bordered table-sm mb-0" style="font-size:0.93em; min-width:320px;">
-                <thead class="thead-light" style="background:#e9ecef;">
-                  <tr>
-                    <th class="align-top text-center border border-dark" style="background:#e9ecef;">Lokasi</th>
-                    <th class="align-top text-center border border-dark" style="background:#e9ecef;">Kode</th>
-                    <th class="align-top text-center border border-dark" style="background:#e9ecef;">Elevasi</th>
-                    <th class="align-top text-center border border-dark" style="background:#e9ecef;">Frekuensi (Hz)</th>
-                    <th class="align-top text-center border border-dark" style="background:#e9ecef;">P (kPa)</th>
-                    <th class="align-top text-center border border-dark" style="background:#e9ecef;">P (mH2O)</th>
-                    <th class="align-top text-center border border-dark" style="background:#e9ecef;">Temp. (°C)</th>
-                  </tr>
-                </thead>
-                <tbody>
+              <table class="table table-bordered table-striped table-hover table-sm mb-0" style="font-size:0.85em; min-width:320px;">
+              <thead class="thead-light text-center align-middle">
+                <tr style="background:#f2f2f2;">
+                  <th class="border border-dark">Lokasi</th>
+                  <th class="border border-dark">Kode</th>
+                  <th class="border border-dark">Elevasi</th>
+                  <th class="border border-dark">Frekuensi (Hz)</th>
+                  <th class="border border-dark">P (kPa)</th>
+                  <th class="border border-dark">P (mH2O)</th>
+                  <th class="border border-dark">Temp. (°C)</th>
+                </tr>
+              </thead>
+                <tbody class="align-middle text-center">
                   <tr><td rowspan="4" class="align-middle">Pondasi</td><td>FP 1</td><td>36.50</td><td><?= esc($avwData['FP1'][0] ?? '-') ?></td><td><?= esc($avwData['FP1'][1] ?? '-') ?></td><td><?= esc($avwData['FP1'][2] ?? '-') ?></td><td><?= esc($avwData['FP1'][3] ?? '-') ?></td></tr>
                   <tr><td>FP 2</td><td>36.50</td><td><?= esc($avwData['FP2'][0] ?? '-') ?></td><td><?= esc($avwData['FP2'][1] ?? '-') ?></td><td><?= esc($avwData['FP2'][2] ?? '-') ?></td><td><?= esc($avwData['FP2'][3] ?? '-') ?></td></tr>
                   <tr><td>FP 3</td><td>46.50</td><td><?= esc($avwData['FP3'][0] ?? '-') ?></td><td><?= esc($avwData['FP3'][1] ?? '-') ?></td><td><?= esc($avwData['FP3'][2] ?? '-') ?></td><td><?= esc($avwData['FP3'][3] ?? '-') ?></td></tr>
@@ -64,19 +64,19 @@
           </div>
           <div class="col-12 col-md-4 col-lg-5 d-flex align-items-start">
             <div class="table-responsive w-100">
-              <table class="table table-bordered table-sm mb-0" style="font-size:0.93em; min-width:320px;">
-                <thead class="thead-light" style="background:#e9ecef;">
-                  <tr>
-                    <th class="align-top text-center border border-dark" style="background:#e9ecef;">Lokasi</th>
-                    <th class="align-top text-center border border-dark" style="background:#e9ecef;">Kode</th>
-                    <th class="align-top text-center border border-dark" style="background:#e9ecef;">Elevasi</th>
-                    <th class="align-top text-center border border-dark" style="background:#e9ecef;">Frekuensi (Hz)</th>
-                    <th class="align-top text-center border border-dark" style="background:#e9ecef;">P (kPa)</th>
-                    <th class="align-top text-center border border-dark" style="background:#e9ecef;">P (mH2O)</th>
-                    <th class="align-top text-center border border-dark" style="background:#e9ecef;">Temp. (°C)</th>
+              <table class="table table-bordered table-striped table-hover table-sm mb-0" style="font-size:0.85em; min-width:320px;">
+                <thead class="thead-light text-center align-middle">
+                  <tr style="background:#f2f2f2;">
+                    <th class="border border-blue">Lokasi</th>
+                    <th class="border border-dark">Kode</th>
+                    <th class="border border-dark">Elevasi</th>
+                    <th class="border border-dark">Frekuensi (Hz)</th>
+                    <th class="border border-dark">P (kPa)</th>
+                    <th class="border border-dark">P (mH2O)</th>
+                    <th class="border border-dark">Temp. (°C)</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody class="align-middle text-center">
                   <!-- Contoh data penampang 2, silakan sesuaikan -->
                   <tr><td rowspan="4" class="align-middle">Pondasi</td><td>FP 5</td><td>28.00</td><td><?= esc($avwData['FP5'][0] ?? '-') ?></td><td><?= esc($avwData['FP5'][1] ?? '-') ?></td><td><?= esc($avwData['FP5'][2] ?? '-') ?></td><td><?= esc($avwData['FP5'][3] ?? '-') ?></td></tr>
                   <tr><td>FP 6</td><td>28.00</td><td><?= esc($avwData['FP6'][0] ?? '-') ?></td><td><?= esc($avwData['FP6'][1] ?? '-') ?></td><td><?= esc($avwData['FP6'][2] ?? '-') ?></td><td><?= esc($avwData['FP6'][3] ?? '-') ?></td></tr>
