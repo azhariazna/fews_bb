@@ -288,7 +288,6 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="sensorDropdown">
                         <li><a class="dropdown-item" href="<?= base_url('dashboard?menu=logger-range') ?>">BENDUNGAN TIU SUNTUK</a></li>
-                        <li><a class="dropdown-item" href="<?= base_url('dashboard?menu=api-download-fetch') ?>">AVW</a></li>
                         <li><a class="dropdown-item" href="<?= base_url('dashboard?menu=data-awlr') ?>">AWLR</a></li>
                     </ul>
                 </li>
@@ -759,25 +758,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         fetch('assets/geojson/titik_evakuasi.json')
-            .then(res => res.json())
-            .then(data => {
-                titikEvakuasiLayer = L.geoJSON(data, {
-                    pointToLayer: (feature, latlng) => {
-                        return L.marker(latlng, {
-                            icon: L.icon({
-                                iconUrl: 'assets/img/evakuasi.png',
-                                iconSize: [24, 24]
-                            })
-                        }).bindPopup(`
-                    <b>${feature.properties?.name || 'Titik Evakuasi'}</b><br>
-                    <button onclick="navigateTo(${latlng.lat}, ${latlng.lng})">🔄 Ke Lokasi</button>
-                `);
-                    }
-                });
+        .then(res => res.json())
+        .then(data => {
+            titikEvakuasiLayer = L.geoJSON(data, {
+                pointToLayer: (feature, latlng) => {
+                    return L.marker(latlng, {
+                        icon: L.icon({
+                            iconUrl: 'assets/img/evakuasi.png',
+                            iconSize: [24, 24]
+                        })
+                    });
+                },
+                onEachFeature: (feature, layer) => {
+                    const props = feature.properties;
 
-                // Tambahkan layer ke peta secara eksplisit
-                titikEvakuasiLayer.addTo(map);
+                    layer.bindPopup(`
+                        <h5> <b>Kecamatan: ${props.KECAMATAN}</b><br> </h5>
+                         <h5> <b>Desa:${props.DESA}<br>  </b>  </h5>
+                        <b>Koordinat (UTM):</b>
+                        x: ${props.x}
+                        y: ${props.y}<br><br>
+                        <button onclick="navigateTo(${feature.geometry.coordinates[1]}, ${feature.geometry.coordinates[0]})">
+                            🔄 Ke Lokasi
+                        </button>
+                    `);
+                }
             });
+
+            titikEvakuasiLayer.addTo(map);
+        });
 
 
         fetch('assets/geojson/Titik_Tinjau.json')
