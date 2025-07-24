@@ -6,28 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
-  <style>
-    .main-sidebar {
-      background-color: #c9dfffff;
-    }
-    .nav-sidebar .nav-link.active {
-      background-color: #3c8dbc;
-      color: white;
-    }
-    thead {
-      background-color: #d0ebff !important;
-    }
-    table th, table td {
-      font-size: 0.85em;
-      padding: 6px;
-    }
-  </style>
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: fuchsia;">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Tambahkan tombol toggle sidebar untuk mobile -->
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
@@ -57,78 +43,96 @@
               <p>Home</p>
             </a>
           </li>
+
           <li class="nav-item">
-            <a href="<?php echo base_url('/') ?>" class="nav-link">
+            <a href="<?php echo base_url('/')?>" class="nav-link">
               <i class="nav-icon fas fa-map"></i>
               <p>Dashboard Peta</p>
             </a>
           </li>
+
           <li class="nav-item">
             <a href="manual-tma" class="nav-link" target="content-frame">
               <i class="nav-icon fas fa-keyboard"></i>
               <p>Input Manual TMA</p>
             </a>
           </li>
+
+             <!-- Dropdown Menu RTD -->
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-laptop"></i>
-              <p>Hasil Simulasi <i class="right fas fa-angle-left"></i></p>
+              <p>
+                Hasil Simulasi
+                <i class="right fas fa-angle-left"></i>
+              </p>
             </a>
             <ul class="nav nav-treeview pl-3">
               <li class="nav-item">
-                <a href="simulasi" class="nav-link" target="content-frame">
+                <a href="simulasi" class="nav-link" target="content-frame" id="menu-isi-rtd">
                   <i class="far fa-tint nav-icon"></i>
                   <p>Bendungan</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="simulasi-awlr" class="nav-link" target="content-frame">
-                  <i class="far fa-tint nav-icon"></i>
+                <a href="simulasi-awlr" class="nav-link" target="content-frame" id="menu-download-rtd">
+                  <i class="far fa-tint  nav-icon"></i>
                   <p>AWLR</p>
                 </a>
               </li>
             </ul>
           </li>
+
+
+            <!-- Dropdown Menu RTD -->
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-folder-open"></i>
-              <p>Data Sensor <i class="right fas fa-angle-left"></i></p>
+              <p>
+                Data Sensor
+                <i class="right fas fa-angle-left"></i>
+              </p>
             </a>
             <ul class="nav nav-treeview pl-3">
               <li class="nav-item">
-                <a href="logger-range" class="nav-link" target="content-frame">
+                <a href="logger-range" class="nav-link" target="content-frame" id="menu-isi-rtd">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Bendungan Tiu Suntuk</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="api-download/fetch" class="nav-link" target="content-frame">
+                <a href="api-download/fetch" class="nav-link" target="content-frame" id="menu-isi-rtd">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>AVW</p>
+                  <p>AVWR</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="data-awlr" class="nav-link" target="content-frame">
+                <a href="data-awlr" class="nav-link" target="content-frame" id="menu-download-rtd">
                   <i class="far fa-circle nav-icon"></i>
                   <p>AWLR</p>
                 </a>
               </li>
             </ul>
           </li>
+
+                <!-- Dropdown Menu RTD -->
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-folder-open"></i>
-              <p>Menu RTD <i class="right fas fa-angle-left"></i></p>
+              <p>
+                Menu RTD
+                <i class="right fas fa-angle-left"></i>
+              </p>
             </a>
             <ul class="nav nav-treeview pl-3">
               <li class="nav-item">
-                <a href="laporanrtd" class="nav-link" target="content-frame">
+                <a href="laporanrtd" class="nav-link" target="content-frame" id="menu-isi-rtd">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Isi RTD</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="laporanrtd/download" class="nav-link" target="content-frame">
+                <a href="laporanrtd/download" class="nav-link" target="content-frame" id="menu-download-rtd">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Download RTD</p>
                 </a>
@@ -142,10 +146,11 @@
 
   <!-- Konten -->
   <div class="content-wrapper">
-    <div class="content pt-1 px-1" style="background-color: darkturquoise;">
+    <div class="content pt-3 px-3">
       <iframe id="content-frame" name="content-frame" style="width:100%; height:90vh; border:none;"></iframe>
     </div>
   </div>
+
 </div>
 
 <!-- Script JS -->
@@ -154,22 +159,27 @@
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
 
 <script>
+  // Tentukan default target
   let target = "admin";
+
+  // Baca parameter URL
   const params = new URLSearchParams(window.location.search);
   if (params.has("rtd")) {
     const val = params.get("rtd");
     if (val === "isi") target = "laporanrtd";
     if (val === "download") target = "laporanrtd/download";
   }
-  if (params.has("menu")) {
-    const menu = params.get("menu");
-    if (menu === "manual-tma") target = "manual-tma";
-    if (menu === "data-awlr") target = "data-awlr";
-    if (menu === "logger-range") target = "logger-range";
-    if (menu === "simulasi") target = "simulasi";
-    if (menu === "simulasi-awlr") target = "simulasi-awlr";
-    if (menu === "api-download-fetch") target = "api-download/fetch";
-  }
+
+    if (params.has("menu")) {
+      const menu = params.get("menu");
+      if (menu === "manual-tma") target = "manual-tma";
+      if (menu === "data-awlr") target = "data-awlr";
+      if (menu === "logger-range") target = "logger-range";
+      if (menu === "simulasi") target = "simulasi";
+      if (menu === "simulasi-awlr") target = "simulasi-awlr";
+    }
+
+  // Set iframe src sesuai target
   document.getElementById("content-frame").src = target;
 </script>
 </body>
