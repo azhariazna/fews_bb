@@ -1,86 +1,83 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Data AVW</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="container mt-4" style="background-color: skyblue;">
-    <h3 class="mb-4">Data AVW Logger 10245</h3>
-    <?php if (!empty($errorMsg)): ?>
-        <div class="alert alert-danger"><?= esc($errorMsg) ?></div>
-    <?php endif; ?>
+<?php echo $this->extend('admin/layout') ?>
+<?php echo $this->section('content') ?>
 
+<div class="container mt-4">
+    <h4 class="mb-4">Download Data Sensor (API AVW per Tanggal)</h4>
 
-    <!-- Form Pilihan Sensor dan Tanggal -->
-    <form method="post" action="<?= base_url('api-download/fetch') ?>" class="row g-3 mb-2">
+    <form method="post" class="row g-3 mb-4" autocomplete="off">
+        <?= csrf_field() ?>
         <div class="col-md-4">
             <label for="sensor" class="form-label">Pilih Sensor</label>
-            <select name="sensor" id="sensor" class="form-select">
-                <?php foreach ($sensors as $sensor): ?>
-                    <option value="<?= $sensor ?>" <?= $sensor == $selectedSensor ? 'selected' : '' ?>>
-                        <?= $sensor ?>
-                    </option>
+            <select class="form-select" name="sensor" id="sensor" required>
+                <option value="">-- Pilih Sensor --</option>
+                <?php foreach ($sensorList as $s): ?>
+                    <option value="<?= esc($s) ?>" <?= ($s === $selectedSensor) ? 'selected' : '' ?>><?= esc($s) ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
-        <div class="col-md-4">
-            <label for="tanggal" class="form-label">Pilih Tanggal</label>
-            <input type="date" name="tanggal" id="tanggal" value="<?= esc($selectedDate) ?>" class="form-control">
+        <div class="col-md-3">
+            <label for="tanggal" class="form-label">Tanggal</label>
+            <input type="date" class="form-control" name="tanggal" id="tanggal" value="<?= esc($selectedDate) ?>" required>
         </div>
-        <div class="col-md-4 d-flex align-items-end">
-            <button type="submit" class="btn btn-primary w-100">Tampilkan Data</button>
+        <div class="col-md-2 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary w-100">Tampilkan</button>
         </div>
+        <?php if (!empty($records)): ?>
+            <div class="col-md-3 d-flex align-items-end justify-content-end">
+                <button id="btnExport" type="button" class="btn btn-success w-100">Export ke Excel</button>
+            </div>
+        <?php endif; ?>
     </form>
 
-    <!-- Tombol Export Excel -->
-    <?php if (!empty($dataList)): ?>
-        <button onclick="exportTableToExcel('avwTable', 'Data_AVW_<?= $selectedSensor ?>_<?= $selectedDate ?>')" class="btn btn-success mb-3">
-            Export ke Excel
-        </button>
-    <?php endif; ?>
-
-    <!-- Tabel Data -->
-    <?php if (empty($dataList)): ?>
-        <div class="alert alert-warning">Data tidak tersedia atau gagal dimuat.</div>
-    <?php else: ?>
+    <?php if ($error): ?>
+        <div class="alert alert-warning"><?= esc($error) ?></div>
+    <?php elseif (!empty($records)): ?>
         <div class="table-responsive">
-            <table id="avwTable" class="table table-bordered table-striped table-sm">
+            <table id="sensorTable" class="table table-bordered table-sm">
                 <thead class="table-light">
                     <tr>
-                        <th>Waktu</th>
-                        <?php foreach ($dataList[0]['data'] as $param): ?>
-                            <th><?= esc($param['nama_parameter']) ?> (<?= esc($param['satuan']) ?>)</th>
+                        <th class="text-center align-middle">Waktu</th>
+                        <?php foreach ($parameters as $p): ?>
+                            <th class="text-center align-middle"><?= esc($p) ?></th>
                         <?php endforeach; ?>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($dataList as $entry): ?>
+                    <?php foreach ($records as $row): ?>
                         <tr>
-                            <td><?= esc($entry['waktu']) ?></td>
-                            <?php foreach ($entry['data'] as $param): ?>
-                                <td><?= esc($param['nilai']) ?></td>
+                            <td class="text-center align-middle"><?= esc($row['waktu']) ?></td>
+                            <?php foreach ($parameters as $p): ?>
+                                <td class="text-center align-middle"><?= isset($row[$p]) ? esc($row[$p]) : '-' ?></td>
                             <?php endforeach; ?>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
+    <?php elseif ($isPost): ?>
+        <div class="alert alert-info">Data tidak ditemukan untuk sensor dan tanggal yang dipilih.</div>
     <?php endif; ?>
+</div>
 
-    <!-- Script Export Excel -->
-    <script>
-    function exportTableToExcel(tableID, filename = '') {
-        const downloadLink = document.createElement("a");
-        const dataType = 'application/vnd.ms-excel';
-        const tableSelect = document.getElementById(tableID);
-        const tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script>
+    document.getElementById('btnExport')?.addEventListener('click', function () {
+        const table = document.getElementById('sensorTable');
+        const wb = XLSX.utils.table_to_book(table, { sheet: "Data Sensor" });
+        XLSX.writeFile(wb, "data_sensor.xlsx");
+    });
+</script>
 
-        filename = filename ? filename + '.xls' : 'data_avw.xls';
-
-        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
-        downloadLink.download = filename;
-        downloadLink.click();
+<?php if (isset($apiRaw)): ?>
+<script>
+    // Tampilkan isi response API ke console browser
+    console.log("API RAW RESPONSE:", <?= json_encode($apiRaw) ?>);
+    try {
+        console.log("API JSON PARSED:", JSON.parse(<?= json_encode($apiRaw) ?>));
+    } catch(e) {
+        console.log("API response is not valid JSON");
     }
-    </script>
-</body>
-</html>
+</script>
+<?php endif; ?>
+
+<?php echo $this->endSection() ?>

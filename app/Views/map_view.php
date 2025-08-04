@@ -245,7 +245,17 @@
 }
 
 
+#sidebarInfo {
+  transition: transform 0.3s ease-in-out;
+}
 
+#sidebarInfo.hide {
+  transform: translateX(100%);
+}
+
+#toggleInfo {
+  z-index: 1100;
+}
 
 
 
@@ -265,10 +275,17 @@
 
     <div class="container-fluid h-100">
         <!-- Logo dan Judul -->
-        <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-            <img src="assets/img/pu.png" alt="Logo" style="height: 36px;">
-            <span class="fw-bold fs-5 text-white">DASHBOARD MONITORING</span>
+        <a class="navbar-brand d-flex align-items-center gap-2 flex-nowrap" href="#">
+        <img src="assets/img/pu.png" alt="Logo" class="img-fluid" style="height: 36px;">
+        
+        <!-- Tambahkan di sini -->
+        <div class="d-none d-sm-block text-white fw-bold lh-sm" style="font-size: 1rem;">
+            <div>DASHBOARD MONITORING</div>
+            <div>EARLY WARNING SYSTEM</div>
+            <div style="font-size: 0.95rem;">BENDUNGAN TIU SUNTUK</div>
+        </div>
         </a>
+
 
         <!-- Toggle untuk Mobile -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTopbar" aria-controls="navbarTopbar" aria-expanded="false" aria-label="Toggle navigation" style="background-color: blue;">
@@ -284,11 +301,12 @@
                 <!-- DATA SENSOR -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle " style="font-size: 0.9rem;" href="#" id="sensorDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        DATA SENSOR
+                       UNDUH DATA SENSOR
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="sensorDropdown">
                         <li><a class="dropdown-item" href="<?= base_url('dashboard?menu=logger-range') ?>">BENDUNGAN TIU SUNTUK</a></li>
                         <li><a class="dropdown-item" href="<?= base_url('dashboard?menu=data-awlr') ?>">AWLR</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('dashboard?menu=data-avwr') ?>">AVWR</a></li>
                     </ul>
                 </li>
 
@@ -332,23 +350,32 @@
                     <button class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
                 <?php endif; ?>
 
-                <button id="toggleSidebar" class="btn btn-outline-light btn-sm ms-1" onclick="toggleSidebar()" title="Sidebar Menu">
-                    ☰
-                </button>
+
+
             </div>
         </div>
     </div>
 </nav>
 
 
+            <button id="toggleSidebar" onclick="toggleSidebar()" 
+                class="btn btn-outline-primary btn-sm position-fixed" 
+                style="top: 9%; right: 10px; z-index: 1100;" 
+                title="Tampilkan Info">
+                <i class="fa-circle">i</i>
+            </button>
 
-<!-- Tambahkan tombol + untuk toggle informasi sisi kiri -->
-<div id="floatingToggle" class="position-fixed bottom-0 end-0 m-3" style="z-index: 1060;">
-  <button class="btn btn-danger rounded-circle shadow" style="width: 40px; height: 40px; font-weight: bold; font-size: 18px; padding: 0; line-height: 36px;"
-          onclick="toggleWarningBox()">
-    +
-  </button>
+
+<div id="alert-sakra" class="banjir-alert-box position-absolute" style="top: 19%; left: 10px; z-index:999;">
+  <div class="alert alert-secondary p-2" id="evakuasi-alert">
+    <strong>⚠️ Status Evakuasi</strong><br>
+    <span id="status-sakra-title"></span><br>
+    <small id="statusevakuasi">-</small>
+  </div>
 </div>
+
+
+ 
 
     
 
@@ -399,7 +426,10 @@
     </div>
 
 <div class="sidebar" id="sidebar" style="font-size: 0.7rem; padding: 6px 10px; width: 240px; background-color: #f8f9fa; border: 1px solid #ccc; border-radius: 6px;">
-    <h6 style="font-size: 0.85rem; font-weight: bold; margin-bottom: 4px;">Info</h6>
+    <!-- Tombol X -->
+ 
+
+<h6 style="font-size: 0.85rem; font-weight: bold; margin-bottom: 4px;">Info</h6>
     <ul class="list-unstyled" style="margin-bottom: 0; padding-left: 0;">
         <?php if (session()->get('logged_in')): ?>
             <li style="margin-bottom: 2px;">
@@ -430,36 +460,36 @@
         <?php endif; ?>
 
         <li style="margin-bottom: 2px;">
-            <label style="cursor: pointer;" onclick="toggleGradeGroup()">Tinggi Genangan</label>
+            <label style="cursor: pointer;" onclick="toggleGradeGroup()">Genangan</label>
             <ul class="list-unstyled ps-2 mt-1" id="gradeGroup" style="font-size: 0.7rem; margin-bottom: 0;">
                 <li>
                     <div class="form-check d-flex align-items-center">
                         <input class="form-check-input me-1 gradeFilter" type="checkbox" value="1" checked>
                         <span style="width:12px;height:12px;background-color:#cce6ff;border:1px solid #333;border-radius:4px;margin-right:4px;"></span>
-                        <label class="form-check-label">0–0.5 m</label>
+                        <label class="form-check-label">Aman</label>
                     </div>
                 </li>
                 <li>
                     <div class="form-check d-flex align-items-center">
                         <input class="form-check-input me-1 gradeFilter" type="checkbox" value="2" checked>
                         <span style="width:12px;height:12px;background-color:#99ccff;border:1px solid #333;border-radius:4px;margin-right:4px;"></span>
-                        <label class="form-check-label">0.5–1.5 m</label>
+                        <label class="form-check-label">Waspada</label>
                     </div>
                 </li>
                 <li>
                     <div class="form-check d-flex align-items-center">
                         <input class="form-check-input me-1 gradeFilter" type="checkbox" value="3" checked>
                         <span style="width:12px;height:12px;background-color:#336699;border:1px solid #333;border-radius:4px;margin-right:4px;"></span>
-                        <label class="form-check-label">1.5–4 m</label>
+                        <label class="form-check-label">Awas</label>
                     </div>
                 </li>
-                <li>
+                <!-- <li>
                     <div class="form-check d-flex align-items-center">
                         <input class="form-check-input me-1 gradeFilter" type="checkbox" value="4" checked>
                         <span style="width:12px;height:12px;background-color:#003366;border:1px solid #333;border-radius:4px;margin-right:4px;"></span>
                         <label class="form-check-label">&gt; 4 m</label>
                     </div>
-                </li>
+                </li> -->
             </ul>
         </li>
 
@@ -580,6 +610,8 @@
 
     <!-- Paling akhir sebelum </body> -->
 <script>
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const toggleBtn = document.getElementById("toggleCuaca");
     const cuacaContent = document.getElementById("cuacaContent");
@@ -614,6 +646,59 @@ document.addEventListener("DOMContentLoaded", function () {
         B: <?= esc($tmaData['sampir'])/100?>,
         C: <?= esc($tmaData['menemeng'])/100?>
     };
+
+    document.addEventListener("DOMContentLoaded", function () {
+   // Ambil nilai TMA dari PHP
+  const tmaSampir = tmaData.B;
+  console.log("TMA Sampir:");
+  // Tetapkan threshold
+  const thresholds = { waspada: 10.5, siaga: 11, awas: 11.5 };
+
+  // Identifikasi elemen
+  const statusEvakuasi = document.getElementById("statusevakuasi");
+  const alertBox = document.getElementById("evakuasi-alert");
+  const statusTitle = document.getElementById("status-sakra-title");
+
+  let status = "-";
+
+  if (tmaSampir >= thresholds.awas) {
+    status = "Awas";
+  } else if (tmaSampir >= thresholds.siaga) {
+    status = "Siaga";
+  } else if (tmaSampir >= thresholds.waspada) {
+    status = "Waspada";
+  } else {
+    status = "Aman";
+  }
+
+  let evakuasiText = "-";
+  let alertClass = "alert alert-secondary p-2";
+
+  switch (status.toLowerCase()) {
+    case "aman":
+      evakuasiText = "Tidak ada evakuasi";
+      alertClass = "alert alert-success p-2";
+      break;
+    case "siaga":
+      evakuasiText = "Belum evakuasi, pemantauan dan persiapan";
+      alertClass = "alert alert-warning p-2";
+      break;
+    case "waspada":
+      evakuasiText = "Evakuasi terbatas / bersiap";
+      alertClass = "alert alert-info p-2";
+      break;
+    case "awas":
+      evakuasiText = "Evakuasi menyeluruh / wajib";
+      alertClass = "alert alert-danger p-2";
+      break;
+  }
+
+  if (statusEvakuasi) statusEvakuasi.textContent = evakuasiText;
+  if (statusTitle) statusTitle.textContent =  status;
+  if (alertBox) alertBox.className = alertClass;
+});
+
+
 
     function updateStatus(tma, batas, statusEl, tmaEl) {
         let status = "Aman";
@@ -1213,6 +1298,32 @@ document.addEventListener("DOMContentLoaded", function () {
             if (checkbox) checkbox.checked = !checkbox.checked;
             }
         }
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const sidebar = document.getElementById("sidebarInfo");
+    const toggleBtn = document.getElementById("toggleInfo");
+    const closeBtn = document.getElementById("closeInfo");
+
+    // Sembunyikan sidebar di awal
+    sidebar.classList.add("hide");
+
+    // Tampilkan sidebar ketika tombol info ditekan
+    toggleBtn.addEventListener("click", () => {
+        sidebar.classList.remove("hide");
+        toggleBtn.style.display = "none";
+    });
+
+    // Sembunyikan sidebar ketika tombol ✕ ditekan
+    closeBtn.addEventListener("click", () => {
+        sidebar.classList.add("hide");
+        toggleBtn.style.display = "block";
+    });
+});
+
+
+
+
 
 
 </script>

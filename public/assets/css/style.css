@@ -53,6 +53,14 @@ html, body {
   border-radius: 5px;
   cursor: pointer;
 }
+#floatingSidebarToggle {
+  position: fixed;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1050;
+}
+
 
 #custom-top-buttons {
     position: absolute;
@@ -68,6 +76,9 @@ html, body {
       left: 10px;
       right: auto;
     }
+      .navbar-brand .fw-bold div {
+    font-size: 0.85rem !important;
+  }
   }
 
 
@@ -90,6 +101,7 @@ html, body {
     .dropdown-menu .dropdown-item:hover {
         background-color: #0b5ed7 !important;
     }
+    
 }
 
 
@@ -194,4 +206,17 @@ html, body {
     animation: blink 1s infinite;
 }
 
+
+
+#sidebarInfo {
+  transition: transform 0.3s ease-in-out;
+}
+
+#sidebarInfo.hide {
+  transform: translateX(100%);
+}
+
+#toggleInfo {
+  transition: all 0.3s ease-in-out;
+}
 

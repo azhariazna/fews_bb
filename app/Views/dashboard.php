@@ -89,7 +89,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-folder-open"></i>
               <p>
-                Data Sensor
+                Unduh Data Sensor
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -177,6 +177,7 @@
       if (menu === "logger-range") target = "logger-range";
       if (menu === "simulasi") target = "simulasi";
       if (menu === "simulasi-awlr") target = "simulasi-awlr";
+      if (menu === "data-avwr") target = "api-download/fetch";
     }
 
   // Set iframe src sesuai target
