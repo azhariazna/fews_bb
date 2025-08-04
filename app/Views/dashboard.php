@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Dashboard</title>
+  <title>Dashboard Admin</title>
   <link rel="icon" type="image/png" href="https://sda.pu.go.id/balai/bbwsnt1/assets/img/favicon.png">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
