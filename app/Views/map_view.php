@@ -6,6 +6,8 @@
 
     <meta charset="utf-8" />
     <title>FEWS Tiu Suntuk</title>
+    <link rel="icon" type="image/png" href="https://sda.pu.go.id/balai/bbwsnt1/assets/img/favicon.png">
+
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="assets/css/style.css">
