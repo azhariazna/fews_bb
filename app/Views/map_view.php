@@ -173,7 +173,7 @@
      .warning-toggle-container {
       position: fixed;
       left: 10px;
-      top: 50%;
+      top: 55%;
       transform: translateY(-50%);
       background: white;
       padding: 10px;
