@@ -368,7 +368,7 @@
             </button>
 
 
-<div id="alert-sakra" class="banjir-alert-box position-absolute" style="top: 17%; left: 10px; z-index:999;">
+<div id="alert-sakra" class="banjir-alert-box position-absolute" style="top: 19%; left: 10px; z-index:999;">
   <div class="alert alert-secondary p-2" id="evakuasi-alert">
     <strong>⚠️ Status Evakuasi</strong><br>
     <span id="status-sakra-title"></span><br>
