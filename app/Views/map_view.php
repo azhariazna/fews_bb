@@ -368,7 +368,7 @@
             </button>
 
 
-<div id="alert-sakra" class="banjir-alert-box position-absolute" style="top: 19%; left: 10px; z-index:999;">
+<div id="alert-sakra" class="banjir-alert-box position-absolute" style="top: 17%; left: 10px; z-index:999;">
   <div class="alert alert-secondary p-2" id="evakuasi-alert">
     <strong>⚠️ Status Evakuasi</strong><br>
     <span id="status-sakra-title"></span><br>
@@ -524,6 +524,19 @@
   <label for="toggleAll" class="toggle-label" style="font-size: 0.6rem; padding: 2px 6px;">!</label>
 
   <div class="warning-wrapper">
+        <!-- CARD 1 -->
+    <div class="card mb-1 shadow-sm border-info" style="font-size: 0.65rem;">
+      <div class="card-body py-1 px-2">
+        <h6 class="card-title mb-1 text-info fw-bold" style="font-size: 0.7rem;">BENDUNGAN BINTANG BANO</h6>
+        <div>
+            Status: Aman </br>
+          <!-- Status: <span id="status-a" class="status-text badge" style="font-size: 0.65rem;">-</span><br> -->
+          <!-- TMA: <span id="tma-a" class="fw-bold">-</span> m -->
+           TMA: 112.99 m
+        </div>
+      </div>
+    </div>
+
     <!-- CARD 1 -->
     <div class="card mb-1 shadow-sm border-info" style="font-size: 0.65rem;">
       <div class="card-body py-1 px-2">
