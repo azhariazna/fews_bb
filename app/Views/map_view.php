@@ -974,7 +974,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     color: 'blue',
                     fillColor: getFillColor(feature.properties.gridcode),
                     fillOpacity: 0.4,
-                    weight: 0.1
+                    weight: 0
                 }),
                 onEachFeature: (feature, layer) => {
                     const popupContent = Object.entries(feature.properties).map(([k, v]) => `<strong>${k}</strong>: ${v}`).join('<br>');
