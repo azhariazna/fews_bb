@@ -467,21 +467,21 @@
                 <li>
                     <div class="form-check d-flex align-items-center">
                         <input class="form-check-input me-1 gradeFilter" type="checkbox" value="1" checked>
-                        <span style="width:12px;height:12px;background-color:#cce6ff;border:1px solid #333;border-radius:4px;margin-right:4px;"></span>
+                        <span style="width:12px;height:12px;background-color:#00FF00;border:1px solid #333;border-radius:4px;margin-right:4px;"></span>
                         <label class="form-check-label">Aman</label>
                     </div>
                 </li>
                 <li>
                     <div class="form-check d-flex align-items-center">
                         <input class="form-check-input me-1 gradeFilter" type="checkbox" value="2" checked>
-                        <span style="width:12px;height:12px;background-color:#99ccff;border:1px solid #333;border-radius:4px;margin-right:4px;"></span>
+                        <span style="width:12px;height:12px;background-color:#FFFF00;border:1px solid #333;border-radius:4px;margin-right:4px;"></span>
                         <label class="form-check-label">Waspada</label>
                     </div>
                 </li>
                 <li>
                     <div class="form-check d-flex align-items-center">
                         <input class="form-check-input me-1 gradeFilter" type="checkbox" value="3" checked>
-                        <span style="width:12px;height:12px;background-color:#336699;border:1px solid #333;border-radius:4px;margin-right:4px;"></span>
+                        <span style="width:12px;height:12px;background-color:#FF0000;border:1px solid #333;border-radius:4px;margin-right:4px;"></span>
                         <label class="form-check-label">Awas</label>
                     </div>
                 </li>
@@ -948,17 +948,17 @@ document.addEventListener("DOMContentLoaded", function () {
         function getFillColor(grade) {
             switch (parseInt(grade)) {
                 case 1:
-                    return '#cce6ff';
+                    return '#00FF00';
                 case 2:
-                    return '#99ccff';
+                    return '#FFFF00';
                 case 3:
-                    return '#336699';
+                    return '#FF0000';
                 case 4:
-                    return '#003366';
+                    return '#FF0000';
                 case 5:
-                    return '#cce6ff';
+                    return '#FF0000';
                 default:
-                    return 'lightblue';
+                    return '#FF0000';
             }
         }
 
@@ -974,7 +974,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     color: 'blue',
                     fillColor: getFillColor(feature.properties.gridcode),
                     fillOpacity: 0.4,
-                    weight: 0.5
+                    weight: 0.1
                 }),
                 onEachFeature: (feature, layer) => {
                     const popupContent = Object.entries(feature.properties).map(([k, v]) => `<strong>${k}</strong>: ${v}`).join('<br>');
