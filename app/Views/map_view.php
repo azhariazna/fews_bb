@@ -260,6 +260,53 @@
 }
 
 
+#alert-sakra {
+    position: absolute;
+    top: 17.5%;
+    left: 10px;
+    z-index: 999;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+  }
+
+  .banjir-box {
+    background-color: #f8f9fa;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: fit-content;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+    padding: 8px;
+  }
+
+  .status-label {
+    background-color: #4CAF50;
+    color: white;
+    padding: 4px 6px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-top: 3px;
+  }
+
+  .banjir-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+  }
+
+  .minmax-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 8px;
+  }
+
+  .banjir-body {
+    margin-top: 8px;
+  }
+
+
 
     </style>
     <!-- Bootstrap 5 CSS -->
@@ -368,11 +415,27 @@
             </button>
 
 
-<div id="alert-sakra" class="banjir-alert-box position-absolute" style="top: 19%; left: 10px; z-index:999;">
-  <div class="alert alert-secondary p-2" id="evakuasi-alert">
-    <strong>⚠️ Status Evakuasi</strong><br>
-    <b> <span id="status-sakra-title"></span> </b>
-    <small id="statusevakuasi">-</small>
+<div id="alert-sakra">
+  <div class="banjir-box">
+    <div class="banjir-header">
+      ⚠️ Status Banjir
+      <button class="minmax-btn" onclick="toggleBanjir()">🗕</button>
+    </div>
+
+    <div class="banjir-body" id="banjir-body">
+      <table style="border-collapse: collapse; margin-top: 5px;">
+        <tr>
+          <td style="padding-right: 15px;">
+            <div><b>Realtime (8/5/2025 00:00)</b></div>
+            <div class="status-label">AMAN (Tidak ada evakuasi)</div>
+          </td>
+          <td>
+            <div><b>Prediksi (8/5/2025 00:00)</b></div>
+            <div class="status-label">AMAN (Tidak ada evakuasi)</div>
+          </td>
+        </tr>
+      </table>
+    </div>
   </div>
 </div>
 
@@ -627,6 +690,18 @@
 
     <!-- Paling akhir sebelum </body> -->
 <script>
+
+      let minimized = false; // <-- deklarasi di awal
+
+  function toggleBanjir() {
+    const body = document.getElementById("banjir-body");
+    const btn = document.querySelector(".minmax-btn");
+
+    minimized = !minimized;
+    body.style.display = minimized ? "none" : "block";
+    btn.textContent = minimized ? "🗖" : "🗕";
+  }
+
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -1337,8 +1412,6 @@ document.addEventListener("DOMContentLoaded", function () {
         toggleBtn.style.display = "block";
     });
 });
-
-
 
 
 
