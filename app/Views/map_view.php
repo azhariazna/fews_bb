@@ -189,11 +189,11 @@
       font-size: 18px;
       font-weight: bold;
       text-align: center;
-      background-color: red;
+      background-color: #007bff;
       color: white;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
+      width: 70px;
+      height: 28px;
+      border-radius: 15%;
       margin-bottom: 10px;
     }
 
@@ -364,7 +364,7 @@
                 class="btn btn-outline-primary btn-sm position-fixed" 
                 style="top: 9%; right: 10px; z-index: 1100;" 
                 title="Tampilkan Info">
-                <i class="fa-circle">i</i>
+                <i class="fa-circle">Legenda</i>
             </button>
 
 
@@ -431,7 +431,7 @@
     <!-- Tombol X -->
  
 
-<h6 style="font-size: 0.85rem; font-weight: bold; margin-bottom: 4px;">Info</h6>
+<h6 style="font-size: 0.85rem; font-weight: bold; margin-bottom: 4px;">Legenda</h6>
     <ul class="list-unstyled" style="margin-bottom: 0; padding-left: 0;">
         <?php if (session()->get('logged_in')): ?>
             <li style="margin-bottom: 2px;">
@@ -521,15 +521,15 @@
 
 <div class="warning-toggle-container" style="font-size: 0.65rem;">
   <input type="checkbox" id="toggleAll" style="display:none;">
-  <label for="toggleAll" class="toggle-label" style="font-size: 0.6rem; padding: 2px 6px;">!</label>
-
+  <label for="toggleAll" class="toggle-label" style="font-size: 0.8rem; padding: 4px 4px;"><i class="fa-circle">Informasi</i></label>
+           
   <div class="warning-wrapper">
 
 
     <!-- CARD 1 -->
     <div class="card mb-1 shadow-sm border-info" style="font-size: 0.65rem;">
       <div class="card-body py-1 px-2">
-        <h6 class="card-title mb-1 text-info fw-bold" style="font-size: 0.7rem;">BENDUNGAN TIU SUNTUK</h6>
+        <h6  style="font-size: 0.7rem;">BENDUNGAN TIU SUNTUK</h6>
         <div>
           Status: <span id="status-a" class="status-text badge" style="font-size: 0.65rem;">-</span><br>
           TMA: <span id="tma-a" class="fw-bold">-</span> m
@@ -540,7 +540,7 @@
             <!-- CARD 1 -->
     <div class="card mb-1 shadow-sm border-info" style="font-size: 0.65rem;">
       <div class="card-body py-1 px-2">
-        <h6 class="card-title mb-1 text-info fw-bold" style="font-size: 0.7rem;">BENDUNGAN BINTANG BANO</h6>
+        <h6   style="font-size: 0.7rem;">BENDUNGAN BINTANG BANO</h6>
         <div>
           <span style="color: green;"> Status: Aman </span> </br>
           <!-- Status: <span id="status-a" class="status-text badge" style="font-size: 0.65rem;">-</span><br> -->
@@ -553,7 +553,7 @@
     <!-- CARD 2 -->
     <div class="card mb-1 shadow-sm border-info" style="font-size: 0.65rem;">
       <div class="card-body py-1 px-2">
-        <h6 class="card-title mb-1 text-info fw-bold" style="font-size: 0.7rem;">AWLR SAMPIR</h6>
+        <h6  style="font-size: 0.7rem;">AWLR SAMPIR</h6>
         <div>
           Status: <span id="status-b" class="status-text badge" style="font-size: 0.65rem;">-</span><br>
           TMA: <span id="tma-b" class="fw-bold">-</span> m
@@ -564,7 +564,7 @@
     <!-- CARD 3 -->
     <div class="card mb-1 shadow-sm border-info" style="font-size: 0.65rem;">
       <div class="card-body py-1 px-2">
-        <h6 class="card-title mb-1 text-info fw-bold" style="font-size: 0.7rem;">AWLR MENEMENG</h6>
+        <h6  style="font-size: 0.7rem;">AWLR MENEMENG</h6>
         <div>
           Status: <span id="status-c" class="status-text badge" style="font-size: 0.65rem;">-</span><br>
           TMA: <span id="tma-c" class="fw-bold">-</span> m
