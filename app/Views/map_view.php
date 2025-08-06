@@ -172,31 +172,38 @@
 
 .warning-toggle-container {
   position: fixed;
-  top: 300px;
+  top: 70px; /* posisi awal tombol */
   left: 0;
-  transform: translateY(-50%);
-  background: white;
-  padding: 10px 10px 20px 10px;
-  border-radius: 5px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   z-index: 999;
   max-width: 250px;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  padding: 0; /* hilangkan padding global, biar bisa dipisah antar tombol & konten */
 
-  /* Tambahan agar bisa scroll bila perlu */
-  max-height: calc(82vh - 100px); /* agar tetap ada ruang atas/bawah */
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 100px); /* batas tinggi maksimal dari layar */
+}
+
+/* tombol toggle tetap di atas, tidak kena scroll */
+.warning-toggle-container .toggle-label {
+  font-size: 0.8rem;
+  padding: 6px;
+  text-align: center;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px 5px 0 0;
+}
+
+/* bagian isi kontennya yang bisa di-scroll */
+.warning-wrapper {
   overflow-y: auto;
   overflow-x: hidden;
+  padding: 10px;
+  max-height: calc(100vh - 370px); /* supaya kontennya tidak melebihi layar */
 }
 
-
-/* Optional scrollbar style */
-.warning-toggle-container::-webkit-scrollbar {
-  width: 8px;
-}
-.warning-toggle-container::-webkit-scrollbar-thumb {
-  background-color: #ccc;
-  border-radius: 3px;
-}
 
 
     .toggle-label {
