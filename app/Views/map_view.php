@@ -227,24 +227,53 @@
     }
 
 
-    #cuacaWrapper {
-        z-index: 9999 !important;
-    }
-
-    #cuacaContent::-webkit-scrollbar {
-        height: 6px;
-    }
-
-    #cuacaContent::-webkit-scrollbar-thumb {
-        background-color: #ccc;
-        border-radius: 3px;
-    }
-    #toggleCuaca.fixed-top-right {
-    position: fixed;
-    bottom: 90px; /* atau 100px jika ingin lebih naik */
-    right: 20px;
-    z-index: 1050; /* pastikan di atas Leaflet dan komponen lain */
+   #cuacaWrapper {
+  position: fixed;
+  bottom: 0;
+  left: 250px;
+  z-index: 1050;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 8px 0 0 0;
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+  padding: 0;
+  max-width: 85vw; /* biar gak terlalu panjang */
+  overflow-x: auto;
+  font-size: 0.6rem;
 }
+
+#cuacaContent {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding: 0.25rem;
+  gap: 0.5rem;
+  background-color: white;
+  border-radius: 6px;
+}
+
+#cuacaContent::-webkit-scrollbar {
+  height: 6px;
+}
+
+#cuacaContent::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 3px;
+}
+
+/* Tombol toggle */
+#cuacaWrapper .btn {
+  font-size: 0.65rem;
+  padding: 2px 8px;
+  margin-right: 8px;
+}
+
+/* Sembunyikan di layar kecil */
+@media screen and (max-width: 768px) {
+  #cuacaWrapper {
+    display: none;
+  }
+}
+
 
 
 #sidebarInfo {
@@ -718,7 +747,7 @@
 
 
 <!-- WRAPPER CUACA + TOGGLE BUTTON -->
-<div id="cuacaWrapper" style="position: fixed; bottom: 0px; right: 0px; z-index: 1050; background: rgba(255,255,255,0.95); border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.2); padding: 0px; max-width: 100vw; overflow-x: auto; font-size: 0.60rem;">
+<div id="cuacaWrapper" >
 
     <!-- Tombol Toggle -->
     <div class="d-flex justify-content-end mb-1 px-2">
