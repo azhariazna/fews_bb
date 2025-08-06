@@ -626,12 +626,12 @@
       <table style="border-collapse: collapse; margin-top: 5px;">
         <tr>
           <td style="font-size:small; text-align: center;">
-            <div><b>Realtime (8/5/2025 00:00)</b></div>
-            <div class="status-label">AMAN (Tidak ada evakuasi)</div>
+            <div><b>Realtime <br> (8/5/2025 00:00)</b></div>
+            <div class="status-label">AMAN <br>(Tidak ada evakuasi)</div>
           </td>
           <td style="font-size:small; text-align: center;">
-            <div><b>Prediksi (8/5/2025 00:00)</b></div>
-            <div class="status-label">AMAN (Tidak ada evakuasi)</div>
+            <div><b>Prediksi <br> (8/5/2025 00:00)</b></div>
+            <div class="status-label">AMAN <br> (Tidak ada evakuasi)</div>
           </td>
         </tr>
       </table>
@@ -756,17 +756,11 @@
       </table>
     </div>
   </div>
-</div>
-     
+</div>     
 
 </div>
-
-
-
-
-
     
-    <div id="map""></div>
+<div id="map""></div>
 
 
 <!-- WRAPPER CUACA + TOGGLE BUTTON -->
