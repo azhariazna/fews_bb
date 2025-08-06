@@ -718,7 +718,7 @@
 
 
 <!-- WRAPPER CUACA + TOGGLE BUTTON -->
-<div id="cuacaWrapper" style="position: fixed; bottom: 0px; right: 0px; z-index: 1050; background: rgba(255,255,255,0.95); border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.2); padding: 0px; max-width: 84vw; overflow-x: auto; font-size: 0.60rem;">
+<div id="cuacaWrapper" style="position: fixed; bottom: 0px; right: 0px; z-index: 1050; background: rgba(255,255,255,0.95); border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.2); padding: 0px; max-width: 100vw; overflow-x: auto; font-size: 0.60rem;">
 
     <!-- Tombol Toggle -->
     <div class="d-flex justify-content-end mb-1 px-2">
