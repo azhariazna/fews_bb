@@ -163,7 +163,7 @@
   padding: 5px 12px;
 }
 
-.leaflet-bottom.leaflet-left {
+.leaflet-bottom.leaflet-right {
     bottom: 80px !important; /* Ganti angkanya sesuai seberapa atas yang kamu mau */
 }
 
@@ -173,7 +173,7 @@
      .warning-toggle-container {
       position: fixed;
       left: 10px;
-      top: 53%;
+      top: 52%;
       transform: translateY(-50%);
       background: white;
       padding: 10px;
@@ -261,12 +261,12 @@
 
 
 #alert-sakra {
-    position: absolute;
-    top: 17.5%;
-    left: 10px;
+    /* position: absolute; */
+    /* top: 17.5%; */
+    /* left: 10px; */
     z-index: 999;
     font-family: Arial, sans-serif;
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .banjir-box {
@@ -279,6 +279,7 @@
   }
 
   .status-label {
+    font-size: smaller;
     background-color: #4CAF50;
     color: white;
     padding: 4px 6px;
@@ -415,29 +416,6 @@
             </button>
 
 
-<div id="alert-sakra">
-  <div class="banjir-box">
-    <div class="banjir-header">
-      ⚠️ Status Banjir
-      <button class="minmax-btn" onclick="toggleBanjir()">🗕</button>
-    </div>
-
-    <div class="banjir-body" id="banjir-body">
-      <table style="border-collapse: collapse; margin-top: 5px;">
-        <tr>
-          <td style="padding-right: 15px;">
-            <div><b>Realtime (8/5/2025 00:00)</b></div>
-            <div class="status-label">AMAN (Tidak ada evakuasi)</div>
-          </td>
-          <td>
-            <div><b>Prediksi (8/5/2025 00:00)</b></div>
-            <div class="status-label">AMAN (Tidak ada evakuasi)</div>
-          </td>
-        </tr>
-      </table>
-    </div>
-  </div>
-</div>
 
 
  
@@ -582,59 +560,153 @@
     
 <body>
 
-<div class="warning-toggle-container" style="font-size: 0.65rem;">
-  <input type="checkbox" id="toggleAll" style="display:none;">
+<div class="warning-toggle-container" style="font-size: 0.40rem;">
+     <input type="checkbox" id="toggleAll" style="display:none;">
   <label for="toggleAll" class="toggle-label" style="font-size: 0.8rem; padding: 4px 4px;"><i class="fa-circle">Informasi</i></label>
-           
-  <div class="warning-wrapper">
-
-
-    <!-- CARD 1 -->
-    <div class="card mb-1 shadow-sm border-info" style="font-size: 0.65rem;">
-      <div class="card-body py-1 px-2">
-        <h6  style="font-size: 0.7rem;">BENDUNGAN TIU SUNTUK</h6>
-        <div>
-          Status: <span id="status-a" class="status-text badge" style="font-size: 0.65rem;">-</span><br>
-          TMA: <span id="tma-a" class="fw-bold">-</span> m
-        </div>
-      </div>
+    <div id="alert-sakra">
+  <div class="banjir-box">
+    <div class="banjir-header">
+      ⚠️ Status Banjir
+      <button class="minmax-btn" onclick="toggleBanjir()">🗕</button>
     </div>
 
-            <!-- CARD 1 -->
-    <div class="card mb-1 shadow-sm border-info" style="font-size: 0.65rem;">
-      <div class="card-body py-1 px-2">
-        <h6   style="font-size: 0.7rem;">BENDUNGAN BINTANG BANO</h6>
-        <div>
-          <span style="color: green;"> Status: Aman </span> </br>
-          <!-- Status: <span id="status-a" class="status-text badge" style="font-size: 0.65rem;">-</span><br> -->
-          <!-- TMA: <span id="tma-a" class="fw-bold">-</span> m -->
-           TMA: 112.99 m
-        </div>
-      </div>
-    </div>
-
-    <!-- CARD 2 -->
-    <div class="card mb-1 shadow-sm border-info" style="font-size: 0.65rem;">
-      <div class="card-body py-1 px-2">
-        <h6  style="font-size: 0.7rem;">AWLR SAMPIR</h6>
-        <div>
-          Status: <span id="status-b" class="status-text badge" style="font-size: 0.65rem;">-</span><br>
-          TMA: <span id="tma-b" class="fw-bold">-</span> m
-        </div>
-      </div>
-    </div>
-
-    <!-- CARD 3 -->
-    <div class="card mb-1 shadow-sm border-info" style="font-size: 0.65rem;">
-      <div class="card-body py-1 px-2">
-        <h6  style="font-size: 0.7rem;">AWLR MENEMENG</h6>
-        <div>
-          Status: <span id="status-c" class="status-text badge" style="font-size: 0.65rem;">-</span><br>
-          TMA: <span id="tma-c" class="fw-bold">-</span> m
-        </div>
-      </div>
+    <div class="banjir-body" id="banjir-body">
+      <table style="border-collapse: collapse; margin-top: 5px;">
+        <tr>
+          <td style="font-size:small; text-align: center;">
+            <div><b>Realtime (8/5/2025 00:00)</b></div>
+            <div class="status-label">AMAN (Tidak ada evakuasi)</div>
+          </td>
+          <td style="font-size:small; text-align: center;">
+            <div><b>Prediksi (8/5/2025 00:00)</b></div>
+            <div class="status-label">AMAN (Tidak ada evakuasi)</div>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
+</div>
+
+ 
+      <div class="warning-wrapper">
+  <!-- CARD 1: BENDUNGAN TIU SUNTUK -->
+  <div class="card mb-1 shadow-sm border-info" style="font-size: 0.65rem;">
+    <div class="card-body py-1 px-2">
+      <h6 style="font-size: 0.7rem;">BENDUNGAN TIU SUNTUK</h6>
+      <table class="table table-bordered table-sm text-center mb-0" style="font-size: 0.65rem;">
+        <thead class="table-light">
+          <tr>
+            <th colspan="2">Realtime <br>(<span id="tanggal-eks-a">-</span>)</th>
+            <th colspan="2">Prediksi <br>(<span id="tanggal-prediksi-a">-</span>)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Status:</td>
+            <td><span id="status-a" class="text-success">-</span></td>
+            <td>Status:</td>
+            <td><span id="status-a-pred" class="text-success">-</span></td>
+          </tr>
+          <tr>
+            <td>TMA:</td>
+            <td><span id="tma-a" class="fw-bold">-</span> m</td>
+            <td>TMA:</td>
+            <td><span id="tma-a-pred" class="fw-bold">-</span> m</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- CARD 2: BENDUNGAN BINTANG BANO -->
+  <div class="card mb-1 shadow-sm border-info" style="font-size: 0.65rem;">
+    <div class="card-body py-1 px-2">
+      <h6 style="font-size: 0.7rem;">BENDUNGAN BINTANG BANO</h6>
+      <table class="table table-bordered table-sm text-center mb-0" style="font-size: 0.65rem;">
+        <thead class="table-light">
+          <tr>
+            <th colspan="2">Realtime<br>(<span id="tanggal-eks-bb">-</span>)</th>
+            <th colspan="2">Prediksi<br>(<span id="tanggal-prediksi-bb">-</span>)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Status:</td>
+            <td><span id="status-bb" class="text-success">-</span></td>
+            <td>Status:</td>
+            <td><span id="status-bb-pred" class="text-success">-</span></td>
+          </tr>
+          <tr>
+            <td>TMA:</td>
+            <td><span id="tma-bb" class="fw-bold">-</span> m</td>
+            <td>TMA:</td>
+            <td><span id="tma-bb-pred" class="fw-bold">-</span> m</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- CARD 3: AWLR SAMPIR -->
+  <div class="card mb-1 shadow-sm border-info" style="font-size: 0.65rem;">
+    <div class="card-body py-1 px-2">
+      <h6 style="font-size: 0.7rem;">AWLR SAMPIR</h6>
+      <table class="table table-bordered table-sm text-center mb-0" style="font-size: 0.65rem;">
+        <thead class="table-light">
+          <tr>
+            <th colspan="2">Realtime<br>(<span id="tanggal-eks-b">-</span>)</th>
+            <th colspan="2">Prediksi<br>(<span id="tanggal-prediksi-b">-</span>)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Status:</td>
+            <td><span id="status-b" class="text-success">-</span></td>
+            <td>Status:</td>
+            <td><span id="status-b-pred" class="text-success">-</span></td>
+          </tr>
+          <tr>
+            <td>TMA:</td>
+            <td><span id="tma-b" class="fw-bold">-</span> m</td>
+            <td>TMA:</td>
+            <td><span id="tma-b-pred" class="fw-bold">-</span> m</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- CARD 4: AWLR MENEMENG -->
+  <div class="card mb-1 shadow-sm border-info" style="font-size: 0.65rem;">
+    <div class="card-body py-1 px-2">
+      <h6 style="font-size: 0.7rem;">AWLR MENEMENG</h6>
+      <table class="table table-bordered table-sm text-center mb-0" style="font-size: 0.65rem;">
+        <thead class="table-light">
+          <tr>
+            <th colspan="2">Realtime<br>(<span id="tanggal-eks-c">-</span>)</th>
+            <th colspan="2">Prediksi<br>(<span id="tanggal-prediksi-c">-</span>)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Status:</td>
+            <td><span id="status-c" class="text-success">-</span></td>
+            <td>Status:</td>
+            <td><span id="status-c-pred" class="text-success">-</span></td>
+          </tr>
+          <tr>
+            <td>TMA:</td>
+            <td><span id="tma-c" class="fw-bold">-</span> m</td>
+            <td>TMA:</td>
+            <td><span id="tma-c-pred" class="fw-bold">-</span> m</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+     
+
 </div>
 
 
@@ -690,6 +762,19 @@
 
     <!-- Paling akhir sebelum </body> -->
 <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const waktu = "8/5/2025 00:00"; // bisa ambil dari API jika dinamis
+        //eksisting
+        document.getElementById("tanggal-eks-a").textContent = waktu;
+        document.getElementById("tanggal-eks-bb").textContent = waktu;
+        document.getElementById("tanggal-eks-b").textContent = waktu;
+        document.getElementById("tanggal-eks-c").textContent = waktu;
+        //prediksi
+        document.getElementById("tanggal-prediksi-a").textContent = waktu;
+        document.getElementById("tanggal-prediksi-bb").textContent = waktu;
+        document.getElementById("tanggal-prediksi-b").textContent = waktu;
+        document.getElementById("tanggal-prediksi-c").textContent = waktu;
+        });
 
       let minimized = false; // <-- deklarasi di awal
 
@@ -839,7 +924,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
    // Inisialisasi peta
-    map = L.map('map').setView([-8.7941986,116.93022], 11); // gunakan ulang variabel
+    map = L.map('map', {
+        zoomControl: false // ⛔ nonaktifkan tombol zoom
+    }).setView([-8.7941986,116.93022], 11);
+
 
 
     // Definisi tile layers
@@ -866,7 +954,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     L.control.layers(baseMaps, null, {
-        position: 'bottomleft'
+        position: 'bottomright'
     }).addTo(map);
 
 
