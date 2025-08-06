@@ -172,24 +172,26 @@
 
 .warning-toggle-container {
   position: fixed;
+  top: 300px;
   left: 0;
-  top: 310px;
   transform: translateY(-50%);
   background: white;
-  padding: 10px;
+  padding: 10px 10px 20px 10px;
   border-radius: 5px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   z-index: 999;
   max-width: 250px;
 
-  /* Tambahan agar bisa scroll jika isi banyak */
-  max-height: 72vh;
+  /* Tambahan agar bisa scroll bila perlu */
+  max-height: calc(82vh - 100px); /* agar tetap ada ruang atas/bawah */
   overflow-y: auto;
+  overflow-x: hidden;
 }
+
 
 /* Optional scrollbar style */
 .warning-toggle-container::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 .warning-toggle-container::-webkit-scrollbar-thumb {
   background-color: #ccc;
