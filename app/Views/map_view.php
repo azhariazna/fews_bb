@@ -107,7 +107,7 @@
         }
 
         .sidebar {
-            top: 54px !important;
+            top: 9% !important;
         }
 
         .gradeGroup {
