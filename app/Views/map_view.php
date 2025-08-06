@@ -766,7 +766,7 @@
 
 
     
-    <div id="map" style="height: 88vh;"></div>
+    <div id="map""></div>
 
 
 <!-- WRAPPER CUACA + TOGGLE BUTTON -->
