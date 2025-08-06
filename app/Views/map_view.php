@@ -170,18 +170,32 @@
 
 
 
-     .warning-toggle-container {
-      position: fixed;
-      left: 0px;
-      top: 360px;
-      transform: translateY(-50%);
-      background: white;
-      padding: 10px;
-      border-radius: 5px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      z-index: 999;
-      max-width: 250px;
-    }
+.warning-toggle-container {
+  position: fixed;
+  left: 0;
+  top: 310px;
+  transform: translateY(-50%);
+  background: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  z-index: 999;
+  max-width: 250px;
+
+  /* Tambahan agar bisa scroll jika isi banyak */
+  max-height: 72vh;
+  overflow-y: auto;
+}
+
+/* Optional scrollbar style */
+.warning-toggle-container::-webkit-scrollbar {
+  width: 6px;
+}
+.warning-toggle-container::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 3px;
+}
+
 
     .toggle-label {
       display: block;
@@ -230,13 +244,13 @@
    #cuacaWrapper {
   position: fixed;
   bottom: 0;
-  left: 250px;
+  right: 0;
   z-index: 1050;
   background: rgba(255, 255, 255, 0.95);
   border-radius: 8px 0 0 0;
   box-shadow: 0 0 8px rgba(0,0,0,0.2);
   padding: 0;
-  max-width: 85vw; /* biar gak terlalu panjang */
+  max-width: 100vw; /* biar gak terlalu panjang */
   overflow-x: auto;
   font-size: 0.6rem;
 }
