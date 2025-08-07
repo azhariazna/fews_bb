@@ -388,7 +388,7 @@
 
 
         <!-- Toggle untuk Mobile -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTopbar" aria-controls="navbarTopbar" aria-expanded="false" aria-label="Toggle navigation" style="background-color: blue;">
+        <button class="navbar-toggler d-lg-none position-absolute top-0 end-0 mt-2 me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTopbar" aria-controls="navbarTopbar" aria-expanded="false" aria-label="Toggle navigation" style="background-color: blue;">
             <span class="navbar-toggler-icon"></span>
         </button>
 
