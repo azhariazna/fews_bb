@@ -208,15 +208,3 @@ html, body {
 
 
 
-#sidebarInfo {
-  transition: transform 0.3s ease-in-out;
-}
-
-#sidebarInfo.hide {
-  transform: translateX(100%);
-}
-
-#toggleInfo {
-  transition: all 0.3s ease-in-out;
-}
-

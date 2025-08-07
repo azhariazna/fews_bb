@@ -10,7 +10,7 @@ class Home extends BaseController
     helper('url');
 
     $model = new TmaModel();
-
+    $tmabano   = $model->getLatestTMAByLocation('AWLR BENDUNGAN BINTANG BANO');
     $tmaSuntuk   = $model->getLatestTMAByLocation('AWLR BENDUNGAN TIU SUNTUK');
     $tmaSampir   = $model->getLatestTMAByLocation('AWLR SAMPIR');
     $tmaMenemeng = $model->getLatestTMAByLocation('AWLR MENEMENG');
@@ -40,6 +40,11 @@ class Home extends BaseController
 
     $data = [
         'tmaData' => [
+            'jam_bano' => $tmabano['waktu'] ?? 0,
+            'jam_suntuk' => $tmaSuntuk['waktu'] ?? 0,
+            'jam_sampir' => $tmaSampir['waktu'] ?? 0,
+            'jam_menemeng' => $tmaMenemeng['waktu'] ?? 0,
+            'bano' => $tmabano['tma'] ?? 0,
             'suntuk' => $tmaSuntuk['tma'] ?? 0,
             'sampir' => $tmaSampir['tma'] ?? 0,
             'menemeng' => $tmaMenemeng['tma'] ?? 0

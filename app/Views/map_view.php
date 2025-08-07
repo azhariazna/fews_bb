@@ -175,7 +175,7 @@
   top: 70px; /* posisi awal tombol */
   left: 0;
   z-index: 999;
-  max-width: 250px;
+  max-width: 270px;
   background: white;
   border-radius: 5px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
@@ -677,20 +677,20 @@
       <table class="table table-bordered table-sm text-center mb-0" style="font-size: 0.65rem;">
         <thead class="table-light">
           <tr>
-            <th colspan="2">Realtime<br>(<span id="tanggal-eks-bb">-</span>)</th>
+            <th colspan="2">Realtime <br>(<span id="tanggal-eks-bb">-</span>)</th>
             <th colspan="2">Prediksi<br>(<span id="tanggal-prediksi-bb">-</span>)</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Status:</td>
-            <td><span id="status-bb" class="text-success">-</span></td>
+            <td><span id="status-d" class="text-success">-</span></td>
             <td>Status:</td>
             <td><span id="status-bb-pred" class="text-success">-</span></td>
           </tr>
           <tr>
             <td>TMA:</td>
-            <td><span id="tma-bb" class="fw-bold">-</span> m</td>
+            <td><span id="tma-d" class="fw-bold">-</span> m</td>
             <td>TMA:</td>
             <td><span id="tma-bb-pred" class="fw-bold">-</span> m</td>
           </tr>
@@ -812,10 +812,7 @@
     document.addEventListener("DOMContentLoaded", function () {
         const waktu = "8/5/2025 00:00"; // bisa ambil dari API jika dinamis
         //eksisting
-        document.getElementById("tanggal-eks-a").textContent = waktu;
-        document.getElementById("tanggal-eks-bb").textContent = waktu;
-        document.getElementById("tanggal-eks-b").textContent = waktu;
-        document.getElementById("tanggal-eks-c").textContent = waktu;
+
         //prediksi
         document.getElementById("tanggal-prediksi-a").textContent = waktu;
         document.getElementById("tanggal-prediksi-bb").textContent = waktu;
@@ -868,12 +865,21 @@ document.addEventListener("DOMContentLoaded", function () {
     const tmaData = {
         A: <?= esc($tmaData['suntuk'])?>,
         B: <?= esc($tmaData['sampir'])/100?>,
-        C: <?= esc($tmaData['menemeng'])/100?>
+        C: <?= esc($tmaData['menemeng'])/100?>,
+        D: <?= esc($tmaData['bano'])?>,
+        jb: "<?= isset($tmaData['jam_bano']) ? esc($tmaData['jam_bano']) : '-' ?>",
+        js: "<?= isset($tmaData['jam_sampir']) ? esc($tmaData['jam_sampir']) : '-' ?>",
+        jm: "<?= isset($tmaData['jam_menemeng']) ? esc($tmaData['jam_menemeng']) : '-' ?>",
+        jsu: "<?= isset($tmaData['jam_suntuk']) ? esc($tmaData['jam_suntuk']) : '-' ?>"
+        
     };
+
+    // Tampilkan jam update data Bintang Bano di konsol
+    console.log("Jam update Bintang Bano:", tmaData.jb);
 
     document.addEventListener("DOMContentLoaded", function () {
    // Ambil nilai TMA dari PHP
-  const tmaSampir = tmaData.B;
+  const tmaSampir = tmaData;
   console.log("TMA Sampir:");
   // Tetapkan threshold
   const thresholds = { waspada: 10.5, siaga: 11, awas: 11.5 };
@@ -969,6 +975,21 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("tma-c")
     );
 
+        updateStatus(
+        tmaData.D,
+        { waspada: 117, siaga: 119, awas: 119.25 },
+        document.getElementById("status-d"),
+        document.getElementById("tma-d")
+    );
+
+    document.getElementById("tanggal-eks-bb").textContent = tmaData.jb;
+    document.getElementById("tanggal-eks-a").textContent = tmaData.jsu;  
+    document.getElementById("tanggal-eks-b").textContent = tmaData.js;
+    document.getElementById("tanggal-eks-c").textContent = tmaData.jm;
+   
+
+    
+
 
    // Inisialisasi peta
     map = L.map('map', {
@@ -1003,12 +1024,6 @@ document.addEventListener("DOMContentLoaded", function () {
     L.control.layers(baseMaps, null, {
         position: 'bottomright'
     }).addTo(map);
-
-
-
-
-
-
 
         const layerOn = true; // atau false jika default ingin disembunyikan
 
@@ -1173,7 +1188,18 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         function updateFilteredLayer() {
-            const selectedGrades = Array.from(gradeCheckboxes).filter(cb => cb.checked).map(cb => cb.value);
+            let selectedGrades = Array.from(gradeCheckboxes)
+                .filter(cb => cb.checked)
+                .map(cb => cb.value);
+
+            // Jika grade 3 dicentang, tambahkan 4-12 ke filter
+            if (selectedGrades.includes("3")) {
+                for (let i = 4; i <= 12; i++) {
+                    if (!selectedGrades.includes(String(i))) {
+                        selectedGrades.push(String(i));
+                    }
+                }
+            }
 
             if (genanganLayer) map.removeLayer(genanganLayer);
             if (selectedGrades.length === 0) return;
@@ -1547,8 +1573,6 @@ document.addEventListener("DOMContentLoaded", function () {
         toggleBtn.style.display = "block";
     });
 });
-
-
 
 
 </script>
