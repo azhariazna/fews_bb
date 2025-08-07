@@ -325,7 +325,7 @@
     background-color: #f8f9fa;
     border: 1px solid #ccc;
     border-radius: 6px;
-    width: fit-content;
+    width: auto;
     box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
     padding: 8px;
   }
@@ -621,17 +621,23 @@
     </div>
 
     <div class="banjir-body" id="banjir-body">
-      <table style="border-collapse: collapse; margin-top: 5px;">
-        <tr>
-          <td style="font-size:small; text-align: center;">
-            <div><b>Realtime <br> <span id="tanggal-eks-banjir">-</span></b></div>
-            <div id="evakuasi-alert"><span id ="status-sakra-title">-</span><br><span id ="statusevakuasi"></span></div>
-          </td>
-          <td style="font-size:small; text-align: center;">
-            <div><b>Prediksi <br> <span id="tanggal-pre-banjir">-</span></b></div>
-             <div id="evakuasi-alertt"><span id ="status-sakra-titlee">-</span><br><span id ="statusevakuasii"></span></div>
-          </td>
-        </tr>
+      <table class="table table-bordered table-sm text-center mb-0" style="font-size: 0.65rem; border-collapse: collapse; margin-top: 5px;">
+        <thead class="table-light">
+          <tr>
+            <th>Realtime <br> <span id="tanggal-eks-banjir">-</span></th>
+            <th>Prediksi <br> <span id="tanggal-pre-banjir">-</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div id="evakuasi-alert"><span id="status-sakra-title">-</span><br><span id="statusevakuasi"></span></div>
+            </td>
+            <td>
+              <div id="evakuasi-alertt"><span id="status-sakra-titlee">-</span><br><span id="statusevakuasii"></span></div>
+            </td>
+          </tr>
+        </tbody>
       </table>
     </div>
   </div>
