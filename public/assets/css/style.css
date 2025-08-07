@@ -91,6 +91,7 @@ html, body {
 @media (max-width: 991.98px) {
     .navbar-collapse {
         background-color: #0d6efd !important;
+        padding-left: 50px;
     }
     .dropdown-menu {
         background-color: #99bdf4 !important;
