@@ -15,6 +15,78 @@ class Home extends BaseController
     $tmaSampir   = $model->getLatestTMAByLocation('AWLR SAMPIR');
     $tmaMenemeng = $model->getLatestTMAByLocation('AWLR MENEMENG');
 
+    $db = \Config\Database::connect();
+    // Ambil 48 data terakhir dari tabel simulasi_tiu_suntuk
+    $query = $db->query("
+        SELECT waktu, elevasi
+        FROM simulasi_tiu_suntuk
+        ORDER BY waktu DESC
+        LIMIT 48
+    ");
+    $rows = $query->getResultArray();
+
+    $maxElevasits = null;
+    $maxWaktuts = null;
+    foreach ($rows as $row) {
+        if ($maxElevasits === null || $row['elevasi'] > $maxElevasits) {
+            $maxElevasits = $row['elevasi'];
+            $maxWaktuts = $row['waktu'];
+            
+        }
+    }
+
+    //binatng bano
+    $query = $db->query("
+        SELECT waktu, elevasi
+        FROM simulasi_bintang_bano
+        ORDER BY waktu DESC
+        LIMIT 48
+    ");
+    $maxElevasibb = null;
+    $maxWaktubb = null;
+    $rows = $query->getResultArray();
+    foreach ($rows as $row) {
+        if ($maxElevasibb === null || $row['elevasi'] > $maxElevasibb) {
+            $maxElevasibb = $row['elevasi'];
+            $maxWaktubb = $row['waktu'];
+        }
+    }
+
+    // Ambil 48 data terakhir dari tabel simulasi_sampir
+    $query = $db->query("
+        SELECT waktu, tma as elevasi
+        FROM simulasi_awlr_sampir
+        ORDER BY waktu DESC
+        LIMIT 48
+    ");
+    $maxElevasisam = null;
+    $maxWaktusam = null;
+    $rows = $query->getResultArray();
+    foreach ($rows as $row) {
+        if ($maxElevasisam === null || $row['elevasi'] > $maxElevasisam) {
+            $maxElevasisam = $row['elevasi'];
+            $maxWaktusam = $row['waktu'];       
+        }
+    }   
+    // Ambil 48 data terakhir dari tabel simulasi_menemeng
+    $query = $db->query("
+        SELECT waktu, tma as elevasi
+        FROM simulasi_awlr_menemeng
+        ORDER BY waktu DESC
+        LIMIT 48
+    ");
+    $maxElevasimen = null;
+    $maxWaktumen = null;
+    $rows = $query->getResultArray();
+    foreach ($rows as $row) {
+        if ($maxElevasimen === null || $row['elevasi'] > $maxElevasimen) {
+            $maxElevasimen = $row['elevasi'];
+            $maxWaktumen = $row['waktu'];
+        }
+    }
+
+
+
     // Default kosong jika cuaca gagal diambil
     $cuacaArray = [];
 
@@ -47,7 +119,15 @@ class Home extends BaseController
             'bano' => $tmabano['tma'] ?? 0,
             'suntuk' => $tmaSuntuk['tma'] ?? 0,
             'sampir' => $tmaSampir['tma'] ?? 0,
-            'menemeng' => $tmaMenemeng['tma'] ?? 0
+            'menemeng' => $tmaMenemeng['tma'] ?? 0,
+            'maxElevasits' => $maxElevasits,
+            'maxWaktuts' => $maxWaktuts,
+            'maxElevasibb' => $maxElevasibb,
+            'maxWaktubb' => $maxWaktubb,
+            'maxElevasisam' => $maxElevasisam,
+            'maxWaktusam' => $maxWaktusam,
+            'maxElevasimen' => $maxElevasimen,
+            'maxWaktumen' => $maxWaktumen
         ],
         'cuacaList' => $cuacaArray
     ];

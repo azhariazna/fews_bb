@@ -164,7 +164,7 @@
 }
 
 .leaflet-bottom.leaflet-right {
-    bottom: 80px !important; /* Ganti angkanya sesuai seberapa atas yang kamu mau */
+    bottom: 110px !important; /* Ganti angkanya sesuai seberapa atas yang kamu mau */
 }
 
 
@@ -175,7 +175,7 @@
   top: 70px; /* posisi awal tombol */
   left: 0;
   z-index: 999;
-  max-width: 270px;
+  max-width: 2830px;
   background: white;
   border-radius: 5px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
@@ -377,15 +377,13 @@
 
     <div class="container-fluid h-100">
         <!-- Logo dan Judul -->
-        <a class="navbar-brand d-flex align-items-center gap-2 flex-nowrap" href="#">
-        <img src="assets/img/pu.png" alt="Logo" class="img-fluid" style="height: 36px;">
-        
-        <!-- Tambahkan di sini -->
-        <div class="d-none d-sm-block text-white fw-bold lh-sm" style="font-size: 1rem;">
-            <div>DASHBOARD MONITORING</div>
-            <div>EARLY WARNING SYSTEM</div>
-            <div style="font-size: 0.95rem;">BENDUNGAN TIU SUNTUK</div>
-        </div>
+        <a class="navbar-brand d-flex align-items-center gap-2 flex-nowrap" href="#" style="margin-right: 32px;">
+            <img src="assets/img/pu.png" alt="Logo" class="img-fluid" style="height: 36px; margin-right: 20px;">
+            <div class="d-none d-sm-block text-white fw-bold lh-sm" style="font-size: 1rem;">
+                <div>DASHBOARD MONITORING</div>
+                <div>EARLY WARNING SYSTEM</div>
+                <div style="font-size: 0.95rem;">BENDUNGAN TIU SUNTUK</div>
+            </div>
         </a>
 
 
@@ -626,12 +624,12 @@
       <table style="border-collapse: collapse; margin-top: 5px;">
         <tr>
           <td style="font-size:small; text-align: center;">
-            <div><b>Realtime <br> (8/5/2025 00:00)</b></div>
-            <div class="status-label">AMAN <br>(Tidak ada evakuasi)</div>
+            <div><b>Realtime <br> <span id="tanggal-eks-banjir">-</span></b></div>
+            <div id="evakuasi-alert"><span id ="status-sakra-title">-</span><br><span id ="statusevakuasi"></span></div>
           </td>
           <td style="font-size:small; text-align: center;">
-            <div><b>Prediksi <br> (8/5/2025 00:00)</b></div>
-            <div class="status-label">AMAN <br> (Tidak ada evakuasi)</div>
+            <div><b>Prediksi <br> <span id="tanggal-pre-banjir">-</span></b></div>
+             <div id="evakuasi-alertt"><span id ="status-sakra-titlee">-</span><br><span id ="statusevakuasii"></span></div>
           </td>
         </tr>
       </table>
@@ -809,16 +807,6 @@
 
     <!-- Paling akhir sebelum </body> -->
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const waktu = "8/5/2025 00:00"; // bisa ambil dari API jika dinamis
-        //eksisting
-
-        //prediksi
-        document.getElementById("tanggal-prediksi-a").textContent = waktu;
-        document.getElementById("tanggal-prediksi-bb").textContent = waktu;
-        document.getElementById("tanggal-prediksi-b").textContent = waktu;
-        document.getElementById("tanggal-prediksi-c").textContent = waktu;
-        });
 
       let minimized = false; // <-- deklarasi di awal
 
@@ -870,8 +858,16 @@ document.addEventListener("DOMContentLoaded", function () {
         jb: "<?= isset($tmaData['jam_bano']) ? esc($tmaData['jam_bano']) : '-' ?>",
         js: "<?= isset($tmaData['jam_sampir']) ? esc($tmaData['jam_sampir']) : '-' ?>",
         jm: "<?= isset($tmaData['jam_menemeng']) ? esc($tmaData['jam_menemeng']) : '-' ?>",
-        jsu: "<?= isset($tmaData['jam_suntuk']) ? esc($tmaData['jam_suntuk']) : '-' ?>"
-        
+        jsu: "<?= isset($tmaData['jam_suntuk']) ? esc($tmaData['jam_suntuk']) : '-' ?>",
+        prediksibb: "<?= isset($tmaData['maxElevasibb']) ? esc($tmaData['maxElevasibb']) : '-' ?>",
+        prediksits: "<?= isset($tmaData['maxElevasits']) ? esc($tmaData['maxElevasits']) : '-' ?>",
+        prediksisampir: <?= isset($tmaData['maxElevasisam']) ? esc($tmaData['maxElevasisam'])/100 : "'-'" ?>,
+        prediksimenemeng: <?= isset($tmaData['maxElevasimen']) ? esc($tmaData['maxElevasimen'])/100 : "'-'" ?>,
+        tglprediksits: "<?= isset($tmaData['maxWaktuts']) ? esc($tmaData['maxWaktuts']) : '-' ?>",
+        tglprediksibb: "<?= isset($tmaData['maxWaktubb']) ? esc($tmaData['maxWaktubb']) : '-' ?>",
+        tglprediksisampir: "<?= isset($tmaData['maxWaktusam']) ? esc($tmaData['maxWaktusam']) : '-' ?>",
+        tglprediksimenemeng: "<?= isset($tmaData['maxWaktumen']) ? esc($tmaData['maxWaktumen']) : '-' ?>"
+
     };
 
     // Tampilkan jam update data Bintang Bano di konsol
@@ -879,53 +875,93 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.addEventListener("DOMContentLoaded", function () {
    // Ambil nilai TMA dari PHP
-  const tmaSampir = tmaData;
-  console.log("TMA Sampir:");
-  // Tetapkan threshold
-  const thresholds = { waspada: 10.5, siaga: 11, awas: 11.5 };
+const tmaSampir = tmaData.B;
+const pretmaSampir = tmaData.prediksisampir; // nilai prediksi
 
-  // Identifikasi elemen
-  const statusEvakuasi = document.getElementById("statusevakuasi");
-  const alertBox = document.getElementById("evakuasi-alert");
-  const statusTitle = document.getElementById("status-sakra-title");
+// Threshold
+const thresholds = { waspada: 10.5, siaga: 11, awas: 11.5 };
 
-  let status = "-";
+// Elemen realtime
+const statusEvakuasi = document.getElementById("statusevakuasi");
+const alertBox = document.getElementById("evakuasi-alert");
+const statusTitle = document.getElementById("status-sakra-title");
 
-  if (tmaSampir >= thresholds.awas) {
+// Elemen prediksi
+const statusEvakuasii = document.getElementById("statusevakuasii");
+const alertBoxx = document.getElementById("evakuasi-alertt");
+const statusTitlee = document.getElementById("status-sakra-titlee");
+
+// --- Realtime ---
+let status = "-";
+if (tmaSampir >= thresholds.awas) {
     status = "Awas";
-  } else if (tmaSampir >= thresholds.siaga) {
+} else if (tmaSampir >= thresholds.siaga) {
     status = "Siaga";
-  } else if (tmaSampir >= thresholds.waspada) {
+} else if (tmaSampir >= thresholds.waspada) {
     status = "Waspada";
-  } else {
+} else {
     status = "Aman";
-  }
+}
 
-  let evakuasiText = "-";
-  let alertClass = "alert alert-secondary p-2";
-
-  switch (status.toLowerCase()) {
+let evakuasiText = "-";
+let alertClass = "evakuasi-aman";
+switch (status.toLowerCase()) {
     case "aman":
-      evakuasiText = "Tidak ada evakuasi";
-      alertClass = "alert alert-success p-2";
-      break;
+        evakuasiText = "Tidak ada evakuasi";
+        alertClass = "evakuasi-aman";
+        break;
     case "siaga":
-      evakuasiText = "Belum evakuasi, pemantauan dan persiapan";
-      alertClass = "alert alert-warning p-2";
-      break;
+        evakuasiText = "Belum evakuasi, pemantauan dan persiapan";
+        alertClass = "evakuasi-siaga";
+        break;
     case "waspada":
-      evakuasiText = "Evakuasi terbatas / bersiap";
-      alertClass = "alert alert-info p-2";
-      break;
+        evakuasiText = "Evakuasi terbatas / bersiap";
+        alertClass = "evakuasi-waspada";
+        break;
     case "awas":
-      evakuasiText = "Evakuasi menyeluruh / wajib";
-      alertClass = "alert alert-danger p-2";
-      break;
-  }
+        evakuasiText = "Evakuasi menyeluruh / wajib";
+        alertClass = "evakuasi-awas";
+        break;
+}
+if (statusEvakuasi) statusEvakuasi.textContent = evakuasiText;
+if (statusTitle) statusTitle.textContent = status;
+if (alertBox) alertBox.className = alertClass;
 
-  if (statusEvakuasi) statusEvakuasi.textContent = evakuasiText;
-  if (statusTitle) statusTitle.textContent =  status;
-  if (alertBox) alertBox.className = alertClass;
+// --- Prediksi ---
+let statusPred = "-";
+if (pretmaSampir >= thresholds.awas) {
+    statusPred = "Awas";
+} else if (pretmaSampir >= thresholds.siaga) {
+    statusPred = "Siaga";
+} else if (pretmaSampir >= thresholds.waspada) {
+    statusPred = "Waspada";
+} else {
+    statusPred = "Aman";
+}
+
+let evakuasiTextPred = "-";
+let alertClassPred = "evakuasi-aman";
+switch (statusPred.toLowerCase()) {
+    case "aman":
+        evakuasiTextPred = "Tidak ada evakuasi";
+        alertClassPred = "evakuasi-aman";
+        break;
+    case "siaga":
+        evakuasiTextPred = "Belum evakuasi, pemantauan dan persiapan";
+        alertClassPred = "evakuasi-siaga";
+        break;
+    case "waspada":
+        evakuasiTextPred = "Evakuasi terbatas / bersiap";
+        alertClassPred = "evakuasi-waspada";
+        break;
+    case "awas":
+        evakuasiTextPred = "Evakuasi menyeluruh / wajib";
+        alertClassPred = "evakuasi-awas";
+        break;
+}
+if (statusEvakuasii) statusEvakuasii.textContent = evakuasiTextPred;
+if (statusTitlee) statusTitlee.textContent = statusPred;
+if (alertBoxx) alertBoxx.className = alertClassPred;
 });
 
 
@@ -933,7 +969,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function updateStatus(tma, batas, statusEl, tmaEl) {
         let status = "Aman";
         let color = "green";
-
+        tma = Number(tma);
         if (tma >= batas.siaga && tma < batas.awas) {
         status = "Siaga";
         color = "orange";
@@ -975,17 +1011,57 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("tma-c")
     );
 
-        updateStatus(
+    updateStatus(
         tmaData.D,
         { waspada: 117, siaga: 119, awas: 119.25 },
         document.getElementById("status-d"),
         document.getElementById("tma-d")
     );
 
+    //prediksi status bintang bano
+    updateStatus(
+        tmaData.prediksibb,
+        { waspada: 117, siaga: 119, awas: 119.25 },
+        document.getElementById("status-bb-pred"),
+        document.getElementById("tma-bb-pred")
+    );
+    //prediksi status tiu suntuk
+    updateStatus(
+        tmaData.prediksits,
+        { waspada: 94.75, siaga: 95.5, awas: 97 },
+        document.getElementById("status-a-pred"),
+        document.getElementById("tma-a-pred")
+    );
+
+    //prediksi status sampir
+    updateStatus(
+        tmaData.prediksisampir,
+        { waspada: 10.5, siaga: 11, awas: 11.5 },
+        document.getElementById("status-b-pred"),
+        document.getElementById("tma-b-pred")
+    );
+
+    //prediksi status menemeng
+    updateStatus(
+        tmaData.prediksimenemeng,
+        { waspada: 7, siaga: 7.5, awas: 8 },
+        document.getElementById("status-c-pred"),
+        document.getElementById("tma-c-pred")
+    );
+
     document.getElementById("tanggal-eks-bb").textContent = tmaData.jb;
     document.getElementById("tanggal-eks-a").textContent = tmaData.jsu;  
     document.getElementById("tanggal-eks-b").textContent = tmaData.js;
+    document.getElementById("tanggal-eks-banjir").textContent = tmaData.js;
     document.getElementById("tanggal-eks-c").textContent = tmaData.jm;
+    document.getElementById("tanggal-prediksi-bb").textContent = tmaData.tglprediksibb ? tmaData.tglprediksibb : '-';
+    document.getElementById("tanggal-prediksi-a").textContent = tmaData.tglprediksits ? tmaData.tglprediksits : '-';
+    document.getElementById("tanggal-prediksi-b").textContent = tmaData.tglprediksisampir ? tmaData.tglprediksisampir : '-';
+    document.getElementById("tanggal-prediksi-c").textContent = tmaData.tglprediksimenemeng ? tmaData.tglprediksimenemeng : '-';
+    document.getElementById("tanggal-pre-banjir").textContent = tmaData.tglprediksisampir ? tmaData.tglprediksisampir : '-';
+
+
+
    
 
     
@@ -1576,5 +1652,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 </script>
+
+<style>
+.evakuasi-aman {
+    background: #4CAF50;
+    font-size: smaller;
+    color: white;
+    padding: 4px 6px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-top: 3px;
+}
+.evakuasi-siaga, .evakuasi-waspada {
+    background: #FFD600;
+    font-size: smaller;
+    color: white;
+    padding: 4px 6px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-top: 3px;
+}
+.evakuasi-awas {
+    background: #F44336;
+    font-size: smaller;
+    color: white;
+    padding: 4px 6px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-top: 3px;
+}
+</style>
 
 </html>
