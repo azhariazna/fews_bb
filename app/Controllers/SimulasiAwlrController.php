@@ -25,8 +25,8 @@ class SimulasiAwlrController extends BaseController
         $max_sampir = $max_sampir_row['tma'];
         $max_menemeng = $max_menemeng_row['tma'];
 
-        $status_sampir = ($max_sampir > 100) ? 'Awas' : (($max_sampir > 90) ? 'Siaga' : 'Aman');
-        $status_menemeng = ($max_menemeng > 100) ? 'Awas' : (($max_menemeng > 90) ? 'Siaga' : 'Aman');
+        $status_sampir = ($max_sampir > 11.5) ? 'Awas' : (($max_sampir > 10.5) ? 'Siaga' : 'Aman');
+        $status_menemeng = ($max_menemeng > 8) ? 'Awas' : (($max_menemeng > 7) ? 'Siaga' : 'Aman');
 
         return view('admin/simulasi_awlr_view', [
             'data_sampir' => $data_sampir,

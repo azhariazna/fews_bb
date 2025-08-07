@@ -33,8 +33,8 @@ class SimulasiController extends BaseController
         $max_bano_time = $max_bano_row['waktu'];
 
         // Klasifikasi status berdasarkan elevasi
-        $status_tiu = ($max_tiu > 105) ? 'Awas' : (($max_tiu > 104) ? 'Siaga' : 'Aman');
-        $status_bano = ($max_bano > 112) ? 'Awas' : (($max_bano > 111) ? 'Siaga' : 'Aman');
+        $status_tiu = ($max_tiu > 97) ? 'Awas' : (($max_tiu > 94.75) ? 'Siaga' : 'Aman');
+        $status_bano = ($max_bano > 119.25) ? 'Awas' : (($max_bano > 117) ? 'Siaga' : 'Aman');
 
         // Kirim ke view
         return view('admin/simulasi_view', [

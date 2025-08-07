@@ -72,9 +72,9 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Waktu</th>
-                                    <th>Inflow</th>
-                                    <th>Outflow</th>
-                                    <th>Elevasi</th>
+                                    <th>Inflow (m3/dtk)</th>
+                                    <th>Outflow (m3/dtk)</th>
+                                    <th>Elevasi (m)</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -108,9 +108,9 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Waktu</th>
-                                    <th>Inflow</th>
-                                    <th>Outflow</th>
-                                    <th>Elevasi</th>
+                                    <th>Inflow (m3/dtk)</th>
+                                    <th>Outflow (m3/dtk)</th>
+                                    <th>Elevasi (m)</th>
                                 </tr>
                             </thead>
                             <tbody>

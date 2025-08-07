@@ -72,7 +72,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Waktu</th>
-                                <th>TMA</th>
+                                <th>TMA (m)</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -101,7 +101,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Waktu</th>
-                                <th>TMA</th>
+                                <th>TMA (m)</th>
                             </tr>
                         </thead>
                         <tbody>
