@@ -45,20 +45,30 @@ class Avwr_rekap extends BaseController
             // Add more stations as needed
         ];
 
+
+        $intervals = [
+            'jam' => 'Jam',
+            'hari' => 'Hari',
+        ];
+
         $data = [
             'title' => 'AVWR Rekap Data',
             'sensorData' => null,
             'stations' => $stations,
+            'intervals' => $intervals,
             'sta' => null,
+            'interval' => null,
             'start_date' => null,
             'end_date' => null
         ];
+
 
         // Handle form submission (POST request)
         if ($this->request->getMethod() === 'post') {
             $validation = \Config\Services::validation();
             $validation->setRules([
                 'sta' => 'required',
+                'interval' => 'required|in_list[jam,hari]',
                 'start_date' => 'required|valid_date',
                 'end_date' => 'required|valid_date'
             ]);
@@ -68,11 +78,11 @@ class Avwr_rekap extends BaseController
                 $session = session();
                 $formData = [
                     'sta' => $this->request->getPost('sta'),
+                    'interval' => $this->request->getPost('interval'),
                     'start_date' => $this->request->getPost('start_date'),
                     'end_date' => $this->request->getPost('end_date')
                 ];
                 $session->setFlashdata('form_data', $formData);
-                
                 // Redirect to the same page with GET parameters
                 return redirect()->to(site_url('avwr-rekap') . '?' . http_build_query($formData));
             } else {
@@ -82,43 +92,45 @@ class Avwr_rekap extends BaseController
         }
 
         // Check for GET parameters or form data in flashdata
+
         $sta = $this->request->getGet('sta');
+        $interval = $this->request->getGet('interval');
         $start_date = $this->request->getGet('start_date');
         $end_date = $this->request->getGet('end_date');
 
         // If no GET parameters but we have flashdata, use that
-        if (!$sta && $this->session->has('form_data')) {
+        if ((!$sta || !$interval) && $this->session->has('form_data')) {
             $formData = $this->session->getFlashdata('form_data');
-            $sta = $formData['sta'];
-            $start_date = $formData['start_date'];
-            $end_date = $formData['end_date'];
+            $sta = $formData['sta'] ?? null;
+            $interval = $formData['interval'] ?? null;
+            $start_date = $formData['start_date'] ?? null;
+            $end_date = $formData['end_date'] ?? null;
         }
 
         // Set the form values in data array
         $data['sta'] = $sta;
+        $data['interval'] = $interval;
         $data['start_date'] = $start_date;
         $data['end_date'] = $end_date;
 
-        if ($sta && $start_date && $end_date) {
+        if ($sta && $interval && $start_date && $end_date) {
             $sensorData = $this->getSensorData();
             if ($sensorData === null) {
                 $errorMessage = 'Gagal mengambil data dari API';
-                
                 // Add debug info in development
                 if (ENVIRONMENT !== 'production') {
                     $debugInfo = [
                         'request' => [
                             'sta' => $this->request->getGet('sta'),
+                            'interval' => $this->request->getGet('interval'),
                             'start_date' => $this->request->getGet('start_date'),
                             'end_date' => $this->request->getGet('end_date'),
                             'url' => $this->apiUrl,
                         ],
                         'error' => error_get_last()
                     ];
-                    
                     session()->setFlashdata('debug', print_r($debugInfo, true));
                 }
-                
                 session()->setFlashdata('error', $errorMessage);
             } else {
                 $data['sensorData'] = $sensorData;
@@ -132,6 +144,7 @@ class Avwr_rekap extends BaseController
     {
         // Get parameters from either GET or POST
         $sta = $this->request->getGet('sta') ?? $this->request->getPost('sta');
+        $interval = $this->request->getGet('interval') ?? $this->request->getPost('interval');
         $startDate = $this->request->getGet('start_date') ?? $this->request->getPost('start_date');
         $endDate = $this->request->getGet('end_date') ?? $this->request->getPost('end_date');
         
@@ -149,7 +162,7 @@ class Avwr_rekap extends BaseController
             return null;
         }
     
-        $url = "{$this->apiUrl}?sta={$sta}&awal={$startDate}&akhir={$endDate}&interval=jam";
+        $url = "{$this->apiUrl}?sta={$sta}&awal={$startDate}&akhir={$endDate}&interval={$interval}";
         
         // Log URL yang akan di-request
         log_message('debug', 'API Request URL: ' . $url);
@@ -212,42 +225,44 @@ class Avwr_rekap extends BaseController
             return redirect()->back()->with('error', 'Failed to fetch data');
         }
 
-        // Create new Spreadsheet object
-        $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();
-        
-        // Set headers
-        $headers = ['Waktu', 'Parameter', 'Nilai', 'Satuan'];
-        $sheet->fromArray([$headers], NULL, 'A1');
-        
-        // Populate data
-        $row = 2;
-        foreach ($data as $entry) {
-            $waktu = $entry['waktu'];
-            foreach ($entry['data'] as $param => $value) {
-                $sheet->setCellValue('A' . $row, $waktu);
-                $sheet->setCellValue('B' . $row, $param);
-                $sheet->setCellValue('C' . $row, $value);
-                $sheet->setCellValue('D' . $row, $this->getUnit($param));
-                $row++;
+        // Siapkan header CSV
+        $filename = "rekap_avwr_STA{$this->request->getGet('sta')}_{$this->request->getGet('start_date')}_to_{$this->request->getGet('end_date')}.csv";
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
+
+        $output = fopen('php://output', 'w');
+
+        // Cek struktur data (nested atau flat)
+        $firstItem = reset($data);
+        $isNested = (is_array($firstItem) && isset($firstItem['data']));
+
+        // Ambil semua kolom unik
+        $columns = [];
+        foreach ($data as $item) {
+            $rowData = $isNested ? ($item['data'] ?? []) : $item;
+            $columns = array_merge($columns, array_keys($rowData));
+        }
+        $columns = array_unique($columns);
+        $columns = array_diff($columns, ['id', 'id_sta']);
+        sort($columns);
+
+        // Header CSV
+        $headerRow = array_merge(['Waktu'], $columns);
+        fputcsv($output, $headerRow);
+
+        // Data CSV
+        foreach ($data as $item) {
+            $rowData = $isNested ? ($item['data'] ?? []) : $item;
+            $waktu = $rowData['waktu'] ?? ($item['waktu'] ?? 'N/A');
+            unset($rowData['waktu']);
+            $row = [$waktu];
+            foreach ($columns as $col) {
+                $row[] = $rowData[$col] ?? '';
             }
+            fputcsv($output, $row);
         }
 
-        // Set auto size for all columns
-        foreach (range('A', 'D') as $col) {
-            $sheet->getColumnDimension($col)->setAutoSize(true);
-        }
-
-        // Set headers for download
-        $filename = "rekan_avwr_STA{$this->request->getGet('sta')}_" . 
-                   "{$this->request->getGet('start_date')}_to_{$this->request->getGet('end_date')}.xlsx";
-        
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="' . $filename . '"');
-        header('Cache-Control: max-age=0');
-
-        $writer = new Xlsx($spreadsheet);
-        $writer->save('php://output');
+        fclose($output);
         exit();
     }
 

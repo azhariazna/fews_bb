@@ -134,6 +134,17 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
+                                    <label>Pilih Interval</label>
+                                    <select name="interval" class="form-control" required>
+                                        <option value="">-- Pilih Interval --</option>
+                                        <?php foreach ($intervals as $key => $label) : ?>
+                                            <option value="<?= $key ?>" <?= (isset($interval) && $interval == $key) ? 'selected' : '' ?>><?= $label ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
                                     <label>Tanggal Awal</label>
                                     <input type="date" name="start_date" class="form-control" 
                                            value="<?= $_GET['start_date'] ?? '' ?>" required>
@@ -146,17 +157,17 @@
                                            value="<?= $_GET['end_date'] ?? date('Y-m-d') ?>" required>
                                 </div>
                             </div>
-                            <div class="col-md-3 d-flex align-items-end gap-2">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-search"></i> Tampilkan Data
-                                </button>
-                                <?php if (isset($sensorData) && !empty($sensorData)) : ?>
-                                    <div class="btn-group">
+                            <div class="col-md-3">
+                                <div class="form-group d-flex align-items-end" style="gap: 10px;">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-search"></i> Tampilkan Data
+                                    </button>
+                                    <?php if (isset($sensorData) && !empty($sensorData)) : ?>
                                         <button type="button" class="btn btn-success" id="exportExcelBtn">
                                             <i class="fas fa-file-export"></i> Export Excel
                                         </button>
-                                    </div>
-                                <?php endif; ?>
+                                    <?php endif; ?>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -258,8 +269,7 @@
 $(document).ready(function() {
     // Initialize DataTable
     var table = $('#sensorTable').DataTable({
-        dom: "Bfrtip",
-
+        dom: "t", // Only show table, no export buttons
         pageLength: 25,
         order: [[0, 'desc']],
         scrollX: true,
@@ -284,8 +294,17 @@ $(document).ready(function() {
 
     // Handle export button click
     $('#exportExcelBtn').on('click', function() {
-        // Trigger the DataTables Excel export
-        table.button('.buttons-excel').trigger();
+        // Ambil parameter dari form/filter
+        const params = {
+            sta: $('select[name="sta"]').val(),
+            interval: $('select[name="interval"]').val(),
+            start_date: $('input[name="start_date"]').val(),
+            end_date: $('input[name="end_date"]').val()
+        };
+        // Build query string
+        const query = $.param(params);
+        // Redirect to export endpoint
+        window.location.href = '<?= base_url('avwr-rekap/export') ?>?' + query;
     });
 
     // Hide loading indicator when DataTable is initialized
