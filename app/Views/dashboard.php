@@ -109,6 +109,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="avwr-rekap" class="nav-link" target="content-frame" id="menu-isi-rtd">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>AVWR REKAP</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="data-awlr" class="nav-link" target="content-frame" id="menu-download-rtd">
                   <i class="far fa-circle nav-icon"></i>
                   <p>AWLR</p>
@@ -180,6 +186,7 @@
       if (menu === "simulasi") target = "simulasi";
       if (menu === "simulasi-awlr") target = "simulasi-awlr";
       if (menu === "data-avwr") target = "api-download/fetch";
+      if (menu === "avwr-rekap") target = "avwr-rekap";
     }
 
   // Set iframe src sesuai target

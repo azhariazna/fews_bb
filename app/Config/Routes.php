@@ -60,7 +60,9 @@ $routes->get('simulasi', 'SimulasiController::index');
 //download Avw
 $routes->match(['get', 'post'], 'api-download/fetch', 'ApiDownloadController::index');
 
-
+//avwr rekap
+$routes->get('avwr-rekap', 'Avwr_rekap::index');
+$routes->get('avwr-rekap/export', 'Avwr_rekap::export');
 
 
 

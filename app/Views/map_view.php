@@ -407,6 +407,7 @@
                         <li><a class="dropdown-item" href="<?= base_url('dashboard?menu=logger-range') ?>">BENDUNGAN TIU SUNTUK</a></li>
                         <li><a class="dropdown-item" href="<?= base_url('dashboard?menu=data-awlr') ?>">AWLR</a></li>
                         <li><a class="dropdown-item" href="<?= base_url('dashboard?menu=data-avwr') ?>">AVWR</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('dashboard?menu=avwr-rekap') ?>">AVWR REKAP</a></li>
                     </ul>
                 </li>
 
