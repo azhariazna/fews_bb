@@ -9,33 +9,39 @@
         overflow: auto;
         border: 1px solid #dee2e6;
         border-radius: 4px;
+        background: #fff;
+        /* Agar sticky header tetap terlihat saat scroll horizontal */
+        /* Webkit browsers */
+        -webkit-overflow-scrolling: touch;
     }
     
     /* Table styling */
     .table {
         width: 100%;
+        min-width: 100%;
         margin-bottom: 0;
         border-collapse: separate;
+        table-layout: auto;
     }
     
     /* Fixed header */
     .table thead {
         position: sticky;
         top: 0;
-        z-index: 10;
+        z-index: 20;
+        background: #f8f9fa;
     }
     
     .table thead th {
         background-color: #f8f9fa;
-        z-index: 10;
+        z-index: 30;
         text-align: center;
         vertical-align: middle;
         border-bottom: 2px solid #dee2e6;
         box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1);
-        /* Ensure header stays above content */
-        position: -webkit-sticky;
         position: sticky;
-        /* Fix for Firefox */
+        top: 0;
+        left: 0;
         background-clip: padding-box;
     }
     
@@ -118,56 +124,44 @@
                     <?php endif; ?>
 
                     <form action="<?= base_url('avwr-rekap') ?>" method="get" class="mb-4">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Pilih STA</label>
-                                    <select name="sta" class="form-control" required>
-                                        <option value="">-- Pilih STA --</option>
-                                        <?php foreach ($stations as $id => $name) : ?>
-                                            <option value="<?= $id ?>" <?= (isset($_GET['sta']) && $_GET['sta'] == $id) ? 'selected' : '' ?>>
-                                                <?= $name ?>
-                                            </option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
+                        <div class="d-flex flex-wrap gap-3 align-items-end">
+                            <div style="min-width: 180px;">
+                                <label class="mb-1">Pilih STA</label>
+                                <select name="sta" class="form-control" required>
+                                    <option value="">-- Pilih STA --</option>
+                                    <?php foreach ($stations as $id => $name) : ?>
+                                        <option value="<?= $id ?>" <?= (isset($_GET['sta']) && $_GET['sta'] == $id) ? 'selected' : '' ?>>
+                                            <?= $name ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Pilih Interval</label>
-                                    <select name="interval" class="form-control" required>
-                                        <option value="">-- Pilih Interval --</option>
-                                        <?php foreach ($intervals as $key => $label) : ?>
-                                            <option value="<?= $key ?>" <?= (isset($interval) && $interval == $key) ? 'selected' : '' ?>><?= $label ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
+                            <div style="min-width: 180px;">
+                                <label class="mb-1">Pilih Interval</label>
+                                <select name="interval" class="form-control" required>
+                                    <option value="">-- Pilih Interval --</option>
+                                    <?php foreach ($intervals as $key => $label) : ?>
+                                        <option value="<?= $key ?>" <?= (isset($interval) && $interval == $key) ? 'selected' : '' ?>><?= $label ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Tanggal Awal</label>
-                                    <input type="date" name="start_date" class="form-control" 
-                                           value="<?= $_GET['start_date'] ?? '' ?>" required>
-                                </div>
+                            <div style="min-width: 200px;">
+                                <label class="mb-1">Tanggal Awal</label>
+                                <input type="date" name="start_date" class="form-control" value="<?= $_GET['start_date'] ?? '' ?>" required>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Tanggal Akhir</label>
-                                    <input type="date" name="end_date" class="form-control" 
-                                           value="<?= $_GET['end_date'] ?? date('Y-m-d') ?>" required>
-                                </div>
+                            <div style="min-width: 200px;">
+                                <label class="mb-1">Tanggal Akhir</label>
+                                <input type="date" name="end_date" class="form-control" value="<?= $_GET['end_date'] ?? date('Y-m-d') ?>" required>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group d-flex align-items-end" style="gap: 10px;">
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="fas fa-search"></i> Tampilkan Data
+                            <div class="d-flex gap-2 align-items-end" style="min-width: 180px;">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-search"></i> Tampilkan Data
+                                </button>
+                                <?php if (isset($sensorData) && !empty($sensorData)) : ?>
+                                    <button type="button" class="btn btn-success" id="exportExcelBtn">
+                                        <i class="fas fa-file-export"></i> Export Excel
                                     </button>
-                                    <?php if (isset($sensorData) && !empty($sensorData)) : ?>
-                                        <button type="button" class="btn btn-success" id="exportExcelBtn">
-                                            <i class="fas fa-file-export"></i> Export Excel
-                                        </button>
-                                    <?php endif; ?>
-                                </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </form>
